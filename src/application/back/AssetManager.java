@@ -24,6 +24,10 @@ public class AssetManager {
 	public static final String PLAYER_9 = "/application/assets/player_9.png";
 	public static final String PLAYER_10 = "/application/assets/player_10.png";
 	public static final String PLAYER_11 = "/application/assets/player_11.png";
+	public static final String PLAYER_12 = "/application/assets/player_12.png";
+	public static final String PLAYER_13 = "/application/assets/player_13.png";
+	public static final String PLAYER_14 = "/application/assets/player_14.png";
+	public static final String PLAYER_15 = "/application/assets/player_15.png";
 
 
 	public static Image[] returnDown() {
@@ -47,18 +51,26 @@ public class AssetManager {
 	public static Image[] returnLeft() {
 		Image leftA = new Image(PLAYER_7);
 		Image leftB = new Image(PLAYER_8);
-		Image[] moveleft = new Image[2];
+		Image leftC = new Image(PLAYER_9);
+		Image leftD = new Image(PLAYER_10);
+		Image[] moveleft = new Image[4];
 		moveleft[0] = leftA;
 		moveleft[1] = leftB;
+		moveleft[2] = leftC;
+		moveleft[3] = leftD;
 		
 		return moveleft;
 	}
 	public static Image[] returnRight() {
-		Image rightA = new Image(PLAYER_10);
-		Image rightB = new Image(PLAYER_11);
-		Image[] moveright = new Image[2];
+		Image rightA = new Image(PLAYER_12);
+		Image rightB = new Image(PLAYER_13);
+		Image rightC = new Image(PLAYER_14);
+		Image rightD = new Image(PLAYER_15);
+		Image[] moveright = new Image[4];
 		moveright[0] = rightA;
 		moveright[1] = rightB;
+		moveright[2] = rightC;
+		moveright[3] = rightD;
 		
 		return moveright;
 	}
@@ -71,7 +83,7 @@ public class AssetManager {
 		} else if (direction.equals("LEFT")) {
 			idle = new Image(PLAYER_6);
 		} else if (direction.equals("RIGHT")) {
-			idle = new Image(PLAYER_9);
+			idle = new Image(PLAYER_11);
 		} else {
 			return null;
 		}
