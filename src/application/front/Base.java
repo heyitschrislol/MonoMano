@@ -3,6 +3,7 @@ package application.front;
 import java.util.ArrayList;
 
 import application.back.AssetManager;
+import application.front.objects.EnvironmentObject;
 import application.front.objects.PlayerObject;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -21,7 +22,6 @@ public class Base extends Application {
 	private Scene scene;
 	private ArrayList<String> input;
 	private String lastInput;
-	
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -44,11 +44,11 @@ public class Base extends Application {
 			keyRelease();
 
 			Image grass = new Image(AssetManager.GRASS);
+			Image newtree = new Image(AssetManager.TREE_1);
 			PlayerObject player = new PlayerObject(224, 224);
+			EnvironmentObject tree = new EnvironmentObject(372, 250, newtree);
 			player.setFrames(AssetManager.returnDown());
 			player.setImage(AssetManager.findIdle("DOWN"));
-			
-
 
 			new AnimationTimer() {
 				public void handle(long currentNanoTime) {
@@ -57,24 +57,25 @@ public class Base extends Application {
 
 					gc.clearRect(0, 0, 512, 512);
 					gc.drawImage(grass, 0, 0);
+					gc.drawImage(tree.getImage(), tree.getX(), tree.getY());
 					if (input.contains("DOWN")) {
 						lastInput = "DOWN";
 						player.setFrames(AssetManager.returnDown());
 						player.tick(0, 5, elapsedTime, 0.300);
 						player.render(gc);
-						
+
 					} else if (input.contains("UP")) {
 						lastInput = "UP";
 						player.setFrames(AssetManager.returnUp());
 						player.tick(0, -5, elapsedTime, 0.300);
 						player.render(gc);
-						
+
 					} else if (input.contains("RIGHT")) {
 						lastInput = "RIGHT";
 						player.setFrames(AssetManager.returnRight());
 						player.tick(5, 0, elapsedTime, 0.100);
 						player.render(gc);
-						
+
 					} else if (input.contains("LEFT")) {
 						lastInput = "LEFT";
 						player.setFrames(AssetManager.returnLeft());
@@ -113,16 +114,15 @@ public class Base extends Application {
 			}
 		});
 	}
-	
+
 	public static int clamp(int var, int min, int max) {
-		if (var >= max) 
+		if (var >= max)
 			return var = max;
-		else if (var <= min) 
+		else if (var <= min)
 			return var = min;
-		else 
+		else
 			return var;
 	}
-	
 
 	public static void main(String[] args) {
 		launch(args);
