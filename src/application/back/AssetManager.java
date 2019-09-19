@@ -3,7 +3,11 @@ package application.back;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 
 public class AssetManager {
 
@@ -29,7 +33,35 @@ public class AssetManager {
 	public static final String PLAYER_14 = "/application/assets/player_14.png";
 	public static final String PLAYER_15 = "/application/assets/player_15.png";
 
+	public static PixelReader wholescene;
+//	public static WritableImage cutscene;
+	
+	/*
+	 * NOTE sliceWidth should be greater than slice height and should be evenly divisible into
+	 * the size of the full image.
+	 * 
+	 * @param iv the imageview lets you slice the large background image into smaller parts
+	 */
+	public static Image[] makeScene(Image sceneimage, int sliceWidth, int sliceHeight) {
 
+		wholescene = sceneimage.getPixelReader();
+		
+		double maxwidth = sceneimage.getWidth();
+		double maxheight = sceneimage.getHeight();
+		
+		int count = (int)(maxwidth + maxheight) / sliceWidth;
+
+		WritableImage[] cutscenes = new WritableImage[count];
+
+		int i = 0;
+		for (int x = 0; x < maxheight; x += sliceWidth) {
+			for (int y = 0; y < maxwidth; y += sliceHeight) {
+				cutscenes[i] = new WritableImage(wholescene, x, y, sliceWidth, sliceHeight);
+				i++;
+			}
+		}
+		return cutscenes;
+	}
 	public static Image[] returnDown() {
 		Image downA = new Image(PLAYER_1);
 		Image downB = new Image(PLAYER_2);

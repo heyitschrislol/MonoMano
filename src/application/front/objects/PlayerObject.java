@@ -1,31 +1,61 @@
 package application.front.objects;
 
-import java.util.ArrayList;
-
-import application.front.Base;
+import application.back.enums.ID;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class PlayerObject extends LiveObject {
+public class PlayerObject extends GameObject {
+	private Image image;
+	private Image[] frames;
 	private Image[] idles;
-	private ArrayList<String> boundaries = new ArrayList<>();
 	
-	//#########---	C O N S T R U C T O R S	---#############################################
+	
+//#########---	C O N S T R U C T O R S	---#############################################
 
 	public PlayerObject(int x, int y) {
 		super(x, y);
-	}
-	
-	public PlayerObject(int x, int y, Image image) {
-		super(x, y);
-		this.image = image;
 	}
 
 	public PlayerObject(int x, int y, int width, int height) {
 		super(x, y, width, height);
 	}
+
+	public PlayerObject(int x, int y, int width, int height, ID id) {
+		super(x, y, width, height, id);
+	}
+
 	
+	//#########---	G E T / S E T	---#############################################
+
+	/**
+	 * @return the image
+	 */
+	public Image getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the frames
+	 */
+	public Image[] getFrames() {
+		return frames;
+	}
+
+	/**
+	 * @param frames the frames to set
+	 */
+	public void setFrames(Image[] frames) {
+		this.frames = frames;
+	}
+
 	/**
 	 * @return the idles
 	 */
@@ -39,42 +69,22 @@ public class PlayerObject extends LiveObject {
 	public void setIdles(Image[] idles) {
 		this.idles = idles;
 	}
-	/**
-	 * @return the boundaries
-	 */
-	public ArrayList<String> getBoundaries() {
-		return boundaries;
-	}
 
-	/**
-	 * @param boundaries the boundaries to set
-	 */
-	public void setBoundaries(ArrayList<String> boundaries) {
-		this.boundaries = boundaries;
-	}
 	
-	
-	
-
-
 	//#########---	M E T H O D S	---#############################################
-	public void addBoundary(String direction) {
-		if (!boundaries.contains(direction))
-		boundaries.add(direction);
-	}
-	public void removeBoundary(String direction) {
-		if (boundaries.contains(direction))
-		boundaries.remove(direction);
-	}
-	
+
 	@Override
-	public int[] objectSize() {
-		int[] size = new int[4];
-		size[0] = x;
-		size[1] = width;
-		size[2] = y;
-		size[3] = height;
-		return size;
+	public void tick() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void tick(int velX, int velY) {
+		this.velX = velX;
+		this.velY = velY;
+		x += velX;
+		y += velY;
 	}
 
 	@Override
@@ -83,16 +93,15 @@ public class PlayerObject extends LiveObject {
 		this.image = frames[index];
 		this.velX = velX;
 		this.velY = velY;
-		
-		
 		x += velX;
 		y += velY;
-		
-		x = Base.clamp(x, 0, Base.WIDTH - 64);
-		y = Base.clamp(y, 0, Base.HEIGHT - 64);
-		
 	}
-	
+
+	@Override
+	public void render() {
+
+	}
+
 	@Override
 	public void render(GraphicsContext gc) {
 		gc.drawImage(image, x, y);

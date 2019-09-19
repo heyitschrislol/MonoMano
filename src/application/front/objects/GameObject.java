@@ -1,9 +1,11 @@
 package application.front.objects;
 
+import application.back.enums.ID;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 
 public abstract class GameObject {
+	protected ID id;
 	protected int x;
 	protected int y;
 	protected int velX;
@@ -19,6 +21,12 @@ public abstract class GameObject {
 		this.y = y;
 	}
 	public GameObject(int x, int y, int width, int height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+	}
+	public GameObject(int x, int y, int width, int height, ID id) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -57,20 +65,20 @@ public abstract class GameObject {
 	/**
 	 * @return the y
 	 */
-	public int getvelX() {
+	public int getVelX() {
 		return velX;
 	}
 
 	/**
 	 * @param y the y to set
 	 */
-	public void setvelX(int velX) {
+	public void setVelX(int velX) {
 		this.velX = velX;
 	}
 	/**
 	 * @return the y
 	 */
-	public int getvelY() {
+	public int getVelY() {
 		return velY;
 	}
 
@@ -107,11 +115,25 @@ public abstract class GameObject {
 	public void setHeight(int height) {
 		this.height = height;
 	}
+	/**
+	 * @param ID the id to get
+	 */
+	public ID getID() {
+		return id;
+	}
+	/**
+	 * @param ID the id to set
+	 */
+	public void setID(ID id) {
+		this.id = id;
+	}
 	
 	//#########---	M E T H O D S	---#############################################
 
+	public abstract void tick();
 	public abstract void tick(int velX, int velY);
 	public abstract void tick(int velX, int velY, double time, double duration);
+	public abstract void render();
 	public abstract void render(GraphicsContext gc);
 	public abstract Rectangle2D getBoundary();
 	public abstract boolean intersects(GameObject object);

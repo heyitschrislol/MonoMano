@@ -4,9 +4,9 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class EnvironmentObject extends LiveObject {
-	private Image[] frames;
+public class EnvironmentObject extends GameObject {
 	private Image image;
+	private Image[] frames;
 	
 	public EnvironmentObject(int x, int y) {
 		super(x, y);
@@ -66,6 +66,16 @@ public class EnvironmentObject extends LiveObject {
 	public boolean intersects(GameObject object) {
 		return object.getBoundary().intersects(this.getBoundary());
 
+	}
+	@Override
+	public void tick() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void render() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
