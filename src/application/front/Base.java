@@ -81,19 +81,19 @@ public class Base extends Application {
 					gc.clearRect(0, 0, 512, 512);
 					gc.drawImage(grass, 0, 0);
 					
-					if (manager.input.contains("DOWN")) {
+					if (InputManager.input.contains("DOWN")) {
 						player.setFrames(AssetManager.returnDown());
 						player.animate(Base.elapsedTime, 0.250);
 						player.setVelY(5);
-					} else if (manager.input.contains("UP")) {
+					} else if (InputManager.input.contains("UP")) {
 						player.setFrames(AssetManager.returnUp());
 						player.animate(Base.elapsedTime, 0.250);
 						player.setVelY(-5);
-					} else if (manager.input.contains("LEFT")) {
+					} else if (InputManager.input.contains("LEFT")) {
 						player.setFrames(AssetManager.returnLeft());
 						player.animate(Base.elapsedTime, 0.100);
 						player.setVelX(-5);
-					} else if (manager.input.contains("RIGHT")) {
+					} else if (InputManager.input.contains("RIGHT")) {
 						player.setFrames(AssetManager.returnRight());
 						player.animate(Base.elapsedTime, 0.100);
 						player.setVelX(5);
