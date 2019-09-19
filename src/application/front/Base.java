@@ -3,6 +3,7 @@ package application.front;
 import java.util.ArrayList;
 
 import application.back.AssetManager;
+import application.front.objects.PlayerObject;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -15,11 +16,12 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 
 public class Base extends Application {
+	public static final int WIDTH = 512;
+	public static final int HEIGHT = 512;
 	private Scene scene;
 	private ArrayList<String> input;
 	private String lastInput;
-	private int x, y;
-	private int velX, velY;
+	
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -41,59 +43,46 @@ public class Base extends Application {
 			keyPress();
 			keyRelease();
 
-			ObjectAnimation anims = new ObjectAnimation();
 			Image grass = new Image(AssetManager.GRASS);
-			Player player = new Player(224, 224);
-//			Image idledown = new Image(AssetManager.PLAYER_0);
-//			Image[] walkdown = AssetManager.returnDown();
-//			Image idleup = new Image(AssetManager.PLAYER_3);
-//			Image[] walkup = AssetManager.returnUp();
-//			Image idleleft = new Image(AssetManager.PLAYER_6);
-//			Image[] walkleft = AssetManager.returnLeft();
-//			Image idleright = new Image(AssetManager.PLAYER_9);
-//			Image[] walkright = AssetManager.returnRight();
-			anims.frames = player.getWalkdown();
-			anims.duration = 0.300;
+			PlayerObject player = new PlayerObject(224, 224);
+			player.setFrames(AssetManager.returnDown());
+			player.setImage(AssetManager.findIdle("DOWN"));
+			
+
 
 			new AnimationTimer() {
 				public void handle(long currentNanoTime) {
 
-					double t = (currentNanoTime - startNanoTime) / 1000000000.0;
+					double elapsedTime = (currentNanoTime - startNanoTime) / 1000000000.0;
 
 					gc.clearRect(0, 0, 512, 512);
 					gc.drawImage(grass, 0, 0);
 					if (input.contains("DOWN")) {
 						lastInput = "DOWN";
-						velY = 5;
-						y += velY;
-						anims.frames = player.getWalkdown();
-						anims.duration = 0.300;
-						gc.drawImage(anims.getFrame(t), x, y);
+						player.setFrames(AssetManager.returnDown());
+						player.tick(0, 5, elapsedTime, 0.300);
+						player.render(gc);
+						
 					} else if (input.contains("UP")) {
 						lastInput = "UP";
-						velY = -5;
-						y += velY;
-						anims.frames = player.getWalkup();
-						anims.duration = 0.300;
-						gc.drawImage(anims.getFrame(t), x, y);
+						player.setFrames(AssetManager.returnUp());
+						player.tick(0, -5, elapsedTime, 0.300);
+						player.render(gc);
+						
 					} else if (input.contains("RIGHT")) {
 						lastInput = "RIGHT";
-						velX = 5;
-						x += velX;
-						anims.frames = player.getWalkright();
-						anims.duration = 0.300;
-						gc.drawImage(anims.getFrame(t), x, y);
+						player.setFrames(AssetManager.returnRight());
+						player.tick(5, 0, elapsedTime, 0.100);
+						player.render(gc);
+						
 					} else if (input.contains("LEFT")) {
 						lastInput = "LEFT";
-						velX = -5;
-						x += velX;
-						anims.frames = player.getWalkleft();
-						anims.duration = 0.300;
-						gc.drawImage(anims.getFrame(t), x, y);
+						player.setFrames(AssetManager.returnLeft());
+						player.tick(-5, 0, elapsedTime, 0.100);
+						player.render(gc);
 					} else {
-						velX = 0;
-						velY = 0;
-						gc.drawImage(AssetManager.findIdle(lastInput), x, y);
+						player.tick(0, 0, elapsedTime, 0.100);
+						gc.drawImage(AssetManager.findIdle(lastInput), player.getX(), player.getY());
 					}
 				}
 			}.start();
@@ -124,6 +113,16 @@ public class Base extends Application {
 			}
 		});
 	}
+	
+	public static int clamp(int var, int min, int max) {
+		if (var >= max) 
+			return var = max;
+		else if (var <= min) 
+			return var = min;
+		else 
+			return var;
+	}
+	
 
 	public static void main(String[] args) {
 		launch(args);

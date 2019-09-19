@@ -8,9 +8,9 @@ import javafx.scene.image.Image;
 public class AssetManager {
 
 	public static final String GRASS = "/application/assets/grass_dirt_1.png";
-	public static final String REDTREE_SM = "/application/assets/redtreesmall.png";
-	public static final String REDTREE_LG = "/application/assets/redtreelarge.png";
-	public static final String REDTREE_GRP = "/application/assets/redtreegroup.png";
+	public static final String TREE_1 = "/application/assets/tree01.png";
+	public static final String TREES_1 = "/application/assets/trees01.png";
+	
 
 	public static final String PLAYER_0 = "/application/assets/player_0.png";
 	public static final String PLAYER_1 = "/application/assets/player_1.png";
@@ -74,6 +74,15 @@ public class AssetManager {
 		
 		return moveright;
 	}
+	public static Image[] returnIdles() {
+		Image[] idles = new Image[4];
+		idles[0] = new Image(PLAYER_0);
+		idles[1] = new Image(PLAYER_3);
+		idles[2] = new Image(PLAYER_6);
+		idles[3] = new Image(PLAYER_11);
+		
+		return idles;
+	}
 	public static Image findIdle(String direction) {
 		Image idle;
 		if (direction.equals("DOWN")) {
@@ -91,4 +100,10 @@ public class AssetManager {
 		
 		return idle;
 	}
+	
+//	public static EnvironmentObject createTree(int x, int y) {
+//		EnvironmentObject item = new EnvironmentObject(x, y);
+//		
+//		return item;
+//	}
 }
