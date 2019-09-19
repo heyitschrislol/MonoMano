@@ -1,5 +1,6 @@
 package application.front.objects;
 
+import application.back.enums.ID;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -8,8 +9,8 @@ public class EnvironmentObject extends GameObject {
 	private Image image;
 	private Image[] frames;
 	
-	public EnvironmentObject(int x, int y) {
-		super(x, y);
+	public EnvironmentObject(int x, int y, ID id) {
+		super(x, y, id);
 	}
 	public EnvironmentObject(int x, int y, Image image) {
 		super(x, y);
@@ -35,26 +36,28 @@ public class EnvironmentObject extends GameObject {
 	
 
 	@Override
+	public void tick() {
+		x += velX;
+		y += velY;
+	}
+	
+	@Override
 	public void tick(int velX, int velY) {
 		this.velX = velX;
 		this.velY = velY;
 		x += velX;
 		y += velY;
 	}
+	
 	@Override
-	public void tick(int velX, int velY, double time, double duration) {
+	public void animate(double time, double duration) {
 		int index = (int) ((time % (frames.length * duration)) / duration);
 		this.image = frames[index];
-		this.velX = velX;
-		this.velY = velY;
-		x += velX;
-		y += velY;
 	}
 
 	@Override
 	public void render(GraphicsContext gc) {
 		gc.drawImage(image, x, y);
-
 	}
 
 	@Override
@@ -66,16 +69,6 @@ public class EnvironmentObject extends GameObject {
 	public boolean intersects(GameObject object) {
 		return object.getBoundary().intersects(this.getBoundary());
 
-	}
-	@Override
-	public void tick() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void render() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

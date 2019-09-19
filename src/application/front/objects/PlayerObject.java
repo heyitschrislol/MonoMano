@@ -1,20 +1,19 @@
 package application.front.objects;
 
 import application.back.enums.ID;
+import application.front.Base;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class PlayerObject extends GameObject {
-	private Image image;
-	private Image[] frames;
 	private Image[] idles;
 	
 	
 //#########---	C O N S T R U C T O R S	---#############################################
 
-	public PlayerObject(int x, int y) {
-		super(x, y);
+	public PlayerObject(int x, int y, ID id) {
+		super(x, y, id);
 	}
 
 	public PlayerObject(int x, int y, int width, int height) {
@@ -27,34 +26,6 @@ public class PlayerObject extends GameObject {
 
 	
 	//#########---	G E T / S E T	---#############################################
-
-	/**
-	 * @return the image
-	 */
-	public Image getImage() {
-		return image;
-	}
-
-	/**
-	 * @param image the image to set
-	 */
-	public void setImage(Image image) {
-		this.image = image;
-	}
-
-	/**
-	 * @return the frames
-	 */
-	public Image[] getFrames() {
-		return frames;
-	}
-
-	/**
-	 * @param frames the frames to set
-	 */
-	public void setFrames(Image[] frames) {
-		this.frames = frames;
-	}
 
 	/**
 	 * @return the idles
@@ -75,8 +46,11 @@ public class PlayerObject extends GameObject {
 
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
-
+		x += velX;
+		y += velY;
+		
+		x = Base.clamp(x, 0, Base.WIDTH - 64);
+		y = Base.clamp(y, 0, Base.HEIGHT - 64);
 	}
 
 	@Override
@@ -85,21 +59,14 @@ public class PlayerObject extends GameObject {
 		this.velY = velY;
 		x += velX;
 		y += velY;
+		
+		x = Base.clamp(x, 0, Base.WIDTH - 64);
+		y = Base.clamp(y, 0, Base.HEIGHT - 64);
 	}
 
-	@Override
-	public void tick(int velX, int velY, double time, double duration) {
+	public void animate(double time, double duration) {
 		int index = (int) ((time % (frames.length * duration)) / duration);
-		this.image = frames[index];
-		this.velX = velX;
-		this.velY = velY;
-		x += velX;
-		y += velY;
-	}
-
-	@Override
-	public void render() {
-
+		this.image = frames[index];	
 	}
 
 	@Override
@@ -117,4 +84,18 @@ public class PlayerObject extends GameObject {
 		return object.getBoundary().intersects(this.getBoundary());
 	}
 
+	
+	
+	
+	
+	
+//	@Override
+//	public void tick(int velX, int velY, double time, double duration) {
+//		int index = (int) ((time % (frames.length * duration)) / duration);
+//		this.image = frames[index];
+//		this.velX = velX;
+//		this.velY = velY;
+//		x += velX;
+//		y += velY;
+//	}
 }

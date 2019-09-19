@@ -3,6 +3,7 @@ package application.front.objects;
 import application.back.enums.ID;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 public abstract class GameObject {
 	protected ID id;
@@ -12,6 +13,8 @@ public abstract class GameObject {
 	protected int velY;
 	protected int width;
 	protected int height;
+	protected Image image;
+	protected Image[] frames;
 	
 	
 	//#########---	C O N S T R U C T O R S	---#############################################
@@ -19,6 +22,11 @@ public abstract class GameObject {
 	public GameObject(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+	public GameObject(int x, int y, ID id) {
+		this.x = x;
+		this.y = y;
+		this.id = id;
 	}
 	public GameObject(int x, int y, int width, int height) {
 		this.x = x;
@@ -127,17 +135,44 @@ public abstract class GameObject {
 	public void setID(ID id) {
 		this.id = id;
 	}
-	
+	/**
+	 * @return the image
+	 */
+	public Image getImage() {
+		return image;
+	}
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(Image image) {
+		this.image = image;
+	}
+	/**
+	 * @return the frames
+	 */
+	public Image[] getFrames() {
+		return frames;
+	}
+	/**
+	 * @param frames the frames to set
+	 */
+	public void setFrames(Image[] frames) {
+		this.frames = frames;
+	}
 	//#########---	M E T H O D S	---#############################################
 
+	
+	
+	
+	
 	public abstract void tick();
 	public abstract void tick(int velX, int velY);
-	public abstract void tick(int velX, int velY, double time, double duration);
-	public abstract void render();
+	public abstract void animate(double time, double duration);
 	public abstract void render(GraphicsContext gc);
 	public abstract Rectangle2D getBoundary();
 	public abstract boolean intersects(GameObject object);
 
 	
+//	public abstract void tick(int velX, int velY, double time, double duration);
 
 }
