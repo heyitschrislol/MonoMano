@@ -42,7 +42,7 @@ public class AssetManager {
 	 * 
 	 * @param iv the imageview lets you slice the large background image into smaller parts
 	 */
-	public static Image[] makeScene(Image sceneimage, int sliceWidth, int sliceHeight) {
+	public static Image[] makeScene(Image sceneimage,  int sliceWidth, int sliceHeight) {
 
 		wholescene = sceneimage.getPixelReader();
 		
@@ -63,8 +63,8 @@ public class AssetManager {
 		return cutscenes;
 	}
 	public static Image[] returnDown() {
-		Image downA = new Image(PLAYER_1);
-		Image downB = new Image(PLAYER_2);
+		Image downA = new Image(PLAYER_1, 64.0, 64.0, true, true);
+		Image downB = new Image(PLAYER_2, 64.0, 64.0, true, true);
 		Image[] movedown = new Image[2];
 		movedown[0] = downA;
 		movedown[1] = downB;
@@ -72,8 +72,8 @@ public class AssetManager {
 		return movedown;
 	}
 	public static Image[] returnUp() {
-		Image upA = new Image(PLAYER_4);
-		Image upB = new Image(PLAYER_5);
+		Image upA = new Image(PLAYER_4, 64.0, 64.0, true, true);
+		Image upB = new Image(PLAYER_5, 64.0, 64.0, true, true);
 		Image[] moveup = new Image[2];
 		moveup[0] = upA;
 		moveup[1] = upB;
@@ -81,10 +81,10 @@ public class AssetManager {
 		return moveup;
 	}
 	public static Image[] returnLeft() {
-		Image leftA = new Image(PLAYER_7);
-		Image leftB = new Image(PLAYER_8);
-		Image leftC = new Image(PLAYER_9);
-		Image leftD = new Image(PLAYER_10);
+		Image leftA = new Image(PLAYER_7, 64.0, 64.0, true, true);
+		Image leftB = new Image(PLAYER_8, 64.0, 64.0, true, true);
+		Image leftC = new Image(PLAYER_9, 64.0, 64.0, true, true);
+		Image leftD = new Image(PLAYER_10, 64.0, 64.0, true, true);
 		Image[] moveleft = new Image[4];
 		moveleft[0] = leftA;
 		moveleft[1] = leftB;
@@ -94,10 +94,10 @@ public class AssetManager {
 		return moveleft;
 	}
 	public static Image[] returnRight() {
-		Image rightA = new Image(PLAYER_12);
-		Image rightB = new Image(PLAYER_13);
-		Image rightC = new Image(PLAYER_14);
-		Image rightD = new Image(PLAYER_15);
+		Image rightA = new Image(PLAYER_12, 64.0, 64.0, true, true);
+		Image rightB = new Image(PLAYER_13, 64.0, 64.0, true, true);
+		Image rightC = new Image(PLAYER_14, 64.0, 64.0, true, true);
+		Image rightD = new Image(PLAYER_15, 64.0, 64.0, true, true);
 		Image[] moveright = new Image[4];
 		moveright[0] = rightA;
 		moveright[1] = rightB;
@@ -108,23 +108,23 @@ public class AssetManager {
 	}
 	public static Image[] returnIdles() {
 		Image[] idles = new Image[4];
-		idles[0] = new Image(PLAYER_0);
-		idles[1] = new Image(PLAYER_3);
-		idles[2] = new Image(PLAYER_6);
-		idles[3] = new Image(PLAYER_11);
+		idles[0] = new Image(PLAYER_0, 64.0, 64.0, true, true);
+		idles[1] = new Image(PLAYER_3, 64.0, 64.0, true, true);
+		idles[2] = new Image(PLAYER_6, 64.0, 64.0, true, true);
+		idles[3] = new Image(PLAYER_11, 64.0, 64.0, true, true);
 		
 		return idles;
 	}
 	public static Image findIdle(String direction) {
 		Image idle;
 		if (direction.equals("DOWN")) {
-			idle = new Image(PLAYER_0);
+			idle = new Image(PLAYER_0, 64.0, 64.0, true, true);
 		} else if (direction.equals("UP")) {
-			idle = new Image(PLAYER_3);
+			idle = new Image(PLAYER_3, 64.0, 64.0, true, true);
 		} else if (direction.equals("LEFT")) {
-			idle = new Image(PLAYER_6);
+			idle = new Image(PLAYER_6, 64.0, 64.0, true, true);
 		} else if (direction.equals("RIGHT")) {
-			idle = new Image(PLAYER_11);
+			idle = new Image(PLAYER_11, 64.0, 64.0, true, true);
 		} else {
 			return null;
 		}

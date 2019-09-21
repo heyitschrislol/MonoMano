@@ -7,38 +7,45 @@ import javafx.scene.image.Image;
 
 public abstract class GameObject {
 	protected ID id;
-	protected int x;
-	protected int y;
-	protected int velX;
-	protected int velY;
-	protected int width;
-	protected int height;
+	protected double x;
+	protected double y;
+	protected double maxX;
+	protected double maxY;
+	protected double velX;
+	protected double velY;
+	protected double width;
+	protected double height;
 	protected Image image;
 	protected Image[] frames;
 	
 	
 	//#########---	C O N S T R U C T O R S	---#############################################
 
-	public GameObject(int x, int y) {
+	public GameObject(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
-	public GameObject(int x, int y, ID id) {
+	public GameObject(double x, double y, ID id) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
 	}
-	public GameObject(int x, int y, int width, int height) {
+	public GameObject(double x, double y, double width, double height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.maxX = x + width;
+		this.maxY = y + height;
 	}
-	public GameObject(int x, int y, int width, int height, ID id) {
+	public GameObject(double x, double y, double width, double height, ID id) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.maxX = x + width;
+		this.maxY = y + height;
+		this.id = id;
 	}
 
 	//#########---	G E T / S E T	---#############################################
@@ -46,81 +53,81 @@ public abstract class GameObject {
 	/**
 	 * @return the x
 	 */
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 
 	/**
 	 * @param x the x to set
 	 */
-	public void setX(int x) {
+	public void setX(double x) {
 		this.x = x;
 	}
 
 	/**
 	 * @return the y
 	 */
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 
 	/**
 	 * @param y the y to set
 	 */
-	public void setY(int y) {
+	public void setY(double y) {
 		this.y = y;
 	}
 	/**
 	 * @return the y
 	 */
-	public int getVelX() {
+	public double getVelX() {
 		return velX;
 	}
 
 	/**
 	 * @param y the y to set
 	 */
-	public void setVelX(int velX) {
+	public void setVelX(double velX) {
 		this.velX = velX;
 	}
 	/**
 	 * @return the y
 	 */
-	public int getVelY() {
+	public double getVelY() {
 		return velY;
 	}
 
 	/**
 	 * @param y the y to set
 	 */
-	public void setVelY(int velY) {
+	public void setVelY(double velY) {
 		this.velY = velY;
 	}
 	/**
 	 * @return the width
 	 */
-	public int getWidth() {
+	public double getWidth() {
 		return width;
 	}
 
 	/**
 	 * @param width the width to set
 	 */
-	public void setWidth(int width) {
+	public void setWidth(double width) {
 		this.width = width;
 	}
 
 	/**
 	 * @return the height
 	 */
-	public int getHeight() {
+	public double getHeight() {
 		return height;
 	}
 
 	/**
 	 * @param height the height to set
 	 */
-	public void setHeight(int height) {
+	public void setHeight(double height) {
 		this.height = height;
 	}
 	/**
@@ -134,6 +141,42 @@ public abstract class GameObject {
 	 */
 	public void setID(ID id) {
 		this.id = id;
+	}
+	/**
+	 * @return the id
+	 */
+	public ID getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(ID id) {
+		this.id = id;
+	}
+	/**
+	 * @return the maxX
+	 */
+	public double getMaxX() {
+		return maxX;
+	}
+	/**
+	 * @param maxX the maxX to set
+	 */
+	public void setMaxX(double maxX) {
+		this.maxX = maxX;
+	}
+	/**
+	 * @return the maxY
+	 */
+	public double getMaxY() {
+		return maxY;
+	}
+	/**
+	 * @param maxY the maxY to set
+	 */
+	public void setMaxY(double maxY) {
+		this.maxY = maxY;
 	}
 	/**
 	 * @return the image
@@ -161,18 +204,15 @@ public abstract class GameObject {
 	}
 	//#########---	M E T H O D S	---#############################################
 
-	
-	
-	
-	
+
 	public abstract void tick();
-	public abstract void tick(int velX, int velY);
+	public abstract void tick(GameObject obj);
 	public abstract void animate(double time, double duration);
 	public abstract void render(GraphicsContext gc);
 	public abstract Rectangle2D getBoundary();
 	public abstract boolean intersects(GameObject object);
 
 	
-//	public abstract void tick(int velX, int velY, double time, double duration);
+//	public abstract void tick(double velX, double velY, double time, double duration);
 
 }

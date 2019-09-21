@@ -1,27 +1,39 @@
 package application.front.objects;
 
+import java.util.ArrayList;
+
 import application.back.enums.ID;
 import application.front.Base;
+import application.front.Handler;
+import application.front.InputManager;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class PlayerObject extends GameObject {
 	private Image[] idles;
+	private double lastX;
+	private double lastY;
+	public boolean colliding = false;
 	
 	
 //#########---	C O N S T R U C T O R S	---#############################################
 
-	public PlayerObject(int x, int y, ID id) {
+	public PlayerObject(double x, double y, ID id) {
 		super(x, y, id);
 	}
 
-	public PlayerObject(int x, int y, int width, int height) {
+	public PlayerObject(double x, double y, double width, double height) {
 		super(x, y, width, height);
+		this.maxX = x + width;
+		this.maxY = y + height;
 	}
 
-	public PlayerObject(int x, int y, int width, int height, ID id) {
+	public PlayerObject(double x, double y, double width, double height, ID id) {
 		super(x, y, width, height, id);
+		this.maxX = x + width;
+		this.maxY = y + height;
 	}
 
 	
@@ -44,6 +56,39 @@ public class PlayerObject extends GameObject {
 	
 	//#########---	M E T H O D S	---#############################################
 
+	/**
+	 * @return the lastX
+	 */
+	public double getLastX() {
+		return lastX;
+	}
+
+	/**
+	 * @param lastX the lastX to set
+	 */
+	public void setLastX(double lastX) {
+		this.lastX = lastX;
+	}
+
+	/**
+	 * @return the lastY
+	 */
+	public double getLastY() {
+		return lastY;
+	}
+
+	/**
+	 * @param lastY the lastY to set
+	 */
+	public void setLastY(double lastY) {
+		this.lastY = lastY;
+	}
+
+	/**
+	 * @return the inputsnag
+	 */
+	
+
 	@Override
 	public void tick() {
 		x += velX;
@@ -51,17 +96,22 @@ public class PlayerObject extends GameObject {
 		
 		x = Base.clamp(x, 0, Base.WIDTH - 64);
 		y = Base.clamp(y, 0, Base.HEIGHT - 64);
+
 	}
 
 	@Override
-	public void tick(int velX, int velY) {
-		this.velX = velX;
-		this.velY = velY;
+	public void tick(GameObject obj) {
 		x += velX;
 		y += velY;
 		
+//		if (!intersects()) {
+//			InputManager.activateAll();
+//		}
+		
+		
 		x = Base.clamp(x, 0, Base.WIDTH - 64);
 		y = Base.clamp(y, 0, Base.HEIGHT - 64);
+		
 	}
 
 	public void animate(double time, double duration) {
@@ -79,23 +129,46 @@ public class PlayerObject extends GameObject {
 		return new Rectangle2D(x, y, width, height);
 	}
 
+	public boolean intersects() {
+		for (GameObject temp : Handler.objectlist) {
+			if (temp.getId() != ID.PLAYER) {
+				if (temp.getBoundary().intersects(this.getBoundary())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean intersects(GameObject object) {
 		return object.getBoundary().intersects(this.getBoundary());
 	}
+	
 
-	
-	
-	
-	
-	
-//	@Override
-//	public void tick(int velX, int velY, double time, double duration) {
-//		int index = (int) ((time % (frames.length * duration)) / duration);
-//		this.image = frames[index];
-//		this.velX = velX;
-//		this.velY = velY;
-//		x += velX;
-//		y += velY;
+//	public int intersects() {
+//	for (GameObject temp : Handler.objectlist) {
+//		if (temp.getId() != ID.PLAYER) {
+//			if (temp.getBoundary().intersects(this.getBoundary())) {
+//				return Handler.objectlist.indexOf(temp);
+//			}
+//		}
 //	}
+//	return -1;
+//}
+//	public GameObject intersects() {
+//	for (GameObject temp : Handler.objectlist) {
+//		if (temp.getId() != ID.PLAYER) {
+//			if (temp.getBoundary().intersects(this.getBoundary())) {
+//				return temp;
+//			}
+//		}
+//	}
+//	return null;
+//}
+	
+	
+	
+	
+
 }

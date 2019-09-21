@@ -1,25 +1,35 @@
 package application.front.objects;
 
 import application.back.enums.ID;
+import application.front.Handler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class EnvironmentObject extends GameObject {
 	private Image image;
 	private Image[] frames;
 	
-	public EnvironmentObject(int x, int y, ID id) {
+	//#########---	C O N S T R U C T O R S	---#############################################
+
+	public EnvironmentObject(double x, double y, ID id) {
 		super(x, y, id);
 	}
-	public EnvironmentObject(int x, int y, Image image) {
-		super(x, y);
-		this.image = image;
+
+	public EnvironmentObject(double x, double y, double width, double height) {
+		super(x, y, width, height);
+		this.maxX = x + width;
+		this.maxY = y + height;
+	}
+	public EnvironmentObject(double x, double y, double width, double height, ID id) {
+		super(x, y, width, height, id);
+		this.maxX = x + width;
+		this.maxY = y + height;
 	}
 
-	public EnvironmentObject(int x, int y, int width, int height) {
-		super(x, y, width, height);
-	}
+	
+	//#########---	G E T / S E T	---#############################################
 
 	/**
 	 * @return the image
@@ -35,6 +45,8 @@ public class EnvironmentObject extends GameObject {
 	}
 	
 
+	//#########---	M E T H O D S	---#############################################
+
 	@Override
 	public void tick() {
 		x += velX;
@@ -42,9 +54,8 @@ public class EnvironmentObject extends GameObject {
 	}
 	
 	@Override
-	public void tick(int velX, int velY) {
-		this.velX = velX;
-		this.velY = velY;
+	public void tick(GameObject obj) {
+		
 		x += velX;
 		y += velY;
 	}
@@ -57,7 +68,9 @@ public class EnvironmentObject extends GameObject {
 
 	@Override
 	public void render(GraphicsContext gc) {
+		gc.setStroke(Color.BLACK);
 		gc.drawImage(image, x, y);
+		gc.stroke();
 	}
 
 	@Override
@@ -65,10 +78,21 @@ public class EnvironmentObject extends GameObject {
 		return new Rectangle2D(x, y, width, height);
 	}
 
+	public int intersects() {
+		for (GameObject temp : Handler.objectlist) {
+			if (temp.getId() != ID.ENVIRONMENT) {
+				if (temp.getBoundary().intersects(this.getBoundary())) {
+					Handler.objectlist.indexOf(temp);
+				}
+			}
+		}
+		return -1;
+	}
 	@Override
 	public boolean intersects(GameObject object) {
 		return object.getBoundary().intersects(this.getBoundary());
-
 	}
+	
+	
 
 }
