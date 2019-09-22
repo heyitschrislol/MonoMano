@@ -1,12 +1,16 @@
 package application.front.objects;
 
+import java.util.ArrayList;
+
 import application.back.enums.ID;
+import application.back.enums.Tag;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class GameObject {
 	protected ID id;
+	protected ArrayList<Tag> tags;
 	protected double x;
 	protected double y;
 	protected double maxX;
@@ -201,6 +205,24 @@ public abstract class GameObject {
 	 */
 	public void setFrames(Image[] frames) {
 		this.frames = frames;
+	}
+	/**
+	 * @param tags the tags to get 
+	 */
+	public ArrayList<Tag> getTags() {
+		return this.tags;
+	}
+	/**
+	 * @param tag the tag to add 
+	 */
+	public void addTag(Tag tag) {
+		this.tags.add(tag);
+	}
+	/**
+	 * @param tag the tag to remove
+	 */
+	public void removeTag(Tag tag) {
+		this.tags.remove(tag);
 	}
 	//#########---	M E T H O D S	---#############################################
 

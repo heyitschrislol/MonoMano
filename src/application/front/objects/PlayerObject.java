@@ -13,9 +13,13 @@ import javafx.scene.image.Image;
 
 public class PlayerObject extends GameObject {
 	private Image[] idles;
-	private double lastX;
-	private double lastY;
-	public boolean colliding = false;
+	private double nextX;
+	private double nextY;
+	public boolean upkey = false;
+	public boolean downkey = false;
+	public boolean leftkey = false;
+	public boolean rightkey = false;
+	
 	
 	
 //#########---	C O N S T R U C T O R S	---#############################################
@@ -59,29 +63,29 @@ public class PlayerObject extends GameObject {
 	/**
 	 * @return the lastX
 	 */
-	public double getLastX() {
-		return lastX;
+	public double getNextX() {
+		return nextX;
 	}
 
 	/**
 	 * @param lastX the lastX to set
 	 */
-	public void setLastX(double lastX) {
-		this.lastX = lastX;
+	public void setNextX(double lastX) {
+		this.nextX = lastX;
 	}
 
 	/**
 	 * @return the lastY
 	 */
-	public double getLastY() {
-		return lastY;
+	public double getNextY() {
+		return nextY;
 	}
 
 	/**
 	 * @param lastY the lastY to set
 	 */
-	public void setLastY(double lastY) {
-		this.lastY = lastY;
+	public void setNextY(double lastY) {
+		this.nextY = lastY;
 	}
 
 	/**
@@ -131,7 +135,7 @@ public class PlayerObject extends GameObject {
 
 	public boolean intersects() {
 		for (GameObject temp : Handler.objectlist) {
-			if (temp.getId() != ID.PLAYER) {
+			if (temp.getId() == ID.COLLIDABLE) {
 				if (temp.getBoundary().intersects(this.getBoundary())) {
 					return true;
 				}

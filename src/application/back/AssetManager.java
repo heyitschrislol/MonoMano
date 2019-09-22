@@ -13,8 +13,15 @@ public class AssetManager {
 
 	public static final String GRASS = "/application/assets/grass_dirt_1.png";
 	public static final String TREE_1 = "/application/assets/tree01.png";
+	public static final String TREETOP = "/application/assets/treetop.png";
+	public static final String TREETRUNK = "/application/assets/treebase.png";
 	public static final String TREES_1 = "/application/assets/trees01.png";
-	
+	public static final String MIDDLE = "/application/assets/middle.png";
+	public static final String MONUMENT = "/application/assets/rock_monument.png";
+	public static final String ROCK = "/application/assets/rock.png";
+	public static final String SIGN = "/application/assets/sign.png";
+	public static final String DRIEDTREE = "/application/assets/tree-dried.png";
+
 
 	public static final String PLAYER_0 = "/application/assets/player_0.png";
 	public static final String PLAYER_1 = "/application/assets/player_1.png";
@@ -64,19 +71,23 @@ public class AssetManager {
 	}
 	public static Image[] returnDown() {
 		Image downA = new Image(PLAYER_1, 64.0, 64.0, true, true);
-		Image downB = new Image(PLAYER_2, 64.0, 64.0, true, true);
-		Image[] movedown = new Image[2];
+		Image downB = new Image(PLAYER_0, 64.0, 64.0, true, true);
+		Image downC = new Image(PLAYER_2, 64.0, 64.0, true, true);
+		Image[] movedown = new Image[3];
 		movedown[0] = downA;
 		movedown[1] = downB;
+		movedown[2] = downC;
 		
 		return movedown;
 	}
 	public static Image[] returnUp() {
 		Image upA = new Image(PLAYER_4, 64.0, 64.0, true, true);
-		Image upB = new Image(PLAYER_5, 64.0, 64.0, true, true);
-		Image[] moveup = new Image[2];
+		Image upB = new Image(PLAYER_3, 64.0, 64.0, true, true);
+		Image upC = new Image(PLAYER_5, 64.0, 64.0, true, true);
+		Image[] moveup = new Image[3];
 		moveup[0] = upA;
 		moveup[1] = upB;
+		moveup[2] = upC;
 		
 		return moveup;
 	}

@@ -25,62 +25,51 @@ public class InputManager {
 	}
 
 	public void keyPress(KeyEvent e) {
+		int p = 0;
 		String key = e.getCode().toString();
-		for (GameObject temp : handler.objectlist) {
-			if (temp.getID() == ID.PLAYER) {
-				if (key.contains("DOWN")) {
-					if (!input.contains("DOWN"))input.add("DOWN");
-				}
-				if (key.contains("UP")) {
-					if (!input.contains("UP"))input.add("UP");
-				}
-				if (key.contains("LEFT")) {
-					if (!input.contains("LEFT"))input.add("LEFT");
-				}
-				if (key.contains("RIGHT")) {
-					if (!input.contains("RIGHT"))input.add("RIGHT");
-				}
-				if (key.contains("SPACE")) {
-					Rectangle2D bounds = temp.getBoundary();
-					System.out.println("Player Min X: " + bounds.getMinX() + " Max X: " + (bounds.getMinX() + bounds.getWidth()) + " Min Y: " + bounds.getMinY() + " Max Y: " + (bounds.getMinY() + bounds.getHeight()));
-				}
-			} else if (temp.getID() == ID.ENVIRONMENT) {
-				if (key.contains("SPACE")) {
-					Rectangle2D bounds = temp.getBoundary();
-					System.out.println("Tree Min X: " + bounds.getMinX() + " Max X: " + (bounds.getMinX() + bounds.getWidth()) + " Min Y: " + bounds.getMinY() + " Max Y: " + (bounds.getMinY() + bounds.getHeight()));
-					System.out.println(temp.getWidth() + " " + temp.getHeight());
-				
-				}
-			}
+		if (key.contains("DOWN")) {
+			handler.findPlayer().downkey = true;
+//			if (!input.contains("DOWN"))input.add("DOWN");
 		}
+		if (key.contains("UP")) {
+			handler.findPlayer().upkey = true;
+//			if (!input.contains("UP"))input.add("UP");
+		}
+		if (key.contains("LEFT")) {
+			handler.findPlayer().leftkey = true;
+//			if (!input.contains("LEFT"))input.add("LEFT");
+		}
+		if (key.contains("RIGHT")) {
+			handler.findPlayer().rightkey = true;
+		}
+//		if (key.contains("SPACE")) {
+//			Rectangle2D bounds = temp.getBoundary();
+//			System.out.println("Player Min X: " + bounds.getMinX() + " Max X: " + (bounds.getMinX() + bounds.getWidth()) + " Min Y: " + bounds.getMinY() + " Max Y: " + (bounds.getMinY() + bounds.getHeight()));
+//		}
 	}
 
 	public void keyRelease(KeyEvent e) {
 		String key = e.getCode().toString();
-		for (GameObject temp : handler.objectlist) {
-			if (temp.getID() == ID.PLAYER) {
-				if (key.contains("DOWN")) {
-					if (input.contains("DOWN"))input.remove("DOWN");
-					temp.setImage(AssetManager.returnIdles()[0]);
-					temp.setVelY(0);
-				}
-				if (key.contains("UP")) {
-					if (input.contains("UP"))input.remove("UP");
-					temp.setImage(AssetManager.returnIdles()[1]);
-					temp.setVelY(0);
-				}
-				
-				if (key.contains("LEFT")) {
-					if (input.contains("LEFT"))input.remove("LEFT");
-					temp.setImage(AssetManager.returnIdles()[2]);
-					temp.setVelX(0);
-				}
-				if (key.contains("RIGHT")) {
-					if (input.contains("RIGHT"))input.remove("RIGHT");
-					temp.setImage(AssetManager.returnIdles()[3]);
-					temp.setVelX(0);
-				}
-			}
+		if (key.contains("DOWN")) {
+			handler.findPlayer().downkey = false;
+			handler.findPlayer().setVelY(0);
+
+		}
+		if (key.contains("UP")) {
+			handler.findPlayer().upkey = false;
+			handler.findPlayer().setVelY(0);
+
+		}
+		
+		if (key.contains("LEFT")) {
+			handler.findPlayer().leftkey = false;
+			handler.findPlayer().setVelX(0);
+
+		}
+		if (key.contains("RIGHT")) {
+			handler.findPlayer().rightkey = false;
+			handler.findPlayer().setVelX(0);
+
 		}
 	}
 	

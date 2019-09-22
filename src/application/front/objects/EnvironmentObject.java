@@ -1,6 +1,9 @@
 package application.front.objects;
 
+import java.util.ArrayList;
+
 import application.back.enums.ID;
+import application.back.enums.Tag;
 import application.front.Handler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -10,6 +13,7 @@ import javafx.scene.paint.Color;
 public class EnvironmentObject extends GameObject {
 	private Image image;
 	private Image[] frames;
+	private ArrayList<Tag> tags;
 	
 	//#########---	C O N S T R U C T O R S	---#############################################
 
@@ -43,6 +47,15 @@ public class EnvironmentObject extends GameObject {
 	public void setImage(Image image) {
 		this.image = image;
 	}
+	public ArrayList<Tag> getTags() {
+		return this.tags;
+	}
+//	public void addTag(Tag tag) {
+//		this.tags.add(tag);
+//	}
+//	public void removeTag(Tag tag) {
+//		this.tags.remove(tag);
+//	}
 	
 
 	//#########---	M E T H O D S	---#############################################
@@ -68,9 +81,7 @@ public class EnvironmentObject extends GameObject {
 
 	@Override
 	public void render(GraphicsContext gc) {
-		gc.setStroke(Color.BLACK);
 		gc.drawImage(image, x, y);
-		gc.stroke();
 	}
 
 	@Override
@@ -78,15 +89,15 @@ public class EnvironmentObject extends GameObject {
 		return new Rectangle2D(x, y, width, height);
 	}
 
-	public int intersects() {
+	public boolean intersects() {
 		for (GameObject temp : Handler.objectlist) {
-			if (temp.getId() != ID.ENVIRONMENT) {
+			if (temp.getId() == ID.COLLIDABLE) {
 				if (temp.getBoundary().intersects(this.getBoundary())) {
-					Handler.objectlist.indexOf(temp);
+					return true;
 				}
 			}
 		}
-		return -1;
+		return false;
 	}
 	@Override
 	public boolean intersects(GameObject object) {

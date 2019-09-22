@@ -4,5 +4,6 @@ public enum ID {
 	PLAYER,
 	NPC,
 	ITEM,
+	COLLIDABLE,
 	ENVIRONMENT;
 }

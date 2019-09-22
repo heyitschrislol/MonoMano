@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import application.back.AssetManager;
 import application.back.enums.ID;
+import application.back.enums.Tag;
 import application.front.objects.EnvironmentObject;
 import application.front.objects.GameObject;
 import application.front.objects.PlayerObject;
@@ -29,7 +30,7 @@ public class Base extends Application {
 	public final long startNanoTime = System.nanoTime();
 	@SuppressWarnings("exports")
 	public PlayerObject player;
-	public ObservableList<GameObject> objectlist = FXCollections.observableArrayList();
+	public static ObservableList<GameObject> objectlist = FXCollections.observableArrayList();
 
 	private Scene scene;
 	private Handler handler;
@@ -56,17 +57,30 @@ public class Base extends Application {
 			 * set up world and world objects including the player.
 			 */
 			Image grass = new Image(AssetManager.GRASS);
-			Image newtree = new Image(AssetManager.TREE_1);
+			Image top = new Image(AssetManager.TREETOP);
+			Image trunk = new Image(AssetManager.TREETRUNK);
+			Image dtree = new Image(AssetManager.DRIEDTREE);
+			Image newsign = new Image(AssetManager.SIGN);
 			player = new PlayerObject(224, 224, 64, 64, ID.PLAYER);
-			EnvironmentObject tree1 = new EnvironmentObject(372, 250, 64, 128, ID.ENVIRONMENT);
-			EnvironmentObject tree2 = new EnvironmentObject(120, 100, 64, 128, ID.ENVIRONMENT);
-			tree1.setImage(newtree);
-			tree2.setImage(newtree);
+			EnvironmentObject treetop = new EnvironmentObject(327, 105, 64, 112, ID.ENVIRONMENT);
+			EnvironmentObject treetrunk = new EnvironmentObject(350, 215, 21, 17, ID.COLLIDABLE);
+			EnvironmentObject treetop2 = new EnvironmentObject(97, 190, 64, 112, ID.ENVIRONMENT);
+			EnvironmentObject treetrunk2 = new EnvironmentObject(120, 300, 21, 17, ID.COLLIDABLE);			
+			EnvironmentObject sign = new EnvironmentObject(200, 50, 19, 22, ID.COLLIDABLE);			
+			treetop.setImage(top);
+			treetrunk.setImage(trunk);
+			treetop2.setImage(top);
+			treetrunk2.setImage(trunk);
+			sign.setImage(newsign);
+//			sign.addTag(Tag.SIGN);
 			player.setFrames(AssetManager.returnDown());
 			player.setImage(AssetManager.findIdle("DOWN"));
 			objectlist.add(player);
-			objectlist.add(tree1);
-			objectlist.add(tree2);
+			objectlist.add(treetop);
+			objectlist.add(treetrunk);
+			objectlist.add(treetop2);
+			objectlist.add(treetrunk2);
+			objectlist.add(sign);
 //			Rectangle2D mytree = tree1.getBoundary();
 //			double maxx = mytree.getMinX() + mytree.getWidth();
 //			double maxy = mytree.getMinY() + mytree.getHeight();
@@ -88,80 +102,41 @@ public class Base extends Application {
 				public void handle(long currentNanoTime) {
 
 					elapsedTime = (currentNanoTime - startNanoTime) / 1000000000.0;
-
+					
 					gc.clearRect(0, 0, 512, 512);
 					gc.drawImage(grass, 0, 0);
 
-					if (InputManager.input.contains("DOWN")) {
+					player.setNextX(player.getX());
+					player.setNextY(player.getY());
+					if (player.downkey) {
 						player.setFrames(AssetManager.returnDown());
-						player.animate(Base.elapsedTime, 0.250);
-						if (player.intersects()) {
-							if (InputManager.inputsnag.isEmpty()) {
-								InputManager.deactivateMove("DOWN");
-							} else if (InputManager.inputsnag.contains("DOWN")) {
-								player.setVelY(-5);
-							} else {
-								if (player.getY() < tree1.getMaxY() || player.getMaxY() > tree1.getY()) {
-									player.setVelY(5);
-								}
-							}
-						} else {
-							player.setVelY(5);
-							InputManager.activateMove("DOWN");
-						}
-					} else if (InputManager.input.contains("UP")) {
+						player.animate(Base.elapsedTime, 0.150);
+						player.setNextY(player.getNextY() + 5);
+					}
+					if (player.upkey) {
 						player.setFrames(AssetManager.returnUp());
-						player.animate(Base.elapsedTime, 0.250);
-						if (player.intersects()) {
-							if (InputManager.inputsnag.isEmpty()) {
-								InputManager.deactivateMove("UP");
-							} else if (InputManager.inputsnag.contains("UP")) {
-								player.setVelY(5);
-							} else {
-								if (player.getY() > tree1.getMaxY() || player.getMaxY() < tree1.getY()) {
-									player.setVelY(-5);
-								}
-							}
-
-						} else {
-							player.setVelY(-5);
-							InputManager.activateMove("UP");
-						}
-					} else if (InputManager.input.contains("LEFT")) {
+						player.animate(Base.elapsedTime, 0.150);
+						player.setNextY(player.getNextY() - 5);
+					}
+					if (player.leftkey) {
 						player.setFrames(AssetManager.returnLeft());
 						player.animate(Base.elapsedTime, 0.100);
-						if (player.intersects()) {
-							if (InputManager.inputsnag.isEmpty()) {
-								InputManager.deactivateMove("LEFT");
-							} else if (InputManager.inputsnag.contains("LEFT")) {
-								player.setVelX(5);
-							} else {
-								if (player.getX() < tree1.getMaxX() || player.getMaxX() > tree1.getX()) {
-									player.setVelX(-5);
-								}
-							}
-						} else {
-							player.setVelX(-5);
-							InputManager.activateMove("LEFT");
-						}
-					} else if (InputManager.input.contains("RIGHT")) {
+						player.setNextX(player.getNextX() - 5);
+					}
+					if (player.rightkey) {
 						player.setFrames(AssetManager.returnRight());
 						player.animate(Base.elapsedTime, 0.100);
-						if (player.intersects()) {
-							if (InputManager.inputsnag.isEmpty()) {
-								InputManager.deactivateMove("RIGHT");
-							} else if (InputManager.inputsnag.contains("RIGHT")) {
-								player.setVelX(-5);
-							} else {
-								if (player.getX() > tree1.getMaxX() || player.getMaxX() < tree1.getX()) {
-									player.setVelX(5);
-								}
-							}
-						} else {
-							player.setVelX(5);
-							InputManager.activateMove("RIGHT");
+						player.setNextX(player.getNextX() + 5);
+					}
+					for (Rectangle2D bound : handler.objectBoundaries()) {
+						if (bound.intersects(player.getNextX() + 4, player.getNextY() + 25, 64, 34)) {
+							handler.tick();
+							handler.render(gc);
+							return;
 						}
 					}
+					player.setX(player.getNextX());
+					player.setY(player.getNextY());
 
 					handler.tick();
 					handler.render(gc);
@@ -190,6 +165,25 @@ public class Base extends Application {
 		} else
 			return var;
 	}
+	public static double[] collider(double x, double y, GameObject temp) {
+		double[] xy = new double[2];
+		if (x >= temp.getMaxX()) {
+			xy[0] = temp.getMaxX();
+		} else if (x <= temp.getX()) {
+			xy[0] = temp.getX();
+		} else {
+			xy[0] = x;
+		}
+		if (y >= temp.getMaxY()) {
+			xy[1] = temp.getMaxY();
+		} else if (y <= temp.getY()) {
+			xy[1] = temp.getY();
+		} else {
+			xy[1] = y;
+		}
+		
+		return xy;
+	}
 
 	public PlayerObject getPlayer() {
 		return player;
@@ -204,13 +198,6 @@ public class Base extends Application {
 	 */
 	public ObservableList<GameObject> getObjectlist() {
 		return objectlist;
-	}
-
-	/**
-	 * @param objectlist the objectlist to set
-	 */
-	public void setObjectlist(ObservableList<GameObject> objectlist) {
-		this.objectlist = objectlist;
 	}
 
 	public static void main(String[] args) {
