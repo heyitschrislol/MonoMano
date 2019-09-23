@@ -2,6 +2,7 @@ package application.front.objects;
 
 import java.util.ArrayList;
 
+import application.back.Boundary;
 import application.back.enums.ID;
 import application.back.enums.Tag;
 import javafx.geometry.Rectangle2D;
@@ -10,7 +11,7 @@ import javafx.scene.image.Image;
 
 public abstract class GameObject {
 	protected ID id;
-	protected ArrayList<Tag> tags;
+	protected Tag tag;
 	protected double x;
 	protected double y;
 	protected double maxX;
@@ -19,6 +20,7 @@ public abstract class GameObject {
 	protected double velY;
 	protected double width;
 	protected double height;
+	protected String objecttext;
 	protected Image image;
 	protected Image[] frames;
 	
@@ -183,6 +185,18 @@ public abstract class GameObject {
 		this.maxY = maxY;
 	}
 	/**
+	 * @return the objecttext
+	 */
+	public String getObjecttext() {
+		return objecttext;
+	}
+	/**
+	 * @param objecttext the objecttext to set
+	 */
+	public void setObjecttext(String objecttext) {
+		this.objecttext = objecttext;
+	}
+	/**
 	 * @return the image
 	 */
 	public Image getImage() {
@@ -194,6 +208,7 @@ public abstract class GameObject {
 	public void setImage(Image image) {
 		this.image = image;
 	}
+	
 	/**
 	 * @return the frames
 	 */
@@ -207,31 +222,31 @@ public abstract class GameObject {
 		this.frames = frames;
 	}
 	/**
-	 * @param tags the tags to get 
+	 * @return the tag
 	 */
-	public ArrayList<Tag> getTags() {
-		return this.tags;
+	public Tag getTag() {
+		return tag;
 	}
 	/**
-	 * @param tag the tag to add 
+	 * @param tag the tag to set
 	 */
-	public void addTag(Tag tag) {
-		this.tags.add(tag);
+	public void setTag(Tag tag) {
+		this.tag = tag;
 	}
-	/**
-	 * @param tag the tag to remove
-	 */
-	public void removeTag(Tag tag) {
-		this.tags.remove(tag);
-	}
+	
 	//#########---	M E T H O D S	---#############################################
 
 
+	
+	
+	
 	public abstract void tick();
 	public abstract void tick(GameObject obj);
 	public abstract void animate(double time, double duration);
+	public abstract void popup(GraphicsContext gc);
+//	public abstract void clearpopup(GraphicsContext gc);
 	public abstract void render(GraphicsContext gc);
-	public abstract Rectangle2D getBoundary();
+	public abstract Boundary getBoundary();
 	public abstract boolean intersects(GameObject object);
 
 	

@@ -11,7 +11,7 @@ import javafx.scene.image.WritableImage;
 
 public class AssetManager {
 
-	public static final String GRASS = "/application/assets/grass_dirt_1.png";
+	public static final String GRASS = "/application/assets/altgrass.png";
 	public static final String TREE_1 = "/application/assets/tree01.png";
 	public static final String TREETOP = "/application/assets/treetop.png";
 	public static final String TREETRUNK = "/application/assets/treebase.png";
@@ -40,6 +40,28 @@ public class AssetManager {
 	public static final String PLAYER_14 = "/application/assets/player_14.png";
 	public static final String PLAYER_15 = "/application/assets/player_15.png";
 
+//	public static final String FTEST1 = "/application/assets/front1.png";
+//	public static final String FTEST2 = "/application/assets/front2.png";
+//	public static final String FTEST3 = "/application/assets/front3.png";
+//	public static final String FTEST4 = "/application/assets/front4.png";
+//	public static final String FTEST5 = "/application/assets/front5.png";
+//	public static final String FTEST6 = "/application/assets/front6.png";
+//	public static final String FTEST7 = "/application/assets/front7.png";
+//	public static final String FUTEST1 = "/application/assets/frontU1.png";
+//	public static final String FUTEST2 = "/application/assets/frontU2.png";
+//	public static final String FUTEST3 = "/application/assets/frontU3.png";
+//	public static final String FUTEST4 = "/application/assets/frontU4.png";
+//	public static final String FUTEST5 = "/application/assets/frontU5.png";
+//	public static final String FUTEST6 = "/application/assets/frontU6.png";
+//	public static final String FUTEST7 = "/application/assets/frontU7.png";
+//	public static final String RTEST1 = "/application/assets/right1.png";
+//	public static final String RTEST2 = "/application/assets/right2.png";
+//	public static final String RTEST3 = "/application/assets/right3.png";
+//	public static final String RTEST4 = "/application/assets/right4.png";
+//	public static final String RTEST5 = "/application/assets/right5.png";
+//	public static final String RTEST6 = "/application/assets/right6.png";
+//	public static final String RTEST7 = "/application/assets/right7.png";
+
 	public static PixelReader wholescene;
 //	public static WritableImage cutscene;
 	
@@ -49,26 +71,47 @@ public class AssetManager {
 	 * 
 	 * @param iv the imageview lets you slice the large background image into smaller parts
 	 */
-	public static Image[] makeScene(Image sceneimage,  int sliceWidth, int sliceHeight) {
+	public static Image[][] makeScene(Image sceneimage,  int sliceWidth, int sliceHeight) {
 
 		wholescene = sceneimage.getPixelReader();
 		
 		double maxwidth = sceneimage.getWidth();
 		double maxheight = sceneimage.getHeight();
 		
-		int count = (int)(maxwidth + maxheight) / sliceWidth;
+		int countX = (int) maxwidth / sliceWidth;
+		int countY = (int) maxheight / sliceHeight;
 
-		WritableImage[] cutscenes = new WritableImage[count];
+		WritableImage[][] cutscenes = new WritableImage[countX][countY];
 
 		int i = 0;
-		for (int x = 0; x < maxheight; x += sliceWidth) {
-			for (int y = 0; y < maxwidth; y += sliceHeight) {
-				cutscenes[i] = new WritableImage(wholescene, x, y, sliceWidth, sliceHeight);
-				i++;
+		int j = 0;
+		for (int x = 0; x < maxwidth; x += sliceWidth) {
+			j = 0;
+			for (int y = 0; y < maxheight; y += sliceHeight) {
+				cutscenes[i][j] = new WritableImage(wholescene, x, y, sliceWidth, sliceHeight);
+				j++;
 			}
+			i++;
 		}
 		return cutscenes;
 	}
+//	public static Image[] returnDown() {
+//		Image downA = new Image(FUTEST2, 64.0, 64.0, true, true);
+//		Image downB = new Image(FUTEST3, 64.0, 64.0, true, true);
+//		Image downC = new Image(FUTEST4, 64.0, 64.0, true, true);
+//		Image downD = new Image(FUTEST5, 64.0, 64.0, true, true);
+//		Image downE = new Image(FUTEST6, 64.0, 64.0, true, true);
+//		Image downF = new Image(FUTEST7, 64.0, 64.0, true, true);
+//		Image[] movedown = new Image[6];
+//		movedown[0] = downA;
+//		movedown[1] = downB;
+//		movedown[2] = downC;
+//		movedown[3] = downD;
+//		movedown[4] = downE;
+//		movedown[5] = downF;
+//		
+//		return movedown;
+//	}
 	public static Image[] returnDown() {
 		Image downA = new Image(PLAYER_1, 64.0, 64.0, true, true);
 		Image downB = new Image(PLAYER_0, 64.0, 64.0, true, true);
@@ -104,6 +147,23 @@ public class AssetManager {
 		
 		return moveleft;
 	}
+//	public static Image[] returnRight() {
+//		Image rightA = new Image(RTEST2, 64.0, 64.0, true, true);
+//		Image rightB = new Image(RTEST3, 64.0, 64.0, true, true);
+//		Image rightC = new Image(RTEST4, 64.0, 64.0, true, true);
+//		Image rightD = new Image(RTEST5, 64.0, 64.0, true, true);
+//		Image rightE = new Image(RTEST6, 64.0, 64.0, true, true);
+//		Image rightF = new Image(RTEST7, 64.0, 64.0, true, true);
+//		Image[] moveright = new Image[6];
+//		moveright[0] = rightA;
+//		moveright[1] = rightB;
+//		moveright[2] = rightC;
+//		moveright[3] = rightD;
+//		moveright[4] = rightE;
+//		moveright[5] = rightF;
+//		
+//		return moveright;
+//	}
 	public static Image[] returnRight() {
 		Image rightA = new Image(PLAYER_12, 64.0, 64.0, true, true);
 		Image rightB = new Image(PLAYER_13, 64.0, 64.0, true, true);
@@ -119,7 +179,7 @@ public class AssetManager {
 	}
 	public static Image[] returnIdles() {
 		Image[] idles = new Image[4];
-		idles[0] = new Image(PLAYER_0, 64.0, 64.0, true, true);
+		idles[0] = new Image(PLAYER_1, 64.0, 64.0, true, true);
 		idles[1] = new Image(PLAYER_3, 64.0, 64.0, true, true);
 		idles[2] = new Image(PLAYER_6, 64.0, 64.0, true, true);
 		idles[3] = new Image(PLAYER_11, 64.0, 64.0, true, true);
@@ -129,7 +189,7 @@ public class AssetManager {
 	public static Image findIdle(String direction) {
 		Image idle;
 		if (direction.equals("DOWN")) {
-			idle = new Image(PLAYER_0, 64.0, 64.0, true, true);
+			idle = new Image(PLAYER_1, 64.0, 64.0, true, true);
 		} else if (direction.equals("UP")) {
 			idle = new Image(PLAYER_3, 64.0, 64.0, true, true);
 		} else if (direction.equals("LEFT")) {

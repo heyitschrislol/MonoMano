@@ -2,6 +2,7 @@ package application.front.objects;
 
 import java.util.ArrayList;
 
+import application.back.Boundary;
 import application.back.enums.ID;
 import application.front.Base;
 import application.front.Handler;
@@ -127,10 +128,13 @@ public class PlayerObject extends GameObject {
 	public void render(GraphicsContext gc) {
 		gc.drawImage(image, x, y);
 	}
+	public void popup(GraphicsContext gc) {
+		
+	}
 
 	@Override
-	public Rectangle2D getBoundary() {
-		return new Rectangle2D(x, y, width, height);
+	public Boundary getBoundary() {
+		return new Boundary(x, y, width, height);
 	}
 
 	public boolean intersects() {

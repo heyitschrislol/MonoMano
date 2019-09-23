@@ -3,6 +3,7 @@ package application.front;
 import java.util.ArrayList;
 
 import application.back.AssetManager;
+import application.back.Boundary;
 import application.back.enums.ID;
 import application.back.enums.Tag;
 import application.front.objects.EnvironmentObject;
@@ -21,15 +22,18 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 
 public class Base extends Application {
-	public static final int WIDTH = 512;
+	public static final int WIDTH = 768;
 	public static final int HEIGHT = 512;
+	public static int LOCX;
+	public static int LOCY;
 	public static double elapsedTime;
 	public final long startNanoTime = System.nanoTime();
 	@SuppressWarnings("exports")
-	public PlayerObject player;
+	public static PlayerObject player;
 	public static ObservableList<GameObject> objectlist = FXCollections.observableArrayList();
 
 	private Scene scene;
@@ -49,14 +53,16 @@ public class Base extends Application {
 			/*
 			 * set up the canvas and graphics context for drawing things on.
 			 */
-			Canvas canvas = new Canvas(512, 512);
+			Canvas canvas = new Canvas(768, 512);
 			root.getChildren().add(canvas);
 			GraphicsContext gc = canvas.getGraphicsContext2D();
 
 			/*
 			 * set up world and world objects including the player.
 			 */
-			Image grass = new Image(AssetManager.GRASS);
+			Image world = new Image(AssetManager.GRASS);
+			
+			Image[][] cutscenes = AssetManager.makeScene(world, 768, 512);
 			Image top = new Image(AssetManager.TREETOP);
 			Image trunk = new Image(AssetManager.TREETRUNK);
 			Image dtree = new Image(AssetManager.DRIEDTREE);
@@ -66,7 +72,9 @@ public class Base extends Application {
 			EnvironmentObject treetrunk = new EnvironmentObject(350, 215, 21, 17, ID.COLLIDABLE);
 			EnvironmentObject treetop2 = new EnvironmentObject(97, 190, 64, 112, ID.ENVIRONMENT);
 			EnvironmentObject treetrunk2 = new EnvironmentObject(120, 300, 21, 17, ID.COLLIDABLE);			
-			EnvironmentObject sign = new EnvironmentObject(200, 50, 19, 22, ID.COLLIDABLE);			
+			EnvironmentObject sign = new EnvironmentObject(200, 50, 19, 22, ID.COLLIDABLE);	
+			sign.setTag(Tag.SIGN);
+			sign.setObjecttext("U suck haha");
 			treetop.setImage(top);
 			treetrunk.setImage(trunk);
 			treetop2.setImage(top);
@@ -90,32 +98,37 @@ public class Base extends Application {
 			 */
 
 			handler = new Handler(objectlist);
-			InputManager manager = new InputManager(handler);
+			InputManager manager = new InputManager(handler, gc);
 			scene.setOnKeyPressed(e -> {
 				manager.keyPress(e);
 			});
 			scene.setOnKeyReleased(e -> {
 				manager.keyRelease(e);
 			});
+//			scene.setOnKeyPressed(e -> {
+//				manager.actionKey(e);
+//			});
 
 			new AnimationTimer() {
 				public void handle(long currentNanoTime) {
-
+					int i = 0;
+					int j = 0;
+					Image startimage;
 					elapsedTime = (currentNanoTime - startNanoTime) / 1000000000.0;
-					
-					gc.clearRect(0, 0, 512, 512);
-					gc.drawImage(grass, 0, 0);
+					startimage = cutscenes[i][j];
+					gc.clearRect(0, 0, 768, 512);
+					gc.drawImage(startimage, LOCX, LOCY);
 
 					player.setNextX(player.getX());
 					player.setNextY(player.getY());
 					if (player.downkey) {
 						player.setFrames(AssetManager.returnDown());
-						player.animate(Base.elapsedTime, 0.150);
+						player.animate(Base.elapsedTime, 0.100);
 						player.setNextY(player.getNextY() + 5);
 					}
 					if (player.upkey) {
 						player.setFrames(AssetManager.returnUp());
-						player.animate(Base.elapsedTime, 0.150);
+						player.animate(Base.elapsedTime, 0.100);
 						player.setNextY(player.getNextY() - 5);
 					}
 					if (player.leftkey) {
@@ -128,12 +141,17 @@ public class Base extends Application {
 						player.animate(Base.elapsedTime, 0.100);
 						player.setNextX(player.getNextX() + 5);
 					}
-					for (Rectangle2D bound : handler.objectBoundaries()) {
-						if (bound.intersects(player.getNextX() + 4, player.getNextY() + 25, 64, 34)) {
+					for (Boundary bound : handler.objectBoundaries()) {
+						if (bound.intersects(player.getNextX(), player.getNextY() + 15, 64, 34)) {
+							if (bound.getTag() == Tag.SIGN) {
+								manager.actionobject = bound.getObj();
+								manager.intersecting = true;
+							}
 							handler.tick();
 							handler.render(gc);
 							return;
 						}
+						manager.intersecting = false;
 					}
 					player.setX(player.getNextX());
 					player.setY(player.getNextY());
@@ -185,12 +203,12 @@ public class Base extends Application {
 		return xy;
 	}
 
-	public PlayerObject getPlayer() {
+	public static PlayerObject getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(PlayerObject player) {
-		this.player = player;
+	public static void setPlayer(PlayerObject player) {
+		Base.player = player;
 	}
 
 	/**

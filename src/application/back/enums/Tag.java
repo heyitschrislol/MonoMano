@@ -4,6 +4,7 @@ public enum Tag {
 	TREE,
 	SIGN,
 	CHARACTER,
-	DOOR;
+	DOOR,
+	BORDER;
 	
 }

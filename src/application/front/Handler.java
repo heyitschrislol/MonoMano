@@ -3,7 +3,9 @@ package application.front;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import application.back.Boundary;
 import application.back.enums.ID;
+import application.back.enums.Tag;
 import application.front.objects.EnvironmentObject;
 import application.front.objects.GameObject;
 import application.front.objects.PlayerObject;
@@ -41,13 +43,29 @@ public class Handler {
 			}
 		}
 		
-		public ObservableList<Rectangle2D> objectBoundaries() {
-			ObservableList<Rectangle2D> bounds = FXCollections.observableArrayList();
+		public ObservableList<Boundary> objectBoundaries() {
+			ObservableList<Boundary> bounds = FXCollections.observableArrayList();
+			Boundary minx = new Boundary(Base.LOCX, Base.LOCY, 768, 0);
+			minx.setTag(Tag.BORDER);
+			Boundary miny = new Boundary(Base.LOCX, Base.LOCY, 0, 512);
+			miny.setTag(Tag.BORDER);
+			Boundary maxx = new Boundary(Base.LOCX, Base.LOCY + 512, 768, 0);
+			maxx.setTag(Tag.BORDER);
+			Boundary maxy = new Boundary(Base.LOCX + 768, Base.LOCY, 0, 512);
+			maxy.setTag(Tag.BORDER);
 			for (GameObject temp : objectlist) {
 				if (temp.getId() == ID.COLLIDABLE || temp.getId() == ID.ITEM) {
-					bounds.add(temp.getBoundary());
+					Boundary b = temp.getBoundary();
+					b.setObj(temp);
+					b.setId(temp.getId());
+					b.setTag(temp.getTag());
+					bounds.add(b);
 				}
 			}
+			bounds.add(minx);
+			bounds.add(miny);
+			bounds.add(maxx);
+			bounds.add(maxy);
 			return bounds;
 		}
 		public void addObject(GameObject temp) {

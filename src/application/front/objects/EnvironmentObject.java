@@ -2,6 +2,7 @@ package application.front.objects;
 
 import java.util.ArrayList;
 
+import application.back.Boundary;
 import application.back.enums.ID;
 import application.back.enums.Tag;
 import application.front.Handler;
@@ -13,7 +14,8 @@ import javafx.scene.paint.Color;
 public class EnvironmentObject extends GameObject {
 	private Image image;
 	private Image[] frames;
-	private ArrayList<Tag> tags;
+	private Tag tag;
+	private boolean popup = false;
 	
 	//#########---	C O N S T R U C T O R S	---#############################################
 
@@ -47,18 +49,39 @@ public class EnvironmentObject extends GameObject {
 	public void setImage(Image image) {
 		this.image = image;
 	}
-	public ArrayList<Tag> getTags() {
-		return this.tags;
+	
+	/**
+	 * @return the frames
+	 */
+	public Image[] getFrames() {
+		return frames;
 	}
-//	public void addTag(Tag tag) {
-//		this.tags.add(tag);
-//	}
-//	public void removeTag(Tag tag) {
-//		this.tags.remove(tag);
-//	}
+
+	/**
+	 * @param frames the frames to set
+	 */
+	public void setFrames(Image[] frames) {
+		this.frames = frames;
+	}
+
+	/**
+	 * @return the tag
+	 */
+	public Tag getTag() {
+		return tag;
+	}
+
+	/**
+	 * @param tag the tag to set
+	 */
+	public void setTag(Tag tag) {
+		this.tag = tag;
+	}
 	
 
 	//#########---	M E T H O D S	---#############################################
+
+	
 
 	@Override
 	public void tick() {
@@ -78,6 +101,19 @@ public class EnvironmentObject extends GameObject {
 		int index = (int) ((time % (frames.length * duration)) / duration);
 		this.image = frames[index];
 	}
+	@Override
+	public void popup(GraphicsContext gc) {
+//		if (!popup) {
+//			gc.setFill(Color.LIGHTSALMON);
+//			gc.fillRoundRect(128.0, 258.0, 512.0, 256.0, 0, 0);
+//			gc.fillText(getObjecttext(), 256, 256);
+//		} else {
+//			gc.clearRect(128.0,  258.0, 512.0, 256.0);
+//		}
+		System.out.println(getObjecttext());
+		
+	}
+	
 
 	@Override
 	public void render(GraphicsContext gc) {
@@ -85,8 +121,8 @@ public class EnvironmentObject extends GameObject {
 	}
 
 	@Override
-	public Rectangle2D getBoundary() {
-		return new Rectangle2D(x, y, width, height);
+	public Boundary getBoundary() {
+		return new Boundary(x, y, width, height);
 	}
 
 	public boolean intersects() {
