@@ -13,6 +13,7 @@ module MonoMano {
 	exports application.back;
 	
 	opens application.assets;
+	opens application.resources.fonts;
 	
 
 }

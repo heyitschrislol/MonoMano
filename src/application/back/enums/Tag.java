@@ -5,6 +5,7 @@ public enum Tag {
 	SIGN,
 	CHARACTER,
 	DOOR,
+	HOUSE,
 	BORDER;
 	
 }

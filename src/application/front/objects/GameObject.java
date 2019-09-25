@@ -30,11 +30,14 @@ public abstract class GameObject {
 	public GameObject(double x, double y) {
 		this.x = x;
 		this.y = y;
+		this.objecttext = "";
 	}
 	public GameObject(double x, double y, ID id) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
+		this.objecttext = "";
+
 	}
 	public GameObject(double x, double y, double width, double height) {
 		this.x = x;
@@ -43,6 +46,7 @@ public abstract class GameObject {
 		this.height = height;
 		this.maxX = x + width;
 		this.maxY = y + height;
+		this.objecttext = "";
 	}
 	public GameObject(double x, double y, double width, double height, ID id) {
 		this.x = x;
@@ -52,6 +56,7 @@ public abstract class GameObject {
 		this.maxX = x + width;
 		this.maxY = y + height;
 		this.id = id;
+		this.objecttext = "";
 	}
 
 	//#########---	G E T / S E T	---#############################################
@@ -243,7 +248,6 @@ public abstract class GameObject {
 	public abstract void tick();
 	public abstract void tick(GameObject obj);
 	public abstract void animate(double time, double duration);
-	public abstract void popup(GraphicsContext gc);
 //	public abstract void clearpopup(GraphicsContext gc);
 	public abstract void render(GraphicsContext gc);
 	public abstract Boundary getBoundary();

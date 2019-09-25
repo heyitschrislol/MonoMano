@@ -7,6 +7,7 @@ import application.back.enums.ID;
 import application.back.enums.Tag;
 import application.front.Handler;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -15,23 +16,33 @@ public class EnvironmentObject extends GameObject {
 	private Image image;
 	private Image[] frames;
 	private Tag tag;
-	private boolean popup = false;
+	public boolean popup = false;
 	
 	//#########---	C O N S T R U C T O R S	---#############################################
 
 	public EnvironmentObject(double x, double y, ID id) {
 		super(x, y, id);
+		this.objecttext = "";
 	}
 
 	public EnvironmentObject(double x, double y, double width, double height) {
 		super(x, y, width, height);
 		this.maxX = x + width;
 		this.maxY = y + height;
+		this.objecttext = "";
 	}
 	public EnvironmentObject(double x, double y, double width, double height, ID id) {
 		super(x, y, width, height, id);
 		this.maxX = x + width;
 		this.maxY = y + height;
+		this.objecttext = "";
+	}
+	public EnvironmentObject(double x, double y, double width, double height, ID id, Tag tag) {
+		super(x, y, width, height, id);
+		this.maxX = x + width;
+		this.maxY = y + height;
+		this.tag = tag;
+		this.objecttext = "";
 	}
 
 	
@@ -101,20 +112,6 @@ public class EnvironmentObject extends GameObject {
 		int index = (int) ((time % (frames.length * duration)) / duration);
 		this.image = frames[index];
 	}
-	@Override
-	public void popup(GraphicsContext gc) {
-//		if (!popup) {
-//			gc.setFill(Color.LIGHTSALMON);
-//			gc.fillRoundRect(128.0, 258.0, 512.0, 256.0, 0, 0);
-//			gc.fillText(getObjecttext(), 256, 256);
-//		} else {
-//			gc.clearRect(128.0,  258.0, 512.0, 256.0);
-//		}
-		System.out.println(getObjecttext());
-		
-	}
-	
-
 	@Override
 	public void render(GraphicsContext gc) {
 		gc.drawImage(image, x, y);

@@ -27,18 +27,21 @@ public class PlayerObject extends GameObject {
 
 	public PlayerObject(double x, double y, ID id) {
 		super(x, y, id);
+		this.objecttext = "";
 	}
 
 	public PlayerObject(double x, double y, double width, double height) {
 		super(x, y, width, height);
 		this.maxX = x + width;
 		this.maxY = y + height;
+		this.objecttext = "";
 	}
 
 	public PlayerObject(double x, double y, double width, double height, ID id) {
 		super(x, y, width, height, id);
 		this.maxX = x + width;
 		this.maxY = y + height;
+		this.objecttext = "";
 	}
 
 	
@@ -127,9 +130,6 @@ public class PlayerObject extends GameObject {
 	@Override
 	public void render(GraphicsContext gc) {
 		gc.drawImage(image, x, y);
-	}
-	public void popup(GraphicsContext gc) {
-		
 	}
 
 	@Override

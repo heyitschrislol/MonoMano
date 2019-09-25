@@ -11,12 +11,18 @@ import javafx.scene.image.WritableImage;
 
 public class AssetManager {
 
-	public static final String GRASS = "/application/assets/altgrass.png";
-	public static final String TREE_1 = "/application/assets/tree01.png";
-	public static final String TREETOP = "/application/assets/treetop.png";
-	public static final String TREETRUNK = "/application/assets/treebase.png";
-	public static final String TREES_1 = "/application/assets/trees01.png";
-	public static final String MIDDLE = "/application/assets/middle.png";
+	public static final String GRASS = "/application/assets/grass768x512.png";
+//	public static final String TREE_1 = "/application/assets/tree01.png";
+	public static final String SMTREETOP = "/application/assets/springtreeSM-top.png";
+	public static final String SMTREETRUNK = "/application/assets/treeSM-bot.png";
+	public static final String LGTREETOP = "/application/assets/springtreeLG-top.png";
+	public static final String LGTREETRUNK = "/application/assets/treeLG-bot.png";
+	public static final String HOUSE = "/application/assets/house.png";
+	public static final String HOUSENODOOR = "/application/assets/houseNODOOR.png";
+	public static final String DOOR = "/application/assets/doorOPEN.png";
+
+	
+//	public static final String TREES_1 = "/application/assets/trees01.png";
 	public static final String MONUMENT = "/application/assets/rock_monument.png";
 	public static final String ROCK = "/application/assets/rock.png";
 	public static final String SIGN = "/application/assets/sign.png";
