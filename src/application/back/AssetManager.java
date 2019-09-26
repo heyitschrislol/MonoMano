@@ -20,6 +20,9 @@ public class AssetManager {
 	public static final String HOUSE = "/application/assets/house.png";
 	public static final String HOUSENODOOR = "/application/assets/houseNODOOR.png";
 	public static final String DOOR = "/application/assets/doorOPEN.png";
+	public static final String STONEFLOOR = "/application/assets/stonefloor.png";
+	public static final String SMCRATE = "/application/assets/crateSM.png";
+	public static final String LGCRATE = "/application/assets/crateLG.png";
 
 	
 //	public static final String TREES_1 = "/application/assets/trees01.png";

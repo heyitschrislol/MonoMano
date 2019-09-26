@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import application.back.Boundary;
 import application.back.enums.ID;
 import application.back.enums.Tag;
-import application.front.Handler;
+import application.back.Handler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

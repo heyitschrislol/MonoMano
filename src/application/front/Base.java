@@ -6,12 +6,14 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import application.back.AssetManager;
+import application.back.Handler;
 import application.back.Boundary;
 import application.back.enums.ID;
 import application.back.enums.Tag;
 import application.front.objects.EnvironmentObject;
 import application.front.objects.GameObject;
 import application.front.objects.PlayerObject;
+import application.back.InputManager;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -42,7 +44,8 @@ public class Base extends Application {
 	@SuppressWarnings("exports")
 	public static PlayerObject player;
 	public static ObservableList<GameObject> objectlist = FXCollections.observableArrayList();
-
+	public Image sceneImage;
+	
 	private Scene scene;
 	private Group root;
 	private Canvas overlay;
@@ -76,9 +79,9 @@ public class Base extends Application {
 			/*
 			 * set up world and world objects including the player.
 			 */
-			Image world = new Image(AssetManager.GRASS);
+			sceneImage = new Image(AssetManager.GRASS);
 			
-			Image[][] cutscenes = AssetManager.makeScene(world, 768, 512);
+			Image[][] cutscenes = AssetManager.makeScene(sceneImage, 768, 512);
 			Image houseBLK = new Image(AssetManager.HOUSENODOOR);
 			Image doorOP = new Image(AssetManager.DOOR);
 			Image topSM = new Image(AssetManager.SMTREETOP);
@@ -143,11 +146,11 @@ public class Base extends Application {
 				public void handle(long currentNanoTime) {
 					int i = 0;
 					int j = 0;
-					Image startimage;
+					
 					elapsedTime = (currentNanoTime - startNanoTime) / 1000000000.0;
-					startimage = cutscenes[i][j];
+					
 					gc.clearRect(0, 0, 768, 512);
-					gc.drawImage(startimage, LOCX, LOCY);
+					gc.drawImage(sceneImage, 0, 0);
 
 					player.setNextX(player.getX());
 					player.setNextY(player.getY());
@@ -176,7 +179,6 @@ public class Base extends Application {
 							if (bound.getTag() != Tag.BORDER) {
 								manager.intersecting = true;
 								manager.actionobject = bound.getObj();
-//								manager.popup(ogc, (EnvironmentObject) bound.getObj());
 							}
 							handler.tick();
 							handler.render(gc);
