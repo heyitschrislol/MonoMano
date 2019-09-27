@@ -58,6 +58,29 @@ public abstract class GameObject {
 		this.id = id;
 		this.objecttext = "";
 	}
+	public GameObject(double x, double y, double width, double height, ID id, Tag tag) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.maxX = x + width;
+		this.maxY = y + height;
+		this.id = id;
+		this.tag = tag;
+		this.objecttext = "";
+	}
+	public GameObject(double x, double y, double width, double height, Image image, ID id, Tag tag) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.maxX = x + width;
+		this.maxY = y + height;
+		this.id = id;
+		this.tag = tag;
+		this.image = image;
+		this.objecttext = "";
+	}
 
 	//#########---	G E T / S E T	---#############################################
 
@@ -252,6 +275,7 @@ public abstract class GameObject {
 	public abstract void render(GraphicsContext gc);
 	public abstract Boundary getBoundary();
 	public abstract boolean intersects(GameObject object);
+	public abstract boolean intersects(Boundary bound);
 
 	
 //	public abstract void tick(double velX, double velY, double time, double duration);

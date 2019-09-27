@@ -5,5 +5,6 @@ public enum ID {
 	NPC,
 	ITEM,
 	COLLIDABLE,
+	ENTRY,
 	ENVIRONMENT;
 }

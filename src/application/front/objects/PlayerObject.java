@@ -101,9 +101,7 @@ public class PlayerObject extends GameObject {
 	public void tick() {
 		x += velX;
 		y += velY;
-		
-		x = Base.clamp(x, 0, Base.WIDTH - 64);
-		y = Base.clamp(y, 0, Base.HEIGHT - 64);
+
 
 	}
 
@@ -112,13 +110,6 @@ public class PlayerObject extends GameObject {
 		x += velX;
 		y += velY;
 		
-//		if (!intersects()) {
-//			InputManager.activateAll();
-//		}
-		
-		
-		x = Base.clamp(x, 0, Base.WIDTH - 64);
-		y = Base.clamp(y, 0, Base.HEIGHT - 64);
 		
 	}
 
@@ -151,6 +142,10 @@ public class PlayerObject extends GameObject {
 	@Override
 	public boolean intersects(GameObject object) {
 		return object.getBoundary().intersects(this.getBoundary());
+	}
+	@Override
+	public boolean intersects(Boundary bound) {
+		return bound.intersects(this.getBoundary());
 	}
 	
 

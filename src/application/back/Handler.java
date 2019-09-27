@@ -26,20 +26,20 @@ public class Handler {
 	}
 	// #########---	M E T H O D S	---#############################################
 
-		public void tick() {
+		public static void tick() {
 			for (GameObject temp : objectlist) {
 				if (temp.getID() != ID.PLAYER) {
 					temp.tick();
 				}
 			}
 		}
-		public void render(GraphicsContext gc) {
+		public static void render(GraphicsContext gc) {
 			for (GameObject temp : objectlist) {
 				temp.render(gc);
 			}
 		}
 		
-		public ObservableList<Boundary> objectBoundaries() {
+		public static ObservableList<Boundary> objectBoundaries() {
 			ObservableList<Boundary> bounds = FXCollections.observableArrayList();
 			Boundary minx = new Boundary(Base.LOCX, Base.LOCY, 768, 0);
 			minx.setTag(Tag.BORDER);
@@ -64,13 +64,13 @@ public class Handler {
 			bounds.add(maxy);
 			return bounds;
 		}
-		public void addObject(GameObject temp) {
-			this.objectlist.add(temp);
+		public static void addObject(GameObject temp) {
+			Handler.objectlist.add(temp);
 		}
-		public void removeObject(GameObject temp) {
-			this.objectlist.remove(temp);
+		public static void removeObject(GameObject temp) {
+			Handler.objectlist.remove(temp);
 		}
-		public PlayerObject findPlayer() {
+		public static PlayerObject findPlayer() {
 			PlayerObject player;
 			for (int i = 0; i < objectlist.size(); i++) {
 				if (objectlist.get(i).getId() == ID.PLAYER) {

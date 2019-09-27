@@ -38,10 +38,15 @@ public class EnvironmentObject extends GameObject {
 		this.objecttext = "";
 	}
 	public EnvironmentObject(double x, double y, double width, double height, ID id, Tag tag) {
-		super(x, y, width, height, id);
+		super(x, y, width, height, id, tag);
 		this.maxX = x + width;
 		this.maxY = y + height;
-		this.tag = tag;
+		this.objecttext = "";
+	}
+	public EnvironmentObject(double x, double y, double width, double height, Image image, ID id, Tag tag) {
+		super(x, y, width, height, image, id, tag);
+		this.maxX = x + width;
+		this.maxY = y + height;
 		this.objecttext = "";
 	}
 
@@ -135,6 +140,10 @@ public class EnvironmentObject extends GameObject {
 	@Override
 	public boolean intersects(GameObject object) {
 		return object.getBoundary().intersects(this.getBoundary());
+	}
+	@Override
+	public boolean intersects(Boundary bound) {
+		return bound.intersects(this.getBoundary());
 	}
 	
 	
