@@ -1,14 +1,16 @@
 package application.front.sheets;
 
 import java.util.HashMap;
+import java.util.Map;
 
-import application.back.Boundary;
-import application.back.Handler;
+import application.back.managers.Handler;
+import application.front.objects.Boundary;
 import application.front.objects.EnvironmentObject;
 import application.front.objects.GameObject;
 import application.front.objects.PlayerObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -20,11 +22,12 @@ public abstract class Sheet extends Group {
 	public static final int HEIGHT = 512;
 	public PlayerObject player;
 	public ObservableList<GameObject> objectlist = FXCollections.observableArrayList();
-	public HashMap<String, Boundary> portals;
+	public ObservableMap<String, Boundary> portals;
 	public Handler handler;
 	public Image sceneImage;
 	public int startX;
 	public int startY;
+	
 	
 	public Canvas canvas;
 //	public Canvas overlay;
@@ -32,19 +35,23 @@ public abstract class Sheet extends Group {
 //	public GraphicsContext ogc;
 	
 	public Sheet() {
-		
+		portals = FXCollections.observableMap(createExitMap());
 	}
 	public Sheet(int startX, int startY) {
 		this.startX = startX;
 		this.startY = startY;
+		portals = FXCollections.observableMap(createExitMap());
+
 	}
 	public Sheet(PlayerObject player) {
 		this.player = player;
+		portals = FXCollections.observableMap(createExitMap());
+
 	}
 	
 	public abstract void enter();
 	public abstract Sheet exitSheet(Boundary bound);
-	
+	public abstract Map<String, Boundary> createExitMap();
 	
 	
 	

@@ -2,10 +2,9 @@ package application.front.objects;
 
 import java.util.ArrayList;
 
-import application.back.Boundary;
 import application.back.enums.ID;
 import application.back.enums.Tag;
-import application.back.Handler;
+import application.back.managers.Handler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

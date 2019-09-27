@@ -1,7 +1,6 @@
-package application.back;
+package application.front.objects;
 
 import application.back.enums.*;
-import application.front.objects.GameObject;
 import javafx.geometry.Rectangle2D;
 
 public class Boundary extends Rectangle2D {

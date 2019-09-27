@@ -1,18 +1,22 @@
-package application.front;
+package application.back.managers;
 
 import java.awt.Graphics;
 import java.util.LinkedList;
 
-import application.back.Boundary;
 import application.back.enums.ID;
 import application.back.enums.Tag;
+import application.front.Base;
+import application.front.objects.Boundary;
 import application.front.objects.EnvironmentObject;
 import application.front.objects.GameObject;
 import application.front.objects.PlayerObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.stage.Stage;
 
 public class Handler {
 	public static ObservableList<GameObject> objectlist;
@@ -22,28 +26,20 @@ public class Handler {
 	}
 	// #########---	M E T H O D S	---#############################################
 
-		public void tick() {
+		public static void tick() {
 			for (GameObject temp : objectlist) {
 				if (temp.getID() != ID.PLAYER) {
 					temp.tick();
 				}
 			}
 		}
-		public void render(GraphicsContext gc) {
+		public static void render(GraphicsContext gc) {
 			for (GameObject temp : objectlist) {
-//				PlayerObject player;
 				temp.render(gc);
-//				if (temp.getID() == ID.PLAYER) {
-//					player = (PlayerObject) temp;
-//					
-//				}
-//				if (temp.getID() == ID.ENVIRONMENT) {
-//					
-//				}
 			}
 		}
 		
-		public ObservableList<Boundary> objectBoundaries() {
+		public static ObservableList<Boundary> objectBoundaries() {
 			ObservableList<Boundary> bounds = FXCollections.observableArrayList();
 			Boundary minx = new Boundary(Base.LOCX, Base.LOCY, 768, 0);
 			minx.setTag(Tag.BORDER);
@@ -68,13 +64,13 @@ public class Handler {
 			bounds.add(maxy);
 			return bounds;
 		}
-		public void addObject(GameObject temp) {
-			this.objectlist.add(temp);
+		public static void addObject(GameObject temp) {
+			Handler.objectlist.add(temp);
 		}
-		public void removeObject(GameObject temp) {
-			this.objectlist.remove(temp);
+		public static void removeObject(GameObject temp) {
+			Handler.objectlist.remove(temp);
 		}
-		public PlayerObject findPlayer() {
+		public static PlayerObject findPlayer() {
 			PlayerObject player;
 			for (int i = 0; i < objectlist.size(); i++) {
 				if (objectlist.get(i).getId() == ID.PLAYER) {
@@ -82,6 +78,20 @@ public class Handler {
 				}
 			}
 			return null;	
+		}
+
+		/**
+		 * @return the objectlist
+		 */
+		public static ObservableList<GameObject> getObjectlist() {
+			return objectlist;
+		}
+
+		/**
+		 * @param objectlist the objectlist to set
+		 */
+		public static void setObjectlist(ObservableList<GameObject> objectlist) {
+			Handler.objectlist = objectlist;
 		}
 }
 

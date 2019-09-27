@@ -2,11 +2,10 @@ package application.front.objects;
 
 import java.util.ArrayList;
 
-import application.back.Boundary;
 import application.back.enums.ID;
+import application.back.managers.Handler;
+import application.back.managers.InputManager;
 import application.front.Base;
-import application.back.Handler;
-import application.back.InputManager;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;

@@ -3,10 +3,16 @@ package application.front.sheets;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
 import application.back.*;
 import application.back.enums.*;
+import application.back.managers.AssetManager;
+import application.back.managers.Handler;
+import application.back.managers.InputManager;
 import application.front.Base;
+import application.front.controllers.StartController;
 import application.front.objects.*;
 import javafx.animation.AnimationTimer;
 import javafx.collections.FXCollections;
@@ -23,6 +29,9 @@ public class HouseSheet extends Sheet {
 
 	public HouseSheet(int startX, int startY) throws FileNotFoundException {
 		super(startX, startY);
+		
+		portals = FXCollections.observableMap(createExitMap());
+		
 		player = new PlayerObject(startX, startY, 64, 64, ID.PLAYER);
 
 		canvas = new Canvas(768, 512);
@@ -114,17 +123,23 @@ public class HouseSheet extends Sheet {
 			}
 		}.start();
 	}
+	
+	
 	@Override
 	public void enter() {
 		gc.drawImage(sceneImage, startX, startY);
 		Handler.tick();
 		Handler.render(gc);
 	}
-	
-
 	@Override
 	public Sheet exitSheet(Boundary bound) {
 		return null;
+	}
+	@Override
+	public Map<String, Boundary> createExitMap() {
+		HashMap<String, Boundary> map = new HashMap<>();
+		
+		return map;
 	}
 	
 	
@@ -143,5 +158,6 @@ public class HouseSheet extends Sheet {
 	public void setObjectlist(ObservableList<GameObject> objectlist) {
 		this.objectlist = objectlist;
 	}
+	
 
 }

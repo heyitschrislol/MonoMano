@@ -1,8 +1,9 @@
-package application.front.sheets;
+package application.front.controllers;
 
 import java.io.FileNotFoundException;
 
-import application.back.InputManager;
+import application.back.managers.InputManager;
+import application.front.sheets.StartSheet;
 import javafx.scene.Scene;
 
 public class StartController extends Controller {

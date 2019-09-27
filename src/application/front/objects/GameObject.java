@@ -2,7 +2,6 @@ package application.front.objects;
 
 import java.util.ArrayList;
 
-import application.back.Boundary;
 import application.back.enums.ID;
 import application.back.enums.Tag;
 import javafx.geometry.Rectangle2D;

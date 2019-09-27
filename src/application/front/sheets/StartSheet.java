@@ -3,15 +3,23 @@ package application.front.sheets;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
 import application.back.*;
 import application.back.enums.ID;
 import application.back.enums.Tag;
+import application.back.managers.AssetManager;
+import application.back.managers.Handler;
+import application.back.managers.InputManager;
 import application.front.Base;
+import application.front.controllers.HouseController;
+import application.front.objects.Boundary;
 import application.front.objects.EnvironmentObject;
 import application.front.objects.GameObject;
 import application.front.objects.PlayerObject;
 import javafx.animation.AnimationTimer;
+import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -25,6 +33,9 @@ public class StartSheet extends Sheet {
 	
 	public StartSheet(int startX, int startY) throws FileNotFoundException {
 		super(startX, startY);
+		
+		portals = FXCollections.observableMap(createExitMap());
+
 		player = new PlayerObject(startX, startY, 64, 64, ID.PLAYER);
 
 		canvas = new Canvas(768, 512);
@@ -120,7 +131,6 @@ public class StartSheet extends Sheet {
 						Base.changeScene(controller);
 						this.stop();
 					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -156,8 +166,14 @@ public class StartSheet extends Sheet {
 	
 	@Override
 	public Sheet exitSheet(Boundary bound) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Map<String, Boundary> createExitMap() {
+		HashMap<String, Boundary> map = new HashMap<>();
+		
+		return map;
 	}
 
 }

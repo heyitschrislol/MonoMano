@@ -1,7 +1,8 @@
-package application.front.sheets;
+package application.front.controllers;
 
 import java.io.FileNotFoundException;
 
+import application.front.sheets.Sheet;
 import javafx.scene.Scene;
 
 public abstract class Controller {
