@@ -3,6 +3,7 @@ package application.front.sheets;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,12 +15,14 @@ import application.back.managers.Handler;
 import application.back.managers.InputManager;
 import application.front.Base;
 import application.front.controllers.HouseController;
+import application.front.controllers.StartController;
 import application.front.objects.Boundary;
 import application.front.objects.EnvironmentObject;
 import application.front.objects.GameObject;
 import application.front.objects.PlayerObject;
 import javafx.animation.AnimationTimer;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -31,11 +34,12 @@ public class StartSheet extends Sheet {
 	public final long startNanoTime = System.nanoTime();
 	public static double elapsedTime = Base.elapsedTime;
 	
+	
 	public StartSheet(int startX, int startY) throws FileNotFoundException {
 		super(startX, startY);
 		
-		portals = FXCollections.observableMap(createExitMap());
-
+		portallist.addAll(createExitList());
+		
 		player = new PlayerObject(startX, startY, 64, 64, ID.PLAYER);
 
 		canvas = new Canvas(768, 512);
@@ -46,11 +50,17 @@ public class StartSheet extends Sheet {
 		 * set up world and world objects including the player.
 		 */
 		sceneImage = new Image(AssetManager.GRASS);
-		player = new PlayerObject(352, 224, 64, 64, ID.PLAYER);
-
+		Image[] bushFrames = new Image[4];
+		bushFrames[0] = new Image(AssetManager.LGBUSH1);
+		bushFrames[1] = new Image(AssetManager.LGBUSH2);
+		bushFrames[2] = new Image(AssetManager.LGBUSH3);
+		bushFrames[3] = new Image(AssetManager.LGBUSH4);
 		
-		Image[][] cutscenes = AssetManager.makeScene(sceneImage, 768, 512);
-		Image houseBLK = new Image(AssetManager.HOUSENODOOR);
+		Image houseBLK = new Image(AssetManager.BLANKHOUSE);
+		Image wopen = new Image(AssetManager.WINOPEN);
+		Image wclosed = new Image(AssetManager.WINCLOSED);
+		Image sbush = new Image(AssetManager.SMBUSH);
+		Image lbush = new Image(AssetManager.LGBUSH1);
 		Image doorOP = new Image(AssetManager.DOOR);
 		Image topSM = new Image(AssetManager.SMTREETOP);
 		Image trunkSM = new Image(AssetManager.SMTREETRUNK);
@@ -61,12 +71,22 @@ public class StartSheet extends Sheet {
 		EnvironmentObject smtop = new EnvironmentObject(306, 101, 64, 112, ID.ENVIRONMENT);
 		EnvironmentObject lgbot = new EnvironmentObject(103, 300, 21, 17, ID.COLLIDABLE, Tag.TREE);	
 		EnvironmentObject lgtop = new EnvironmentObject(80, 200, 64, 112, ID.ENVIRONMENT);
+		EnvironmentObject bushsm = new EnvironmentObject(517, 12, 27, 21, ID.ENVIRONMENT);
+		EnvironmentObject bushlg = new EnvironmentObject(36, 436, 50, 43, ID.ENVIRONMENT);
+		EnvironmentObject winopen = new EnvironmentObject(553, 360, 38, 85, ID.COLLIDABLE, Tag.WINDOW);
+		EnvironmentObject winclosed = new EnvironmentObject(684, 360, 32, 85, ID.COLLIDABLE, Tag.WINDOW);
 		EnvironmentObject sign = new EnvironmentObject(200, 50, 50, 50, ID.COLLIDABLE,Tag.SIGN);
 		EnvironmentObject house = new EnvironmentObject(512, -60, 248, 498, ID.COLLIDABLE, Tag.HOUSE);
-		EnvironmentObject door = new EnvironmentObject(607, 384, 58, 58, ID.COLLIDABLE, Tag.DOOR);
+		EnvironmentObject door = new EnvironmentObject(607, 382, 58, 58, ID.COLLIDABLE, Tag.DOOR);
 
+		bushlg.setFrames(bushFrames);
 		sign.setObjecttext("Sign: 'U suck haha'");
-		door.setObjecttext("Someone's spreading peanut butter on their pee pee... better not go in...");
+		winopen.setObjecttext("Someone's spreading peanut butter on their wee wee... better not go in...");
+		winclosed.setObjecttext("The window is closed. You can only see window.");
+		bushsm.setImage(sbush);
+		bushlg.setImage(lbush);
+		winopen.setImage(wopen);
+		winclosed.setImage(wclosed);
 		smtop.setImage(topSM);
 		smbot.setImage(trunkSM);
 		lgtop.setImage(topLG);
@@ -84,6 +104,10 @@ public class StartSheet extends Sheet {
 		objectlist.add(sign);
 		objectlist.add(house);
 		objectlist.add(door);
+		objectlist.add(bushlg);
+		objectlist.add(bushsm);
+		objectlist.add(winopen);
+		objectlist.add(winclosed);
 
 		for (GameObject go : objectlist) {
 			if (go.getTag() == Tag.TREE) {
@@ -125,16 +149,20 @@ public class StartSheet extends Sheet {
 					player.animate(elapsedTime, 0.100);
 					player.setNextX(player.getNextX() + 5);
 				}
-				if (player.intersects(door)) {
+				if (player.intersects(door) && player.upkey) {
 					try {
-						HouseController controller = new HouseController();
+						HouseController controller = new HouseController(352, 440);
 						Base.changeScene(controller);
 						this.stop();
+						gc.clearRect(0, 0, 768, 512);
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					}
 				}
-				for (Boundary bound : Handler.objectBoundaries()) {
+				if (player.intersects(bushlg)) {
+					bushlg.animate(elapsedTime, 0.1, player.getX(), player.getY());
+				}
+				for (Boundary bound : objectBoundaries()) {
 					if (bound.intersects(player.getNextX(), player.getNextY() + 15, 64, 34)) {
 						if (bound.getTag() != Tag.BORDER) {
 							InputManager.intersecting = true;
@@ -142,7 +170,7 @@ public class StartSheet extends Sheet {
 						}
 						
 						Handler.tick();
-						Handler.render(gc);
+						render(gc);
 						return;
 					}
 					InputManager.intersecting = false;
@@ -151,7 +179,7 @@ public class StartSheet extends Sheet {
 				player.setY(player.getNextY());
 
 				Handler.tick();
-				Handler.render(gc);
+				render(gc);
 			}
 		}.start();
 	}
@@ -160,20 +188,51 @@ public class StartSheet extends Sheet {
 	public void enter() {
 		gc.drawImage(sceneImage, startX, startY);
 		Handler.tick();
-		Handler.render(gc);
+		render(gc);
 	}
-
-	
 	@Override
-	public Sheet exitSheet(Boundary bound) {
-		return null;
+	public ObservableList<Boundary> objectBoundaries() {
+		ObservableList<Boundary> bounds = FXCollections.observableArrayList();
+		Boundary minx = new Boundary(Base.LOCX, Base.LOCY, 768, 0);
+		minx.setTag(Tag.BORDER);
+		Boundary miny = new Boundary(Base.LOCX, Base.LOCY, 0, 512);
+		miny.setTag(Tag.BORDER);
+		Boundary maxx = new Boundary(Base.LOCX, Base.LOCY + 512, 768, 0);
+		maxx.setTag(Tag.BORDER);
+		Boundary maxy = new Boundary(Base.LOCX + 768, Base.LOCY, 0, 512);
+		maxy.setTag(Tag.BORDER);
+		for (GameObject temp : objectlist) {
+			if (temp.getId() == ID.COLLIDABLE || temp.getId() == ID.ITEM) {
+				Boundary b = temp.getBoundary();
+				b.setObj(temp);
+				b.setId(temp.getId());
+				b.setTag(temp.getTag());
+				bounds.add(b);
+			}
+		}
+		bounds.add(minx);
+		bounds.add(miny);
+		bounds.add(maxx);
+		bounds.add(maxy);
+//		bounds.addAll(createExitList());
+		return bounds;
 	}
-
 	@Override
-	public Map<String, Boundary> createExitMap() {
-		HashMap<String, Boundary> map = new HashMap<>();
-		
-		return map;
+	public ArrayList<Boundary> createExitList() {
+		ArrayList<Boundary> list = new ArrayList<>();
+		Boundary door = new Boundary(620, 390, 30, 50, "door");
+		Boundary northexit = new Boundary(0, 0, 768, 3, "north");
+		Boundary southexit = new Boundary(0, 509, 768, 512, "south");
+		Boundary eastexit = new Boundary(765, 0, 3, 512, "east");
+		Boundary westexit = new Boundary(0, 0, 3, 512, "west");
+		list.add(door);
+		return list;
+	}
+	@Override
+	public void render(GraphicsContext gc) {
+		for (GameObject temp : objectlist) {
+			temp.render(gc);
+		}	
 	}
 
 }

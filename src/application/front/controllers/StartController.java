@@ -10,8 +10,9 @@ public class StartController extends Controller {
 	public StartSheet sheet;
 	public Scene scene;
 	
-	public StartController() throws FileNotFoundException {
-		sheet = new StartSheet(244, 244);
+	public StartController(int exitX, int exitY) throws FileNotFoundException {
+		super(exitX, exitY);
+		sheet = new StartSheet(exitX, exitY);
 		scene = new Scene(sheet);
 		sheet.enter();
 		

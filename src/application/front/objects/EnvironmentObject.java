@@ -110,11 +110,23 @@ public class EnvironmentObject extends GameObject {
 		x += velX;
 		y += velY;
 	}
-	
 	@Override
 	public void animate(double time, double duration) {
 		int index = (int) ((time % (frames.length * duration)) / duration);
-		this.image = frames[index];
+		this.image = frames[index];			
+	}
+	@Override
+	public void animate(double time, double duration, double playerX, double playerY) {
+//		int index = (int) ((time % (frames.length * duration)) / duration);
+//		this.image = frames[index];
+		int index = (int) ((x - playerX) + (y - playerY));
+		if (index < 5) {
+			this.image = frames[3];
+		} else if(index > 5 || index < -5) {
+			this.image = frames[2];
+		} else {
+			this.image = frames[0];
+		}
 	}
 	@Override
 	public void render(GraphicsContext gc) {
@@ -144,6 +156,8 @@ public class EnvironmentObject extends GameObject {
 	public boolean intersects(Boundary bound) {
 		return bound.intersects(this.getBoundary());
 	}
+
+	
 	
 	
 

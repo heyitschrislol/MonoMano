@@ -1,5 +1,6 @@
 package application.front.sheets;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public abstract class Sheet extends Group {
 	public static final int HEIGHT = 512;
 	public PlayerObject player;
 	public ObservableList<GameObject> objectlist = FXCollections.observableArrayList();
-	public ObservableMap<String, Boundary> portals;
+	public ObservableList<Boundary> portallist = FXCollections.observableArrayList();
 	public Handler handler;
 	public Image sceneImage;
 	public int startX;
@@ -35,25 +36,22 @@ public abstract class Sheet extends Group {
 //	public GraphicsContext ogc;
 	
 	public Sheet() {
-		portals = FXCollections.observableMap(createExitMap());
+
 	}
 	public Sheet(int startX, int startY) {
 		this.startX = startX;
 		this.startY = startY;
-		portals = FXCollections.observableMap(createExitMap());
 
 	}
 	public Sheet(PlayerObject player) {
 		this.player = player;
-		portals = FXCollections.observableMap(createExitMap());
 
 	}
 	
 	public abstract void enter();
-	public abstract Sheet exitSheet(Boundary bound);
-	public abstract Map<String, Boundary> createExitMap();
-	
-	
+	public abstract ObservableList<Boundary> objectBoundaries();
+	public abstract ArrayList<Boundary> createExitList();
+	public abstract void render(GraphicsContext gc);
 	
 	
 
@@ -86,19 +84,17 @@ public abstract class Sheet extends Group {
 	}
 
 	/**
-	 * @return the portals
+	 * @return the portallist
 	 */
-	public HashMap<String, Boundary> getPortals() {
-		return portals;
+	public ObservableList<Boundary> getPortallist() {
+		return portallist;
 	}
-
 	/**
-	 * @param portals the portals to set
+	 * @param portallist the portallist to set
 	 */
-	public void setPortals(HashMap<String, Boundary> portals) {
-		this.portals = portals;
+	public void setPortallist(ObservableList<Boundary> portallist) {
+		this.portallist = portallist;
 	}
-
 	/**
 	 * @return the handler
 	 */

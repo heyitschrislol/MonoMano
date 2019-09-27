@@ -7,11 +7,15 @@ public class Boundary extends Rectangle2D {
 	private ID id;
 	private Tag tag;
 	private GameObject obj;
+	private String label;
 	
 
 	public Boundary(double minX, double minY, double width, double height) {
 		super(minX, minY, width, height);
-		// TODO Auto-generated constructor stub
+	}
+	public Boundary(double minX, double minY, double width, double height, String label) {
+		super(minX, minY, width, height);
+		this.label = label;
 	}
 
 	/**
@@ -54,5 +58,19 @@ public class Boundary extends Rectangle2D {
 	 */
 	public void setObj(GameObject object) {
 		this.obj = object;
+	}
+
+	/**
+	 * @return the label
+	 */
+	public String getLabel() {
+		return label;
+	}
+
+	/**
+	 * @param label the label to set
+	 */
+	public void setLabel(String label) {
+		this.label = label;
 	}
 }

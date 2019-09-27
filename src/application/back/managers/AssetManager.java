@@ -12,17 +12,31 @@ import javafx.scene.image.WritableImage;
 public class AssetManager {
 
 	public static final String GRASS = "/application/assets/grass768x512.png";
-//	public static final String TREE_1 = "/application/assets/tree01.png";
 	public static final String SMTREETOP = "/application/assets/springtreeSM-top.png";
 	public static final String SMTREETRUNK = "/application/assets/treeSM-bot.png";
 	public static final String LGTREETOP = "/application/assets/springtreeLG-top.png";
 	public static final String LGTREETRUNK = "/application/assets/treeLG-bot.png";
-	public static final String HOUSE = "/application/assets/house.png";
+	public static final String SMBUSH = "/application/assets/bushSM-27x21.png";
+	public static final String LGBUSH1 = "/application/assets/bushLG.png";
+	public static final String LGBUSH2= "/application/assets/bushLG2.png";
+	public static final String LGBUSH3 = "/application/assets/bushLG3.png";
+	public static final String LGBUSH4 = "/application/assets/bushLG4.png";
+
+	public static final String BLANKHOUSE = "/application/assets/blankhouse-248x498.png";
 	public static final String HOUSENODOOR = "/application/assets/houseNODOOR.png";
 	public static final String DOOR = "/application/assets/doorOPEN.png";
-	public static final String STONEFLOOR = "/application/assets/stonefloor.png";
+	public static final String WINOPEN = "/application/assets/winOPEN-38x85.png";
+	public static final String WINCLOSED = "/application/assets/winCLOSED-32x85.png";
+	
+	public static final String INDOOR = "/application/assets/insidedoor.png";
+	public static final String STONEFLOOR = "/application/assets/stonefloor-v2.png";
+	public static final String BACKWALL = "/application/assets/backwall.png";
+	public static final String LEFTWALL = "/application/assets/leftwall.png";
+	public static final String RIGHTWALL = "/application/assets/rightwall.png";
 	public static final String SMCRATE = "/application/assets/crateSM.png";
 	public static final String LGCRATE = "/application/assets/crateLG.png";
+
+
 
 	
 //	public static final String TREES_1 = "/application/assets/trees01.png";

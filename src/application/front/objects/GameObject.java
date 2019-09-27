@@ -270,6 +270,7 @@ public abstract class GameObject {
 	public abstract void tick();
 	public abstract void tick(GameObject obj);
 	public abstract void animate(double time, double duration);
+	public abstract void animate(double time, double duration, double playerX, double playerY);
 //	public abstract void clearpopup(GraphicsContext gc);
 	public abstract void render(GraphicsContext gc);
 	public abstract Boundary getBoundary();

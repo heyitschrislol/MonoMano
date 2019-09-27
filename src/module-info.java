@@ -9,8 +9,14 @@ module MonoMano {
 	opens application.front to java.fxml;
 	exports application.front;
 	
-	opens application.back;
-	exports application.back;
+	opens application.back.managers;
+	exports application.back.managers;
+	
+	opens application.front.controllers;
+	exports application.front.controllers;
+	
+	opens application.front.sheets;
+	exports application.front.sheets;
 	
 	opens application.assets;
 	opens application.resources.fonts;

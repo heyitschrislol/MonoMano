@@ -3,6 +3,7 @@ package application.front.sheets;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class HouseSheet extends Sheet {
 	public HouseSheet(int startX, int startY) throws FileNotFoundException {
 		super(startX, startY);
 		
-		portals = FXCollections.observableMap(createExitMap());
+		portallist.addAll(createExitList());
 		
 		player = new PlayerObject(startX, startY, 64, 64, ID.PLAYER);
 
@@ -45,18 +46,39 @@ public class HouseSheet extends Sheet {
         
         Image crate1 = new Image(AssetManager.SMCRATE);
         Image crate2 = new Image(AssetManager.LGCRATE);
+        Image door = new Image(AssetManager.INDOOR);
+        Image bwall = new Image(AssetManager.BACKWALL);
+        Image rwall = new Image(AssetManager.RIGHTWALL);
+        Image lwall = new Image(AssetManager.LEFTWALL);
         
-        EnvironmentObject crateSM = new EnvironmentObject(100, 100, 32, 37, crate1, ID.COLLIDABLE, Tag.CRATE);
-        EnvironmentObject crateLG = new EnvironmentObject(100, 100, 42, 47, crate2, ID.COLLIDABLE, Tag.CRATE);
         
-
-        crateSM.setObjecttext("This crate appears to be full of peanut butter...");
+        EnvironmentObject crateSM = new EnvironmentObject(100, 100, 32, 37, ID.COLLIDABLE, Tag.CRATE);
+        EnvironmentObject crateLG = new EnvironmentObject(200, 175, 42, 47, ID.COLLIDABLE, Tag.CRATE);
+        EnvironmentObject indoor = new EnvironmentObject(335, 500, 98, 16, ID.COLLIDABLE, Tag.DOOR);
+        EnvironmentObject backwall = new EnvironmentObject(0, 0, 768, 64, ID.COLLIDABLE, Tag.BORDER);
+        EnvironmentObject leftwall = new EnvironmentObject(0, 64, 16, 448, ID.COLLIDABLE, Tag.BORDER);
+        EnvironmentObject rightwall = new EnvironmentObject(752, 64, 16, 448, ID.COLLIDABLE, Tag.DOOR);
+        
+        crateSM.setImage(crate1);
+        crateLG.setImage(crate2);
+        indoor.setImage(door);
+        backwall.setImage(bwall);
+        leftwall.setImage(lwall);
+        rightwall.setImage(rwall);
+        player.setFrames(AssetManager.returnUp());
+		player.setImage(AssetManager.findIdle("UP"));
+        crateSM.setObjecttext("This crate is full of empty peanut butter jars...");
         crateLG.setObjecttext("It looks like a small animal was kept in here...");
         objectlist.add(player);
         objectlist.add(crateSM);
         objectlist.add(crateLG);
+        objectlist.add(indoor);
+        objectlist.add(backwall);
+        objectlist.add(leftwall);
+        objectlist.add(rightwall);
         
         Handler.setObjectlist(objectlist);
+        
         
 		
 
@@ -92,25 +114,24 @@ public class HouseSheet extends Sheet {
 					player.animate(elapsedTime, 0.100);
 					player.setNextX(player.getNextX() + 5);
 				}
-				Boundary bounderee = new Boundary(244, 510, 64, 10);
-				if (player.intersects(bounderee)) {
+				if (player.intersects(indoor) && player.downkey) {
 					try {
-						StartController controller = new StartController();
+						StartController controller = new StartController(607, 445);
 						Base.changeScene(controller);
 						this.stop();
-
+						gc.clearRect(0, 0, 768, 512);
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					}
 				}
-				for (Boundary bound : Handler.objectBoundaries()) {
+				for (Boundary bound : objectBoundaries()) {
 					if (bound.intersects(player.getNextX(), player.getNextY() + 15, 64, 34)) {
 						if (bound.getTag() != Tag.BORDER) {
 							InputManager.intersecting = true;
 							InputManager.actionobject = bound.getObj();
 						}
 						Handler.tick();
-						Handler.render(gc);
+						render(gc);
 						return;
 					}
 					InputManager.intersecting = false;
@@ -119,7 +140,7 @@ public class HouseSheet extends Sheet {
 				player.setY(player.getNextY());
 
 				Handler.tick();
-				Handler.render(gc);
+				render(gc);
 			}
 		}.start();
 	}
@@ -129,20 +150,48 @@ public class HouseSheet extends Sheet {
 	public void enter() {
 		gc.drawImage(sceneImage, startX, startY);
 		Handler.tick();
-		Handler.render(gc);
+		render(gc);
 	}
 	@Override
-	public Sheet exitSheet(Boundary bound) {
-		return null;
+	public ObservableList<Boundary> objectBoundaries() {
+		ObservableList<Boundary> bounds = FXCollections.observableArrayList();
+		Boundary minx = new Boundary(Base.LOCX, Base.LOCY, 768, 0);
+		minx.setTag(Tag.BORDER);
+		Boundary miny = new Boundary(Base.LOCX, Base.LOCY, 0, 512);
+		miny.setTag(Tag.BORDER);
+		Boundary maxx = new Boundary(Base.LOCX, Base.LOCY + 512, 768, 0);
+		maxx.setTag(Tag.BORDER);
+		Boundary maxy = new Boundary(Base.LOCX + 768, Base.LOCY, 0, 512);
+		maxy.setTag(Tag.BORDER);
+		for (GameObject temp : objectlist) {
+			if (temp.getId() == ID.COLLIDABLE || temp.getId() == ID.ITEM) {
+				Boundary b = temp.getBoundary();
+				b.setObj(temp);
+				b.setId(temp.getId());
+				b.setTag(temp.getTag());
+				bounds.add(b);
+			}
+		}
+//		bounds.add(minx);
+//		bounds.add(miny);
+//		bounds.add(maxx);
+//		bounds.add(maxy);
+//		bounds.addAll(createExitList());
+		return bounds;
 	}
 	@Override
-	public Map<String, Boundary> createExitMap() {
-		HashMap<String, Boundary> map = new HashMap<>();
-		
-		return map;
+	public ArrayList<Boundary> createExitList() {
+		ArrayList<Boundary> list = new ArrayList<>();
+		Boundary door = new Boundary(352, 490, 60, 11, "door");
+		list.add(door);
+		return list;
 	}
-	
-	
+	@Override
+	public void render(GraphicsContext gc) {
+		for (GameObject temp : objectlist) {
+			temp.render(gc);
+		}	
+	}
 
 	
 	/**
@@ -158,6 +207,8 @@ public class HouseSheet extends Sheet {
 	public void setObjectlist(ObservableList<GameObject> objectlist) {
 		this.objectlist = objectlist;
 	}
+
+
 	
 
 }

@@ -111,10 +111,15 @@ public class PlayerObject extends GameObject {
 		
 		
 	}
-
+	@Override
 	public void animate(double time, double duration) {
 		int index = (int) ((time % (frames.length * duration)) / duration);
 		this.image = frames[index];	
+	}
+	@Override
+	public void animate(double time, double duration, double playerX, double playerY) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -146,6 +151,8 @@ public class PlayerObject extends GameObject {
 	public boolean intersects(Boundary bound) {
 		return bound.intersects(this.getBoundary());
 	}
+
+	
 	
 
 //	public int intersects() {

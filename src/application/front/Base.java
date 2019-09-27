@@ -79,9 +79,9 @@ public class Base extends Application {
 
 			primaryStage.setTitle("Mono Mano");
 			
-			sheet = new StartSheet(244, 244);
+//			sheet = new StartSheet(244, 244);
 			
-			StartController starter = new StartController();
+			StartController starter = new StartController(352, 244);
 			changeScene(starter);
 			
 
@@ -157,6 +157,7 @@ public class Base extends Application {
 		Sheet sheet = controller.getSheet();
 		sheet.getChildren().add(overlay);
 		sheet.player.render(sheet.gc);
+		
 		Handler.setObjectlist(sheet.getObjectlist());
 		Handler.render(sheet.gc);
 		Scene scene = controller.getScene();

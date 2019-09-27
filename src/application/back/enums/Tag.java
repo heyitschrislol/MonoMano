@@ -6,6 +6,7 @@ public enum Tag {
 	CHARACTER,
 	EXIT,
 	CRATE,
+	WINDOW,
 	DOOR,
 	HOUSE,
 	BORDER;

@@ -11,8 +11,9 @@ public class HouseController extends Controller {
 	public Scene scene;
 	
 	
-	public HouseController() throws FileNotFoundException {
-		sheet = new HouseSheet(352, 420);
+	public HouseController(int exitX, int exitY) throws FileNotFoundException {
+		super(exitX, exitY);
+		sheet = new HouseSheet(exitX, exitY);
 		scene = new Scene(sheet);
 		sheet.enter();
 		InputManager manager = new InputManager();
