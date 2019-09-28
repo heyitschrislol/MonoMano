@@ -11,6 +11,7 @@ import application.back.*;
 import application.back.enums.ID;
 import application.back.enums.Tag;
 import application.back.managers.AssetManager;
+import application.back.managers.AudioManager;
 import application.back.managers.Handler;
 import application.back.managers.InputManager;
 import application.front.Base;
@@ -40,10 +41,12 @@ public class StartSheet extends Sheet {
 		
 		portallist.addAll(createExitList());
 		
-		player = new PlayerObject(startX, startY, 64, 64, ID.PLAYER);
+		player = new PlayerObject(startX, startY, 55, 64, ID.PLAYER);
 
 		canvas = new Canvas(768, 512);
 		gc = canvas.getGraphicsContext2D();
+		
+//		AudioManager.changeMusic("/application/assets/Bgins.wav");
 		
         getChildren().add(canvas);
 		/*
@@ -81,7 +84,7 @@ public class StartSheet extends Sheet {
 
 		bushlg.setFrames(bushFrames);
 		sign.setObjecttext("Sign: 'U suck haha'");
-		winopen.setObjecttext("Someone's spreading peanut butter on their wee wee... better not go in...");
+		winopen.setObjecttext("There's a naked man inside... it looks like he's practicing thrusting his pelvis...");
 		winclosed.setObjecttext("The window is closed. You can only see window.");
 		bushsm.setImage(sbush);
 		bushlg.setImage(lbush);
@@ -94,8 +97,8 @@ public class StartSheet extends Sheet {
 		sign.setImage(newsign);
 		house.setImage(houseBLK);
 		door.setImage(doorOP);
-		player.setFrames(AssetManager.returnDown());
-		player.setImage(AssetManager.findIdle("DOWN"));
+		player.setFrames(AssetManager.returnRight());
+		player.setImage(AssetManager.findIdle("RIGHT"));
 		objectlist.add(player);
 		objectlist.add(smtop);
 		objectlist.add(smbot);
@@ -202,7 +205,7 @@ public class StartSheet extends Sheet {
 		Boundary maxy = new Boundary(Base.LOCX + 768, Base.LOCY, 0, 512);
 		maxy.setTag(Tag.BORDER);
 		for (GameObject temp : objectlist) {
-			if (temp.getId() == ID.COLLIDABLE || temp.getId() == ID.ITEM) {
+			if (temp.getId() == ID.COLLIDABLE || temp.getId() == ID.ITEM || temp.getId() == ID.NPC) {
 				Boundary b = temp.getBoundary();
 				b.setObj(temp);
 				b.setId(temp.getId());

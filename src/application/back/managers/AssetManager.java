@@ -63,27 +63,25 @@ public class AssetManager {
 	public static final String PLAYER_14 = "/application/assets/player_14.png";
 	public static final String PLAYER_15 = "/application/assets/player_15.png";
 
-//	public static final String FTEST1 = "/application/assets/front1.png";
-//	public static final String FTEST2 = "/application/assets/front2.png";
-//	public static final String FTEST3 = "/application/assets/front3.png";
-//	public static final String FTEST4 = "/application/assets/front4.png";
-//	public static final String FTEST5 = "/application/assets/front5.png";
-//	public static final String FTEST6 = "/application/assets/front6.png";
-//	public static final String FTEST7 = "/application/assets/front7.png";
-//	public static final String FUTEST1 = "/application/assets/frontU1.png";
-//	public static final String FUTEST2 = "/application/assets/frontU2.png";
-//	public static final String FUTEST3 = "/application/assets/frontU3.png";
-//	public static final String FUTEST4 = "/application/assets/frontU4.png";
-//	public static final String FUTEST5 = "/application/assets/frontU5.png";
-//	public static final String FUTEST6 = "/application/assets/frontU6.png";
-//	public static final String FUTEST7 = "/application/assets/frontU7.png";
-//	public static final String RTEST1 = "/application/assets/right1.png";
-//	public static final String RTEST2 = "/application/assets/right2.png";
-//	public static final String RTEST3 = "/application/assets/right3.png";
-//	public static final String RTEST4 = "/application/assets/right4.png";
-//	public static final String RTEST5 = "/application/assets/right5.png";
-//	public static final String RTEST6 = "/application/assets/right6.png";
-//	public static final String RTEST7 = "/application/assets/right7.png";
+	public static final String FTEST1 = "/application/assets/man1.png";
+	public static final String FTEST2 = "/application/assets/man2.png";
+	public static final String FTEST3 = "/application/assets/man3.png";
+	public static final String FTEST4 = "/application/assets/man4.png";
+	public static final String FTEST5 = "/application/assets/man5.png";
+	public static final String FTEST6 = "/application/assets/man6.png";
+	public static final String FTEST7 = "/application/assets/man7.png";
+	public static final String FTEST8 = "/application/assets/man8.png";
+	public static final String FTEST9 = "/application/assets/man9-death.png";
+	public static final String RTEST1 = "/application/assets/nuderman1.png";
+	public static final String RTEST2 = "/application/assets/nuderman2.png";
+	public static final String RTEST3 = "/application/assets/nuderman3.png";
+	public static final String RTEST4 = "/application/assets/nuderman4.png";
+	public static final String RTEST5 = "/application/assets/nuderman5.png";
+	public static final String RTEST6 = "/application/assets/nuderman6.png";
+	public static final String RTEST7 = "/application/assets/nuderman7.png";
+	public static final String RTEST8 = "/application/assets/nuderman8.png";
+//	public static final String RTEST9 = "/application/assets/nudeman9-death.png";
+
 
 	public static PixelReader wholescene;
 //	public static WritableImage cutscene;
@@ -171,19 +169,15 @@ public class AssetManager {
 		return moveleft;
 	}
 //	public static Image[] returnRight() {
-//		Image rightA = new Image(RTEST2, 64.0, 64.0, true, true);
-//		Image rightB = new Image(RTEST3, 64.0, 64.0, true, true);
-//		Image rightC = new Image(RTEST4, 64.0, 64.0, true, true);
-//		Image rightD = new Image(RTEST5, 64.0, 64.0, true, true);
-//		Image rightE = new Image(RTEST6, 64.0, 64.0, true, true);
-//		Image rightF = new Image(RTEST7, 64.0, 64.0, true, true);
-//		Image[] moveright = new Image[6];
+//		Image rightA = new Image(FTEST2, 50.0, 64.0, true, true);
+//		Image rightB = new Image(FTEST3, 50.0, 64.0, true, true);
+//		Image rightC = new Image(FTEST6, 50.0, 64.0, true, true);
+////		Image rightD = new Image(FTEST2, 50.0, 64.0, true, true);
+//		Image[] moveright = new Image[3];
 //		moveright[0] = rightA;
 //		moveright[1] = rightB;
 //		moveright[2] = rightC;
-//		moveright[3] = rightD;
-//		moveright[4] = rightE;
-//		moveright[5] = rightF;
+////		moveright[3] = rightD;
 //		
 //		return moveright;
 //	}
@@ -209,6 +203,23 @@ public class AssetManager {
 		
 		return idles;
 	}
+//	public static Image findIdle(String direction) {
+//		Image idle;
+//		if (direction.equals("DOWN")) {
+//			idle = new Image(FTEST4, 50.0, 64.0, true, true);
+//		} else if (direction.equals("UP")) {
+//			idle = new Image(FTEST4, 50.0, 64.0, true, true);
+//		} else if (direction.equals("LEFT")) {
+//			idle = new Image(PLAYER_6, 64.0, 64.0, true, true);
+//		} else if (direction.equals("RIGHT")) {
+//			idle = new Image(FTEST4, 50.0, 64.0, true, true);
+//		} else {
+//			return null;
+//		}
+//		
+//		
+//		return idle;
+//	}
 	public static Image findIdle(String direction) {
 		Image idle;
 		if (direction.equals("DOWN")) {

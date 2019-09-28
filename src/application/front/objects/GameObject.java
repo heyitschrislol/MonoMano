@@ -9,6 +9,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class GameObject {
+	protected String name;
+	protected String sound;
 	protected ID id;
 	protected Tag tag;
 	protected double x;
@@ -83,6 +85,30 @@ public abstract class GameObject {
 
 	//#########---	G E T / S E T	---#############################################
 
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**
+	 * @return the sound
+	 */
+	public String getSound() {
+		return sound;
+	}
+	/**
+	 * @param sound the sound to set
+	 */
+	public void setSound(String sound) {
+		this.sound = sound;
+	}
 	/**
 	 * @return the x
 	 */

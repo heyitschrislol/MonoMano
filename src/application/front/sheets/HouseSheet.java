@@ -10,6 +10,7 @@ import java.util.Map;
 import application.back.*;
 import application.back.enums.*;
 import application.back.managers.AssetManager;
+import application.back.managers.AudioManager;
 import application.back.managers.Handler;
 import application.back.managers.InputManager;
 import application.front.Base;
@@ -28,7 +29,7 @@ public class HouseSheet extends Sheet {
 	public final long startNanoTime = System.nanoTime();
 	public static double elapsedTime = Base.elapsedTime;
 
-	public HouseSheet(int startX, int startY) throws FileNotFoundException {
+	public HouseSheet(int startX, int startY){
 		super(startX, startY);
 		
 		portallist.addAll(createExitList());
@@ -40,10 +41,14 @@ public class HouseSheet extends Sheet {
 
 
         getChildren().add(canvas);
-       
-        
+//		AudioManager.changeMusic("/application/assets/Nothing For the Swim Back.wav");
+
         sceneImage = new Image(AssetManager.STONEFLOOR);
         
+        Image[] nudeframes = new Image[2];
+        nudeframes[0] = new Image(AssetManager.RTEST2);
+        nudeframes[1] = new Image(AssetManager.RTEST5);
+        Image nudepic = new Image(AssetManager.RTEST4);
         Image crate1 = new Image(AssetManager.SMCRATE);
         Image crate2 = new Image(AssetManager.LGCRATE);
         Image door = new Image(AssetManager.INDOOR);
@@ -51,7 +56,7 @@ public class HouseSheet extends Sheet {
         Image rwall = new Image(AssetManager.RIGHTWALL);
         Image lwall = new Image(AssetManager.LEFTWALL);
         
-        
+        NPCObject nudeman = new NPCObject(369, 169, 55, 64, ID.NPC, Tag.CHARACTER);
         EnvironmentObject crateSM = new EnvironmentObject(100, 100, 32, 37, ID.COLLIDABLE, Tag.CRATE);
         EnvironmentObject crateLG = new EnvironmentObject(200, 175, 42, 47, ID.COLLIDABLE, Tag.CRATE);
         EnvironmentObject indoor = new EnvironmentObject(335, 500, 98, 16, ID.COLLIDABLE, Tag.DOOR);
@@ -59,6 +64,10 @@ public class HouseSheet extends Sheet {
         EnvironmentObject leftwall = new EnvironmentObject(0, 64, 16, 448, ID.COLLIDABLE, Tag.BORDER);
         EnvironmentObject rightwall = new EnvironmentObject(752, 64, 16, 448, ID.COLLIDABLE, Tag.DOOR);
         
+        nudeman.setName("Fully-Erect Nude Man");
+        nudeman.setImage(nudepic);
+        nudeman.setSound("milkshake");
+        nudeman.setFrames(nudeframes);
         crateSM.setImage(crate1);
         crateLG.setImage(crate2);
         indoor.setImage(door);
@@ -67,9 +76,11 @@ public class HouseSheet extends Sheet {
         rightwall.setImage(rwall);
         player.setFrames(AssetManager.returnUp());
 		player.setImage(AssetManager.findIdle("UP"));
+        nudeman.setObjecttext("My milkshake brings all the boys to th- whaa agh!");
         crateSM.setObjecttext("This crate is full of empty peanut butter jars...");
         crateLG.setObjecttext("It looks like a small animal was kept in here...");
         objectlist.add(player);
+        objectlist.add(nudeman);
         objectlist.add(crateSM);
         objectlist.add(crateLG);
         objectlist.add(indoor);
@@ -89,35 +100,46 @@ public class HouseSheet extends Sheet {
 				
 				elapsedTime = (currentNanoTime - startNanoTime) / 1000000000.0;
 				
+				
 				gc.clearRect(0, 0, 768, 512);
 				gc.drawImage(sceneImage, 0, 0);
-
+				
+				
 				player.setNextX(player.getX());
 				player.setNextY(player.getY());
 				if (player.downkey) {
 					player.setFrames(AssetManager.returnDown());
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() + 5);
+					nudeman.animate(elapsedTime, .5);
+
 				}
 				if (player.upkey) {
 					player.setFrames(AssetManager.returnUp());
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() - 5);
+					nudeman.animate(elapsedTime, .5);
+
 				}
 				if (player.leftkey) {
 					player.setFrames(AssetManager.returnLeft());
 					player.animate(elapsedTime, 0.100);
 					player.setNextX(player.getNextX() - 5);
+					nudeman.animate(elapsedTime, .5);
+
 				}
 				if (player.rightkey) {
 					player.setFrames(AssetManager.returnRight());
 					player.animate(elapsedTime, 0.100);
 					player.setNextX(player.getNextX() + 5);
+					nudeman.animate(elapsedTime, .5);
+
 				}
 				if (player.intersects(indoor) && player.downkey) {
 					try {
 						StartController controller = new StartController(607, 445);
 						Base.changeScene(controller);
+						nudeman.animate(elapsedTime, .5);
 						this.stop();
 						gc.clearRect(0, 0, 768, 512);
 					} catch (FileNotFoundException e) {
@@ -130,15 +152,18 @@ public class HouseSheet extends Sheet {
 							InputManager.intersecting = true;
 							InputManager.actionobject = bound.getObj();
 						}
+						nudeman.animate(elapsedTime, .5);
 						Handler.tick();
 						render(gc);
 						return;
 					}
+					nudeman.animate(elapsedTime, .5);
 					InputManager.intersecting = false;
 				}
 				player.setX(player.getNextX());
 				player.setY(player.getNextY());
 
+				nudeman.animate(elapsedTime, .5);
 				Handler.tick();
 				render(gc);
 			}
@@ -164,7 +189,7 @@ public class HouseSheet extends Sheet {
 		Boundary maxy = new Boundary(Base.LOCX + 768, Base.LOCY, 0, 512);
 		maxy.setTag(Tag.BORDER);
 		for (GameObject temp : objectlist) {
-			if (temp.getId() == ID.COLLIDABLE || temp.getId() == ID.ITEM) {
+			if (temp.getId() == ID.COLLIDABLE || temp.getId() == ID.ITEM || temp.getId() == ID.NPC) {
 				Boundary b = temp.getBoundary();
 				b.setObj(temp);
 				b.setId(temp.getId());

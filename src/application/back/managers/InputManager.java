@@ -62,8 +62,11 @@ public class InputManager {
 			if (intersecting) {
 				if (!popup) {
 					if (!actionobject.getObjecttext().isBlank()) {
-						Base.showPopup((EnvironmentObject) actionobject);
+						Base.showPopup(actionobject);
 						popup = true;
+					}
+					if (!actionobject.getSound().isBlank()) {
+						AudioManager.playSound(actionobject.getSound());
 					}
 					
 				} else {

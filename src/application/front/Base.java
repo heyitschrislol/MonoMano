@@ -3,12 +3,14 @@ package application.front;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 
 import application.back.enums.ID;
 import application.back.enums.Tag;
 import application.back.managers.AssetManager;
+import application.back.managers.AudioManager;
 import application.back.managers.Handler;
 import application.back.managers.InputManager;
 import application.front.controllers.Controller;
@@ -25,6 +27,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Stage;
@@ -36,6 +39,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -66,7 +72,10 @@ public class Base extends Application {
 	private GraphicsContext ngc;
 	private Handler handler;
 	public static InputManager manager;
-
+	public static AudioManager audiomanager;
+	public static Font regfont;
+	public static Font boldfont;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -75,12 +84,13 @@ public class Base extends Application {
 			
 			overlay = new Canvas(768, 512);
 			ogc = overlay.getGraphicsContext2D();
-	        ogc.setFont(Font.loadFont(new FileInputStream(new File("src/application/resources/fonts/AmaticSC-Bold.ttf")), 40));
-
-			primaryStage.setTitle("Mono Mano");
+	        
+			regfont = Font.loadFont(new FileInputStream(new File("src/application/resources/fonts/AmaticSC-Regular.ttf")), 40);
+	        boldfont = Font.loadFont(new FileInputStream(new File("src/application/resources/fonts/AmaticSC-Bold.ttf")), 44);
 			
-//			sheet = new StartSheet(244, 244);
-			
+	        ogc.setFont(regfont);
+	        primaryStage.setTitle("Mono Mano");
+						
 			StartController starter = new StartController(352, 244);
 			changeScene(starter);
 			
@@ -90,16 +100,30 @@ public class Base extends Application {
 			 */
 
 			handler = new Handler(starter.sheet.getObjectlist());
+
+			audiomanager = new AudioManager(3);
+			audiomanager.loadBGMusic("Bgins", "Bgins.wav");
+			audiomanager.loadBGMusic("NFTSB", "Nothing For the Swim Back.wav");
+			audiomanager.loadSoundEffects("grunt", "Male grunt.wav");
+			audiomanager.loadSoundEffects("milkshake", "milkshake.mp3");
+			audiomanager.loadSoundEffects("heeya", "Hee-ya.mp3");
 			
-
-
+			audiomanager.playMusic("Bgins");
+			primaryStage.setOnCloseRequest(e -> {
+				audiomanager.shutdown();
+			});
+//			AudioManager.changeMusic("/application/assets/Bgins.wav");
+			primaryStage.setResizable(false);
 			primaryStage.show();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public static void showPopup(EnvironmentObject eo) {
+	public static void playMusic(final String id) {
+    	audiomanager.playMusic(id);
+	}
+	public static void showPopup(GameObject eo) {
 		if (!eo.getObjecttext().isBlank()) {
 			ogc.setStroke(Color.BROWN);
 			ogc.setLineWidth(4);
@@ -110,7 +134,7 @@ public class Base extends Application {
 	        ogc.setFill(Color.BLACK);
 	        int index = 0;
 	        int linect = 0;
-	        int xlet = 160;
+	        int xlet = 150;
 	        int ylet = 356;
 	        
 	        String[] lines = new String[] { "", "", "", "" };
@@ -125,10 +149,22 @@ public class Base extends Application {
 		        	 lines[index] = lines[index].concat(" " + word);
 	        	 }
 	        }
+	        boolean isfirst = true;
 	        for (int i = 0; i < lines.length; i++) {
 	        	if (!lines[i].isBlank()) {
-	        		ogc.fillText(lines[i], xlet, ylet);
-	        		ylet += 35;
+	        		if (isfirst && !eo.getName().isBlank()) {
+	        			ogc.setFont(boldfont);
+	        			ogc.fillText(eo.getName() + ":", xlet, ylet);
+		        		ylet += 35; 
+		        		ogc.setFont(regfont);
+	        			ogc.fillText(lines[i], xlet, ylet);
+		        		ylet += 35; 
+		        		isfirst = false;
+	        		} else {
+	        			ogc.fillText(lines[i], xlet, ylet);
+		        		ylet += 35;
+	        		}
+	        		
 	        	}
 	        }
 	       
@@ -137,21 +173,6 @@ public class Base extends Application {
 	public static void clearPopup() {
 		ogc.clearRect(0, 0, 768, 512);
 	}
-//	public void keyPress(Stage primaryStage) {
-//		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//			public void handle(KeyEvent e) {
-//				String code = e.getCode().toString();
-//				if (code.contains("S")) {
-//					try {
-//						HouseController controller = new HouseController();
-//						changeScene(controller);
-//					} catch (FileNotFoundException e1) {
-//						e1.printStackTrace();
-//					}
-//				}
-//			}
-//		});
-//	}
 
 	public static void changeScene(Controller controller) throws FileNotFoundException {
 		Sheet sheet = controller.getSheet();
@@ -163,11 +184,14 @@ public class Base extends Application {
 		Scene scene = controller.getScene();
 		scene.setRoot(sheet);
 		primaryStage.setScene(scene);
-
-//		Base.scene = newscene;
-//		scene.getRoot().getChildren().add(overlay);
-//		Handler.setObjectlist(sheet.getObjectlist());
-//		primaryStage.setScene(newscene);
+	}
+	
+	public static AudioClip startMusic() {
+		AudioClip music = new AudioClip("src/application/assets/Bgins.wav");
+        music.setVolume(0.5f);
+        music.setCycleCount(1000);
+        music.play();
+        return null;
 	}
 
 
@@ -181,7 +205,6 @@ public class Base extends Application {
 	public static void setPlayer(PlayerObject player) {
 		Base.player = player;
 	}
-
 	/**
 	 * @return the objectlist
 	 */

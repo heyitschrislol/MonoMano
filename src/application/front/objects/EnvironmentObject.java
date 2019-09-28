@@ -22,6 +22,9 @@ public class EnvironmentObject extends GameObject {
 	public EnvironmentObject(double x, double y, ID id) {
 		super(x, y, id);
 		this.objecttext = "";
+		this.name = "";
+		this.sound = "";
+
 	}
 
 	public EnvironmentObject(double x, double y, double width, double height) {
@@ -29,24 +32,36 @@ public class EnvironmentObject extends GameObject {
 		this.maxX = x + width;
 		this.maxY = y + height;
 		this.objecttext = "";
+		this.name = "";
+		this.sound = "";
+
 	}
 	public EnvironmentObject(double x, double y, double width, double height, ID id) {
 		super(x, y, width, height, id);
 		this.maxX = x + width;
 		this.maxY = y + height;
 		this.objecttext = "";
+		this.name = "";
+		this.sound = "";
+
 	}
 	public EnvironmentObject(double x, double y, double width, double height, ID id, Tag tag) {
 		super(x, y, width, height, id, tag);
 		this.maxX = x + width;
 		this.maxY = y + height;
 		this.objecttext = "";
+		this.name = "";
+		this.sound = "";
+
 	}
 	public EnvironmentObject(double x, double y, double width, double height, Image image, ID id, Tag tag) {
 		super(x, y, width, height, image, id, tag);
 		this.maxX = x + width;
 		this.maxY = y + height;
 		this.objecttext = "";
+		this.name = "";
+		this.sound = "";
+
 	}
 
 	

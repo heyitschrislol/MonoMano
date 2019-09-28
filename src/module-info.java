@@ -5,6 +5,7 @@ module MonoMano {
 	requires java.sql;
 	requires javafx.base;
 	requires java.desktop;
+	requires javafx.media;
 	
 	opens application.front to java.fxml;
 	exports application.front;

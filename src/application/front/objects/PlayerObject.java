@@ -27,6 +27,9 @@ public class PlayerObject extends GameObject {
 	public PlayerObject(double x, double y, ID id) {
 		super(x, y, id);
 		this.objecttext = "";
+		this.name = "";
+		this.sound = "";
+
 	}
 
 	public PlayerObject(double x, double y, double width, double height) {
@@ -34,6 +37,9 @@ public class PlayerObject extends GameObject {
 		this.maxX = x + width;
 		this.maxY = y + height;
 		this.objecttext = "";
+		this.name = "";
+		this.sound = "";
+
 	}
 
 	public PlayerObject(double x, double y, double width, double height, ID id) {
@@ -41,6 +47,8 @@ public class PlayerObject extends GameObject {
 		this.maxX = x + width;
 		this.maxY = y + height;
 		this.objecttext = "";
+		this.name = "";
+		this.sound = "";
 	}
 
 	
