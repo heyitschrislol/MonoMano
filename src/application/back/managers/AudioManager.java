@@ -34,7 +34,7 @@ public class AudioManager {
 	 *            src/main/resources directory.
 	 */
 	public void loadSoundEffects(String id, String url) {
-        AudioClip sound = new AudioClip(getClass().getResource("/application/assets/" + url).toExternalForm());
+        AudioClip sound = new AudioClip(getClass().getResource("/application/assets/audio/" + url).toExternalForm());
 		soundEffectsMap.put(id, sound);
 	}
 	public void loadBGMusic(String id, String url) {
@@ -57,7 +57,7 @@ public class AudioManager {
 	}
 
 	public void playMusic(String id) {
-    	Media media = new Media(getClass().getResource("/application/assets/" + bgMusicMap.get(id)).toExternalForm());
+    	Media media = new Media(getClass().getResource("/application/assets/audio/" + bgMusicMap.get(id)).toExternalForm());
 
     	MediaPlayer player = new MediaPlayer(media);
     	player.setOnReady(new Runnable() {

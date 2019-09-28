@@ -63,24 +63,35 @@ public class AssetManager {
 	public static final String PLAYER_14 = "/application/assets/player_14.png";
 	public static final String PLAYER_15 = "/application/assets/player_15.png";
 
-	public static final String FTEST1 = "/application/assets/man1.png";
-	public static final String FTEST2 = "/application/assets/man2.png";
-	public static final String FTEST3 = "/application/assets/man3.png";
-	public static final String FTEST4 = "/application/assets/man4.png";
-	public static final String FTEST5 = "/application/assets/man5.png";
-	public static final String FTEST6 = "/application/assets/man6.png";
-	public static final String FTEST7 = "/application/assets/man7.png";
-	public static final String FTEST8 = "/application/assets/man8.png";
-	public static final String FTEST9 = "/application/assets/man9-death.png";
-	public static final String RTEST1 = "/application/assets/nuderman1.png";
-	public static final String RTEST2 = "/application/assets/nuderman2.png";
-	public static final String RTEST3 = "/application/assets/nuderman3.png";
-	public static final String RTEST4 = "/application/assets/nuderman4.png";
-	public static final String RTEST5 = "/application/assets/nuderman5.png";
-	public static final String RTEST6 = "/application/assets/nuderman6.png";
-	public static final String RTEST7 = "/application/assets/nuderman7.png";
-	public static final String RTEST8 = "/application/assets/nuderman8.png";
-//	public static final String RTEST9 = "/application/assets/nudeman9-death.png";
+	public static final String CAELLFT01 = "/application/assets/cael-lft1.png";
+	public static final String CAELLFT02 = "/application/assets/cael-lft2.png";
+	public static final String CAELLFT03 = "/application/assets/cael-lft3.png";
+	public static final String CAELLFT04 = "/application/assets/cael-lft4.png";
+	public static final String CAELLFT05 = "/application/assets/cael-lft5.png";
+	public static final String CAELLFT06 = "/application/assets/cael-lft6.png";
+	public static final String CAELLFT07 = "/application/assets/cael-lft7.png";
+	public static final String CAELLFT08 = "/application/assets/cael-lft8.png";
+	public static final String CAELLFT09 = "/application/assets/cael-lft-death.png";
+	
+	public static final String CAELRGT01 = "/application/assets/cael-rgt1.png";
+	public static final String CAELRGT02 = "/application/assets/cael-rgt2.png";
+	public static final String CAELRGT03 = "/application/assets/cael-rgt3.png";
+	public static final String CAELRGT04 = "/application/assets/cael-rgt4.png";
+	public static final String CAELRGT05 = "/application/assets/cael-rgt5.png";
+	public static final String CAELRGT06 = "/application/assets/cael-rgt6.png";
+	public static final String CAELRGT07 = "/application/assets/cael-rgt7.png";
+	public static final String CAELRGT08 = "/application/assets/cael-rgt8.png";
+	public static final String CAELRGT09 = "/application/assets/cael-rgt-death.png";
+	
+	public static final String NUDEMAN1 = "/application/assets/nuderman1.png";
+	public static final String NUDEMAN2 = "/application/assets/nuderman2.png";
+	public static final String NUDEMAN3 = "/application/assets/nuderman3.png";
+	public static final String NUDEMAN4 = "/application/assets/nuderman4.png";
+	public static final String NUDEMAN5 = "/application/assets/nuderman5.png";
+	public static final String NUDEMAN6 = "/application/assets/nuderman6.png";
+	public static final String NUDEMAN7 = "/application/assets/nuderman7.png";
+	public static final String NUDEMAN8 = "/application/assets/nuderman8.png";
+	public static final String NUDEMAN9 = "/application/assets/nudeman9-death.png";
 
 
 	public static PixelReader wholescene;

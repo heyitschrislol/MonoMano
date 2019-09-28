@@ -105,6 +105,9 @@ public class Base extends Application {
 			audiomanager.loadBGMusic("Bgins", "Bgins.wav");
 			audiomanager.loadBGMusic("NFTSB", "Nothing For the Swim Back.wav");
 			audiomanager.loadSoundEffects("grunt", "Male grunt.wav");
+			audiomanager.loadSoundEffects("wah", "wachhg.mp3");
+			audiomanager.loadSoundEffects("pendrop", "pendrop.mp3");
+			audiomanager.loadSoundEffects("mailshake", "shakymail.mp3");
 			audiomanager.loadSoundEffects("milkshake", "milkshake.mp3");
 			audiomanager.loadSoundEffects("heeya", "Hee-ya.mp3");
 			

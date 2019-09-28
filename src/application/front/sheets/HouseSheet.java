@@ -46,9 +46,9 @@ public class HouseSheet extends Sheet {
         sceneImage = new Image(AssetManager.STONEFLOOR);
         
         Image[] nudeframes = new Image[2];
-        nudeframes[0] = new Image(AssetManager.RTEST2);
-        nudeframes[1] = new Image(AssetManager.RTEST5);
-        Image nudepic = new Image(AssetManager.RTEST4);
+        nudeframes[0] = new Image(AssetManager.NUDEMAN2);
+        nudeframes[1] = new Image(AssetManager.NUDEMAN5);
+        Image nudepic = new Image(AssetManager.NUDEMAN4);
         Image crate1 = new Image(AssetManager.SMCRATE);
         Image crate2 = new Image(AssetManager.LGCRATE);
         Image door = new Image(AssetManager.INDOOR);
@@ -66,7 +66,7 @@ public class HouseSheet extends Sheet {
         
         nudeman.setName("Fully-Erect Nude Man");
         nudeman.setImage(nudepic);
-        nudeman.setSound("milkshake");
+        nudeman.setSound("grunt");
         nudeman.setFrames(nudeframes);
         crateSM.setImage(crate1);
         crateLG.setImage(crate2);
