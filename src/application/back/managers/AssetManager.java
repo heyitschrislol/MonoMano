@@ -167,63 +167,92 @@ public class AssetManager {
 		return moveup;
 	}
 	public static Image[] returnLeft() {
-		Image leftA = new Image(PLAYER_7, 64.0, 64.0, true, true);
-		Image leftB = new Image(PLAYER_8, 64.0, 64.0, true, true);
-		Image leftC = new Image(PLAYER_9, 64.0, 64.0, true, true);
-		Image leftD = new Image(PLAYER_10, 64.0, 64.0, true, true);
-		Image[] moveleft = new Image[4];
+		Image leftA = new Image(CAELLFT03, 50.0, 55.0, true, true);
+		Image leftB = new Image(CAELLFT04, 50.0, 55.0, true, true);
+		Image leftC = new Image(CAELLFT06, 50.0, 55.0, true, true);
+		Image leftD = new Image(CAELLFT05, 50.0, 55.0, true, true);
+		Image leftE = new Image(CAELLFT04, 50.0, 55.0, true, true);
+		Image[] moveleft = new Image[5];
 		moveleft[0] = leftA;
 		moveleft[1] = leftB;
 		moveleft[2] = leftC;
 		moveleft[3] = leftD;
+		moveleft[4] = leftE;
 		
 		return moveleft;
 	}
-//	public static Image[] returnRight() {
-//		Image rightA = new Image(FTEST2, 50.0, 64.0, true, true);
-//		Image rightB = new Image(FTEST3, 50.0, 64.0, true, true);
-//		Image rightC = new Image(FTEST6, 50.0, 64.0, true, true);
-////		Image rightD = new Image(FTEST2, 50.0, 64.0, true, true);
-//		Image[] moveright = new Image[3];
-//		moveright[0] = rightA;
-//		moveright[1] = rightB;
-//		moveright[2] = rightC;
-////		moveright[3] = rightD;
-//		
-//		return moveright;
-//	}
 	public static Image[] returnRight() {
-		Image rightA = new Image(PLAYER_12, 64.0, 64.0, true, true);
-		Image rightB = new Image(PLAYER_13, 64.0, 64.0, true, true);
-		Image rightC = new Image(PLAYER_14, 64.0, 64.0, true, true);
-		Image rightD = new Image(PLAYER_15, 64.0, 64.0, true, true);
-		Image[] moveright = new Image[4];
+		Image rightA = new Image(CAELRGT03, 50.0, 55.0, true, true);
+		Image rightB = new Image(CAELRGT04, 50.0, 55.0, true, true);
+		Image rightC = new Image(CAELRGT06, 50.0, 55.0, true, true);
+		Image rightD = new Image(CAELRGT05, 50.0, 55.0, true, true);
+		Image rightE = new Image(CAELRGT04, 50.0, 55.0, true, true);
+		Image[] moveright = new Image[5];
 		moveright[0] = rightA;
 		moveright[1] = rightB;
 		moveright[2] = rightC;
 		moveright[3] = rightD;
+		moveright[4] = rightE;
 		
 		return moveright;
 	}
+//	public static Image[] returnLeft() {
+//		Image leftA = new Image(PLAYER_7, 64.0, 64.0, true, true);
+//		Image leftB = new Image(PLAYER_8, 64.0, 64.0, true, true);
+//		Image leftC = new Image(PLAYER_9, 64.0, 64.0, true, true);
+//		Image leftD = new Image(PLAYER_10, 64.0, 64.0, true, true);
+//		Image[] moveleft = new Image[4];
+//		moveleft[0] = leftA;
+//		moveleft[1] = leftB;
+//		moveleft[2] = leftC;
+//		moveleft[3] = leftD;
+//		
+//		return moveleft;
+//	}
+//	public static Image[] returnRight() {
+//		Image rightA = new Image(PLAYER_12, 64.0, 64.0, true, true);
+//		Image rightB = new Image(PLAYER_13, 64.0, 64.0, true, true);
+//		Image rightC = new Image(PLAYER_14, 64.0, 64.0, true, true);
+//		Image rightD = new Image(PLAYER_15, 64.0, 64.0, true, true);
+//		Image[] moveright = new Image[4];
+//		moveright[0] = rightA;
+//		moveright[1] = rightB;
+//		moveright[2] = rightC;
+//		moveright[3] = rightD;
+//		
+//		return moveright;
+//	}
+	
 	public static Image[] returnIdles() {
 		Image[] idles = new Image[4];
-		idles[0] = new Image(PLAYER_1, 64.0, 64.0, true, true);
-		idles[1] = new Image(PLAYER_3, 64.0, 64.0, true, true);
-		idles[2] = new Image(PLAYER_6, 64.0, 64.0, true, true);
-		idles[3] = new Image(PLAYER_11, 64.0, 64.0, true, true);
+		idles[0] = new Image(CAELLFT01, 50.0, 55.0, true, true);
+		idles[1] = new Image(CAELLFT01, 50.0, 55.0, true, true);
+		idles[2] = new Image(CAELRGT01, 50.0, 55.0, true, true);
+		idles[3] = new Image(CAELRGT01, 50.0, 55.0, true, true);
 		
 		return idles;
+	}
+	public static Image findIdle(String direction) {
+		Image idle;
+		if (direction.equals("LEFT")) {
+			idle = new Image(CAELLFT01, 50.0, 55.0, true, true);
+		} else if (direction.equals("RIGHT")) {
+			idle = new Image(CAELRGT01, 50.0, 64.0, true, true);
+		} else {
+			return null;
+		}
+		return idle;
 	}
 //	public static Image findIdle(String direction) {
 //		Image idle;
 //		if (direction.equals("DOWN")) {
-//			idle = new Image(FTEST4, 50.0, 64.0, true, true);
+//			idle = new Image(PLAYER_1, 64.0, 64.0, true, true);
 //		} else if (direction.equals("UP")) {
-//			idle = new Image(FTEST4, 50.0, 64.0, true, true);
+//			idle = new Image(PLAYER_3, 64.0, 64.0, true, true);
 //		} else if (direction.equals("LEFT")) {
 //			idle = new Image(PLAYER_6, 64.0, 64.0, true, true);
 //		} else if (direction.equals("RIGHT")) {
-//			idle = new Image(FTEST4, 50.0, 64.0, true, true);
+//			idle = new Image(PLAYER_11, 64.0, 64.0, true, true);
 //		} else {
 //			return null;
 //		}
@@ -231,23 +260,6 @@ public class AssetManager {
 //		
 //		return idle;
 //	}
-	public static Image findIdle(String direction) {
-		Image idle;
-		if (direction.equals("DOWN")) {
-			idle = new Image(PLAYER_1, 64.0, 64.0, true, true);
-		} else if (direction.equals("UP")) {
-			idle = new Image(PLAYER_3, 64.0, 64.0, true, true);
-		} else if (direction.equals("LEFT")) {
-			idle = new Image(PLAYER_6, 64.0, 64.0, true, true);
-		} else if (direction.equals("RIGHT")) {
-			idle = new Image(PLAYER_11, 64.0, 64.0, true, true);
-		} else {
-			return null;
-		}
-		
-		
-		return idle;
-	}
 	
 //	public static EnvironmentObject createTree(int x, int y) {
 //		EnvironmentObject item = new EnvironmentObject(x, y);

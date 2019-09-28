@@ -74,8 +74,8 @@ public class HouseSheet extends Sheet {
         backwall.setImage(bwall);
         leftwall.setImage(lwall);
         rightwall.setImage(rwall);
-        player.setFrames(AssetManager.returnUp());
-		player.setImage(AssetManager.findIdle("UP"));
+        player.setFrames(AssetManager.returnLeft());
+		player.setImage(AssetManager.findIdle("LEFT"));
         nudeman.setObjecttext("My milkshake brings all the boys to th- whaa agh!");
         crateSM.setObjecttext("This crate is full of empty peanut butter jars...");
         crateLG.setObjecttext("It looks like a small animal was kept in here...");
@@ -108,14 +108,14 @@ public class HouseSheet extends Sheet {
 				player.setNextX(player.getX());
 				player.setNextY(player.getY());
 				if (player.downkey) {
-					player.setFrames(AssetManager.returnDown());
+//					player.setFrames(AssetManager.returnDown());
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() + 5);
 					nudeman.animate(elapsedTime, .5);
 
 				}
 				if (player.upkey) {
-					player.setFrames(AssetManager.returnUp());
+//					player.setFrames(AssetManager.returnUp());
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() - 5);
 					nudeman.animate(elapsedTime, .5);

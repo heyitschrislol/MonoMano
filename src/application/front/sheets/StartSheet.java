@@ -133,12 +133,12 @@ public class StartSheet extends Sheet {
 				player.setNextX(player.getX());
 				player.setNextY(player.getY());
 				if (player.downkey) {
-					player.setFrames(AssetManager.returnDown());
+//					player.setFrames(AssetManager.returnDown());
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() + 5);
 				}
 				if (player.upkey) {
-					player.setFrames(AssetManager.returnUp());
+//					player.setFrames(AssetManager.returnUp());
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() - 5);
 				}
