@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import application.back.enums.ID;
 import application.back.enums.Tag;
+import application.back.managers.Animator;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class GameObject {
+	protected Animator animator;
 	protected String name;
 	protected String sound;
 	protected ID id;
@@ -85,6 +87,18 @@ public abstract class GameObject {
 
 	//#########---	G E T / S E T	---#############################################
 
+	/**
+	 * @return the animator
+	 */
+	public Animator getAnimator() {
+		return animator;
+	}
+	/**
+	 * @param animator the animator to set
+	 */
+	public void setAnimator(Animator animator) {
+		this.animator = animator;
+	}
 	/**
 	 * @return the name
 	 */

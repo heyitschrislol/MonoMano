@@ -9,6 +9,8 @@ import java.util.Map;
 
 import application.back.*;
 import application.back.enums.*;
+import application.back.managers.Animator;
+import application.back.managers.Asset;
 import application.back.managers.AssetManager;
 import application.back.managers.AudioManager;
 import application.back.managers.Handler;
@@ -24,6 +26,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 public class HouseSheet extends Sheet {
 	public final long startNanoTime = System.nanoTime();
@@ -32,6 +35,9 @@ public class HouseSheet extends Sheet {
 	public HouseSheet(int startX, int startY){
 		super(startX, startY);
 		
+//		Animator animator = new Animator("NUDEMAN", Duration.millis(1000), Asset.NUDEMAN, 55, 64);
+//		animator.setCycleCount(Animator.INDEFINITE);
+//        animator.play();
 		portallist.addAll(createExitList());
 		
 		player = new PlayerObject(startX, startY, 64, 64, ID.PLAYER);
@@ -65,7 +71,7 @@ public class HouseSheet extends Sheet {
         EnvironmentObject rightwall = new EnvironmentObject(752, 64, 16, 448, ID.COLLIDABLE, Tag.DOOR);
         
         nudeman.setName("Fully-Erect Nude Man");
-        nudeman.setImage(nudepic);
+        nudeman.setImage(Asset.assetImage("NUDEMAN4"));
         nudeman.setSound("grunt");
         nudeman.setFrames(nudeframes);
         crateSM.setImage(crate1);
@@ -108,14 +114,14 @@ public class HouseSheet extends Sheet {
 				player.setNextX(player.getX());
 				player.setNextY(player.getY());
 				if (player.downkey) {
-//					player.setFrames(AssetManager.returnDown());
+					player.setFrames(AssetManager.returnDown());
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() + 5);
 					nudeman.animate(elapsedTime, .5);
 
 				}
 				if (player.upkey) {
-//					player.setFrames(AssetManager.returnUp());
+					player.setFrames(AssetManager.returnUp());
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() - 5);
 					nudeman.animate(elapsedTime, .5);
