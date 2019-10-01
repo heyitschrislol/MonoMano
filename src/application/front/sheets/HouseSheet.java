@@ -35,9 +35,7 @@ public class HouseSheet extends Sheet {
 	public HouseSheet(int startX, int startY){
 		super(startX, startY);
 		
-//		Animator animator = new Animator("NUDEMAN", Duration.millis(1000), Asset.NUDEMAN, 55, 64);
-//		animator.setCycleCount(Animator.INDEFINITE);
-//        animator.play();
+
 		portallist.addAll(createExitList());
 		
 		player = new PlayerObject(startX, startY, 64, 64, ID.PLAYER);
@@ -51,16 +49,18 @@ public class HouseSheet extends Sheet {
 
         sceneImage = new Image(AssetManager.STONEFLOOR);
         
+        Image[] nudemanframes = Asset.spriteFrames("NUDEMAN");
         Image[] nudeframes = new Image[2];
-        nudeframes[0] = new Image(AssetManager.NUDEMAN2);
-        nudeframes[1] = new Image(AssetManager.NUDEMAN5);
-        Image nudepic = new Image(AssetManager.NUDEMAN4);
-        Image crate1 = new Image(AssetManager.SMCRATE);
-        Image crate2 = new Image(AssetManager.LGCRATE);
-        Image door = new Image(AssetManager.INDOOR);
-        Image bwall = new Image(AssetManager.BACKWALL);
-        Image rwall = new Image(AssetManager.RIGHTWALL);
-        Image lwall = new Image(AssetManager.LEFTWALL);
+        nudeframes[0] = nudemanframes[1];
+        nudeframes[1] = nudemanframes[4];
+        Image nudepic = nudemanframes[3];
+
+        Image crate1 = Asset.assetImage("SMCRATE");
+        Image crate2 = Asset.assetImage("LGCRATE");
+        Image door = Asset.assetImage("INDOOR");
+        Image bwall = Asset.assetImage("BACKWALL");
+        Image rwall = Asset.assetImage("RIGHTWALL");
+        Image lwall = Asset.assetImage("LEFTWALL");
         
         NPCObject nudeman = new NPCObject(369, 169, 55, 64, ID.NPC, Tag.CHARACTER);
         EnvironmentObject crateSM = new EnvironmentObject(100, 100, 32, 37, ID.COLLIDABLE, Tag.CRATE);
@@ -71,7 +71,7 @@ public class HouseSheet extends Sheet {
         EnvironmentObject rightwall = new EnvironmentObject(752, 64, 16, 448, ID.COLLIDABLE, Tag.DOOR);
         
         nudeman.setName("Fully-Erect Nude Man");
-        nudeman.setImage(Asset.assetImage("NUDEMAN4"));
+        nudeman.setImage(nudepic);
         nudeman.setSound("grunt");
         nudeman.setFrames(nudeframes);
         crateSM.setImage(crate1);

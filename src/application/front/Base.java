@@ -113,7 +113,7 @@ public class Base extends Application {
 			
 			audiomanager.playMusic("Bgins");
 			primaryStage.setOnCloseRequest(e -> {
-				audiomanager.shutdown();
+				AudioManager.soundPool.shutdown();
 			});
 //			AudioManager.changeMusic("/application/assets/Bgins.wav");
 			primaryStage.setResizable(false);

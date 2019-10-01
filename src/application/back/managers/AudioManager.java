@@ -13,7 +13,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class AudioManager {
-	static ExecutorService soundPool = Executors.newFixedThreadPool(2);
+	public static ExecutorService soundPool = Executors.newFixedThreadPool(2);
 	static Map<String, AudioClip> soundEffectsMap = new HashMap<>();
 	static Map<String, String> bgMusicMap = new HashMap<>();
 
@@ -58,14 +58,25 @@ public class AudioManager {
 
 	public void playMusic(String id) {
     	Media media = new Media(getClass().getResource("/application/assets/audio/" + bgMusicMap.get(id)).toExternalForm());
-
+    	
+    	
     	MediaPlayer player = new MediaPlayer(media);
-    	player.setOnReady(new Runnable() {
-    		@Override
-    		 public void run() {
-    			player.play();
-    		}
-    	});
+    	Runnable musicplay = new Runnable() {
+			@Override
+			public void run() {
+				player.play();
+			}
+		};
+		
+		soundPool.execute(musicplay);
+		
+//    	player.setOnReady(new Runnable() {
+//    		@Override
+//    		 public void run() {
+//    			player.play();
+//    		}
+//    	});
+//    	soundpool.execute()
 	}
 //	public static void changeMusic(String url) {
 //		final Task task = new Task() {

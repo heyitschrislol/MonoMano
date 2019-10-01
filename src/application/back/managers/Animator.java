@@ -12,26 +12,26 @@ import javafx.util.Duration;
 
 public class Animator extends Transition {
 
-	private final ImageView imageView;
-	private final int count;
-	private final int columns;
+	private Image image;
+	private int count;
+	private int rows;
 	private Asset asset;
     //space between LEFT edge of image and first FRAME start
-	private final int offsetX;
+	private int offsetX;
     //space between TOP edge of image and first ROW start
-	private final int offsetY;
+	private int offsetY;
     //width of each frame
-	private final int width;
+	private int width;
     //height of each frame
-	private final int height;
+	private int height;
 
 	private int lastIndex;
 	
-	public Animator(String sheetname, Duration duration, int count, int columns, int offsetX, int offsetY, int width,
+	public Animator(String sheetname, Duration duration, int count, int rows, int offsetX, int offsetY, int width,
 			int height) {
-		imageView = new ImageView(sheetname);
+		image = new Image(sheetname);
 		this.count = count;
-		this.columns = columns;
+		this.rows = rows;
 		this.offsetX = offsetX;
 		this.offsetY = offsetY;
 		this.width = width;
@@ -39,11 +39,11 @@ public class Animator extends Transition {
 		setCycleDuration(duration);
 		setInterpolator(Interpolator.LINEAR);
 	}
-	public Animator(String sheetname, Duration duration, Asset asset, int width, int height) {
-		imageView = new ImageView(Asset.assetImage(sheetname));
-		this.asset = asset;
+	public Animator(String sheetname, Duration duration, int width, int height) {
+		Asset asset = Asset.findAsset(sheetname);
+		image = new Image(asset.getUrl());
 		this.count = asset.getCount();
-		this.columns = asset.getCount();
+		this.rows = asset.getRows();
 		this.offsetX = asset.getOffsetX();
 		this.offsetY = asset.getOffsetY();
 		this.width = width;
@@ -51,32 +51,23 @@ public class Animator extends Transition {
 		setCycleDuration(duration);
 		setInterpolator(Interpolator.LINEAR);
 	}
-
-	protected void interpolate(double k) {
-		final int index = Math.min((int) Math.floor(k * count), count - 1);
-		if (index != lastIndex) {
-			final int x = (index % columns) * width + offsetX;
-			final int y = (index / columns) * height + offsetY;
-			imageView.setViewport(new Rectangle2D(x, y, width, height));
-			lastIndex = index;
-		}
+	@Override
+	protected void interpolate(double arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	public ImageView[] animate(int row) throws FileNotFoundException {
+//	protected void interpolate(double k) {
+//		final int index = Math.min((int) Math.floor(k * count), count - 1);
+//		if (index != lastIndex) {
+//			final int x = (index % columns) * width + offsetX;
+//			final int y = (index / columns) * height + offsetY;
+//			imageView.setViewport(new Rectangle2D(x, y, width, height));
+//			lastIndex = index;
+//		}
+//	}
 
-		ImageView[] frames = new ImageView[asset.getCount()];
-		
-		int minx = 0 + offsetX;
-		int miny = row * height;
-		int maxy = miny + height;
-		int maxx = asset.getSheetWidth();
-		
-		for (int i = 0; i < asset.getCount(); i++ ) {
-			imageView.setViewport(new Rectangle2D(minx, miny, width, height));
-			frames[i] = imageView;
-			minx += width + offsetX;
-		}
-		
-		return frames;
-	}
+//	public Image[] sprites() {
+//		
+//	}
 }

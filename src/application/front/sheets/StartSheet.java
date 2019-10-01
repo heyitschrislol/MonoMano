@@ -10,6 +10,7 @@ import java.util.Map;
 import application.back.*;
 import application.back.enums.ID;
 import application.back.enums.Tag;
+import application.back.managers.Asset;
 import application.back.managers.AssetManager;
 import application.back.managers.AudioManager;
 import application.back.managers.Handler;
@@ -53,6 +54,9 @@ public class StartSheet extends Sheet {
 		 * set up world and world objects including the player.
 		 */
 		sceneImage = new Image(AssetManager.GRASS);
+		Image[] SMtrees = Asset.spriteFrames("SMTREES");
+		Image[] LGtrees = Asset.spriteFrames("LGTREES");
+		Image[] trunks = Asset.spriteFrames("TREETRUNKS");
 		Image[] bushFrames = new Image[4];
 		bushFrames[0] = new Image(AssetManager.LGBUSH1);
 		bushFrames[1] = new Image(AssetManager.LGBUSH2);
@@ -65,10 +69,6 @@ public class StartSheet extends Sheet {
 		Image sbush = new Image(AssetManager.SMBUSH);
 		Image lbush = new Image(AssetManager.LGBUSH1);
 		Image doorOP = new Image(AssetManager.DOOR);
-		Image topSM = new Image(AssetManager.SMTREETOP);
-		Image trunkSM = new Image(AssetManager.SMTREETRUNK);
-		Image topLG = new Image(AssetManager.LGTREETOP);
-		Image trunkLG = new Image(AssetManager.LGTREETRUNK);
 		Image newsign = new Image(AssetManager.SIGN, 50, 50, true, true);
 		EnvironmentObject smbot = new EnvironmentObject(325, 178, 21, 17, ID.COLLIDABLE, Tag.TREE);
 		EnvironmentObject smtop = new EnvironmentObject(306, 101, 64, 112, ID.ENVIRONMENT);
@@ -90,10 +90,10 @@ public class StartSheet extends Sheet {
 		bushlg.setImage(lbush);
 		winopen.setImage(wopen);
 		winclosed.setImage(wclosed);
-		smtop.setImage(topSM);
-		smbot.setImage(trunkSM);
-		lgtop.setImage(topLG);
-		lgbot.setImage(trunkLG);
+		smtop.setImage(SMtrees[1]);
+		smbot.setImage(trunks[0]);
+		lgtop.setImage(LGtrees[1]);
+		lgbot.setImage(trunks[1]);
 		sign.setImage(newsign);
 		house.setImage(houseBLK);
 		door.setImage(doorOP);
