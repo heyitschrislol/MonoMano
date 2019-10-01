@@ -19,7 +19,9 @@ module MonoMano {
 	opens application.front.sheets;
 	exports application.front.sheets;
 	
-	opens application.assets;
+//	opens application.assets;
+	opens application.assets.sprites;
+	opens application.assets.audio;
 	opens application.resources.fonts;
 	
 

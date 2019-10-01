@@ -53,23 +53,17 @@ public class StartSheet extends Sheet {
 		/*
 		 * set up world and world objects including the player.
 		 */
-		sceneImage = new Image(AssetManager.GRASS);
+		sceneImage = Asset.assetImage("GRASS");
 		Image[] SMtrees = Asset.spriteFrames("SMTREES");
 		Image[] LGtrees = Asset.spriteFrames("LGTREES");
 		Image[] trunks = Asset.spriteFrames("TREETRUNKS");
-		Image[] bushFrames = new Image[4];
-		bushFrames[0] = new Image(AssetManager.LGBUSH1);
-		bushFrames[1] = new Image(AssetManager.LGBUSH2);
-		bushFrames[2] = new Image(AssetManager.LGBUSH3);
-		bushFrames[3] = new Image(AssetManager.LGBUSH4);
+//		Image[] bushFrames = new Image[4];
+//		bushFrames[0] = new Image(AssetManager.LGBUSH1);
+//		bushFrames[1] = new Image(AssetManager.LGBUSH2);
+//		bushFrames[2] = new Image(AssetManager.LGBUSH3);
+//		bushFrames[3] = new Image(AssetManager.LGBUSH4);
 		
-		Image houseBLK = new Image(AssetManager.BLANKHOUSE);
-		Image wopen = new Image(AssetManager.WINOPEN);
-		Image wclosed = new Image(AssetManager.WINCLOSED);
-		Image sbush = new Image(AssetManager.SMBUSH);
-		Image lbush = new Image(AssetManager.LGBUSH1);
-		Image doorOP = new Image(AssetManager.DOOR);
-		Image newsign = new Image(AssetManager.SIGN, 50, 50, true, true);
+		
 		EnvironmentObject smbot = new EnvironmentObject(325, 178, 21, 17, ID.COLLIDABLE, Tag.TREE);
 		EnvironmentObject smtop = new EnvironmentObject(306, 101, 64, 112, ID.ENVIRONMENT);
 		EnvironmentObject lgbot = new EnvironmentObject(103, 300, 21, 17, ID.COLLIDABLE, Tag.TREE);	
@@ -88,15 +82,15 @@ public class StartSheet extends Sheet {
 		winclosed.setObjecttext("The window is closed. You can only see window.");
 		bushsm.setImage(sbush);
 		bushlg.setImage(lbush);
-		winopen.setImage(wopen);
-		winclosed.setImage(wclosed);
+		winopen.setImage(Asset.assetImage("WINOPEN"));
+		winclosed.setImage(Asset.assetImage("WINCLOSED"));
 		smtop.setImage(SMtrees[1]);
 		smbot.setImage(trunks[0]);
 		lgtop.setImage(LGtrees[1]);
 		lgbot.setImage(trunks[1]);
-		sign.setImage(newsign);
-		house.setImage(houseBLK);
-		door.setImage(doorOP);
+		sign.setImage(Asset.assetImage("SIGN"));
+		house.setImage(Asset.assetImage("BLANKHOUSE"));
+		door.setImage(Asset.assetImage("DOOR"));
 		player.setFrames(AssetManager.returnRight());
 		player.setImage(AssetManager.findIdle("RIGHT"));
 		objectlist.add(player);

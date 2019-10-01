@@ -13,6 +13,7 @@ import application.back.managers.AssetManager;
 import application.back.managers.AudioManager;
 import application.back.managers.Handler;
 import application.back.managers.InputManager;
+import application.back.managers.SoundManager;
 import application.front.controllers.Controller;
 import application.front.controllers.HouseController;
 import application.front.controllers.StartController;
@@ -73,6 +74,7 @@ public class Base extends Application {
 	private Handler handler;
 	public static InputManager manager;
 	public static AudioManager audiomanager;
+//	public static SoundManager soundmanager;
 	public static Font regfont;
 	public static Font boldfont;
 	
@@ -102,8 +104,8 @@ public class Base extends Application {
 			handler = new Handler(starter.sheet.getObjectlist());
 
 			audiomanager = new AudioManager(3);
-			audiomanager.loadBGMusic("Bgins", "Bgins.wav");
-			audiomanager.loadBGMusic("NFTSB", "Nothing For the Swim Back.wav");
+//			audiomanager.loadBGMusic("Bgins", "Bgins.wav");
+//			audiomanager.loadBGMusic("NFTSB", "Nothing For the Swim Back.wav");
 			audiomanager.loadSoundEffects("grunt", "Male grunt.wav");
 			audiomanager.loadSoundEffects("wah", "wachhg.mp3");
 			audiomanager.loadSoundEffects("pendrop", "pendrop.mp3");
@@ -111,8 +113,12 @@ public class Base extends Application {
 			audiomanager.loadSoundEffects("milkshake", "milkshake.mp3");
 			audiomanager.loadSoundEffects("heeya", "Hee-ya.mp3");
 			
-			audiomanager.playMusic("Bgins");
+//			audiomanager.playMusic("Bgins");
+			
+			SoundManager.bgins.playMusic();
+			SoundManager.bgins.loopMusic();
 			primaryStage.setOnCloseRequest(e -> {
+				
 				AudioManager.soundPool.shutdown();
 			});
 //			AudioManager.changeMusic("/application/assets/Bgins.wav");
