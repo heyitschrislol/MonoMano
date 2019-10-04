@@ -39,4 +39,10 @@ public class LakeSheet extends Sheet {
 
 	}
 
+	@Override
+	public void awake() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

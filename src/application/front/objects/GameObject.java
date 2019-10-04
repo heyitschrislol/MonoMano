@@ -3,17 +3,22 @@ package application.front.objects;
 import java.util.ArrayList;
 
 import application.back.enums.ID;
+import application.back.enums.Location;
 import application.back.enums.Tag;
 import application.back.managers.Animator;
+import application.front.sheets.Sheet;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class GameObject {
+	public ArrayList<String> footsteps;
+	protected static GameObject instance;
 	protected Animator animator;
 	protected String name;
 	protected String sound;
 	protected ID id;
+	public Location location;
 	protected Tag tag;
 	protected double x;
 	protected double y;
@@ -34,12 +39,16 @@ public abstract class GameObject {
 		this.x = x;
 		this.y = y;
 		this.objecttext = "";
+		this.sound = "";
+
 	}
 	public GameObject(double x, double y, ID id) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
 		this.objecttext = "";
+		this.sound = "";
+
 
 	}
 	public GameObject(double x, double y, double width, double height) {
@@ -50,6 +59,8 @@ public abstract class GameObject {
 		this.maxX = x + width;
 		this.maxY = y + height;
 		this.objecttext = "";
+		this.sound = "";
+
 	}
 	public GameObject(double x, double y, double width, double height, ID id) {
 		this.x = x;
@@ -60,6 +71,8 @@ public abstract class GameObject {
 		this.maxY = y + height;
 		this.id = id;
 		this.objecttext = "";
+		this.sound = "";
+
 	}
 	public GameObject(double x, double y, double width, double height, ID id, Tag tag) {
 		this.x = x;
@@ -71,6 +84,8 @@ public abstract class GameObject {
 		this.id = id;
 		this.tag = tag;
 		this.objecttext = "";
+		this.sound = "";
+
 	}
 	public GameObject(double x, double y, double width, double height, Image image, ID id, Tag tag) {
 		this.x = x;
@@ -83,10 +98,38 @@ public abstract class GameObject {
 		this.tag = tag;
 		this.image = image;
 		this.objecttext = "";
+		this.sound = "";
+
+	}
+	public GameObject(double x, double y, double width, double height, Image image, ID id, Tag tag, Location location) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.maxX = x + width;
+		this.maxY = y + height;
+		this.id = id;
+		this.tag = tag;
+		this.image = image;
+		this.location = location;
+		this.objecttext = "";
+		this.sound = "";
 	}
 
 	//#########---	G E T / S E T	---#############################################
 
+	/**
+	 * @return the footsteps
+	 */
+	public ArrayList<String> getFootsteps() {
+		return footsteps;
+	}
+	/**
+	 * @param footsteps the footsteps to set
+	 */
+	public void setFootsteps(ArrayList<String> footsteps) {
+		this.footsteps = footsteps;
+	}
 	/**
 	 * @return the animator
 	 */
@@ -228,6 +271,18 @@ public abstract class GameObject {
 		this.id = id;
 	}
 	/**
+	 * @return the location
+	 */
+	public Location getLocation() {
+		return location;
+	}
+	/**
+	 * @param location the location to set
+	 */
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+	/**
 	 * @return the maxX
 	 */
 	public double getMaxX() {
@@ -311,6 +366,7 @@ public abstract class GameObject {
 	public abstract void tick(GameObject obj);
 	public abstract void animate(double time, double duration);
 	public abstract void animate(double time, double duration, double playerX, double playerY);
+//	public abstract void awake();
 //	public abstract void clearpopup(GraphicsContext gc);
 	public abstract void render(GraphicsContext gc);
 	public abstract Boundary getBoundary();

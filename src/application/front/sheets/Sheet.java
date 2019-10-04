@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import application.back.enums.Location;
 import application.back.managers.Handler;
 import application.front.objects.Boundary;
 import application.front.objects.EnvironmentObject;
@@ -19,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public abstract class Sheet extends Group {
+	public Location location;
 	public static final int WIDTH = 768;
 	public static final int HEIGHT = 512;
 	public PlayerObject player;
@@ -52,6 +54,7 @@ public abstract class Sheet extends Group {
 	public abstract ObservableList<Boundary> objectBoundaries();
 	public abstract ArrayList<Boundary> createExitList();
 	public abstract void render(GraphicsContext gc);
+	public abstract void awake();
 	
 	
 	
@@ -182,7 +185,6 @@ public abstract class Sheet extends Group {
 	public void setGc(GraphicsContext gc) {
 		this.gc = gc;
 	}
-
 
 
 

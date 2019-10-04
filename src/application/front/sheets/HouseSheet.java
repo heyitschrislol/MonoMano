@@ -1,20 +1,14 @@
 package application.front.sheets;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import application.back.*;
 import application.back.enums.*;
-import application.back.managers.Animator;
-import application.back.managers.Asset;
-import application.back.managers.AssetManager;
-import application.back.managers.AudioManager;
 import application.back.managers.Handler;
 import application.back.managers.InputManager;
+import application.back.managers.SoundManager;
 import application.front.Base;
 import application.front.controllers.StartController;
 import application.front.objects.*;
@@ -24,9 +18,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.util.Duration;
 
 public class HouseSheet extends Sheet {
 	public final long startNanoTime = System.nanoTime();
@@ -34,10 +25,12 @@ public class HouseSheet extends Sheet {
 
 	public HouseSheet(int startX, int startY){
 		super(startX, startY);
+		this.location = Location.HOUSE;
 		
-
+		
 		portallist.addAll(createExitList());
 		
+		PlayerObject.location = Location.HOUSE;
 		player = new PlayerObject(startX, startY, 64, 64, ID.PLAYER);
 
 		canvas = new Canvas(768, 512);
@@ -45,22 +38,13 @@ public class HouseSheet extends Sheet {
 
 
         getChildren().add(canvas);
-//		AudioManager.changeMusic("/application/assets/Nothing For the Swim Back.wav");
 
-        sceneImage = new Image(AssetManager.STONEFLOOR);
+        sceneImage = Asset.assetImage("STONEFLOOR");
         
         Image[] nudemanframes = Asset.spriteFrames("NUDEMAN");
         Image[] nudeframes = new Image[2];
         nudeframes[0] = nudemanframes[1];
         nudeframes[1] = nudemanframes[4];
-        Image nudepic = nudemanframes[3];
-
-        Image crate1 = Asset.assetImage("SMCRATE");
-        Image crate2 = Asset.assetImage("LGCRATE");
-        Image door = Asset.assetImage("INDOOR");
-        Image bwall = Asset.assetImage("BACKWALL");
-        Image rwall = Asset.assetImage("RIGHTWALL");
-        Image lwall = Asset.assetImage("LEFTWALL");
         
         NPCObject nudeman = new NPCObject(369, 169, 55, 64, ID.NPC, Tag.CHARACTER);
         EnvironmentObject crateSM = new EnvironmentObject(100, 100, 32, 37, ID.COLLIDABLE, Tag.CRATE);
@@ -71,17 +55,20 @@ public class HouseSheet extends Sheet {
         EnvironmentObject rightwall = new EnvironmentObject(752, 64, 16, 448, ID.COLLIDABLE, Tag.DOOR);
         
         nudeman.setName("Fully-Erect Nude Man");
-        nudeman.setImage(nudepic);
+        nudeman.setImage(nudemanframes[3]);
         nudeman.setSound("grunt");
         nudeman.setFrames(nudeframes);
-        crateSM.setImage(crate1);
-        crateLG.setImage(crate2);
-        indoor.setImage(door);
-        backwall.setImage(bwall);
-        leftwall.setImage(lwall);
-        rightwall.setImage(rwall);
-        player.setFrames(AssetManager.returnLeft());
-		player.setImage(AssetManager.findIdle("LEFT"));
+        indoor.setSound("doorclick");
+        crateSM.setImage(Asset.assetImage("SMCRATE"));
+		crateSM.setSound("boodaboo");
+        crateLG.setImage(Asset.assetImage("LGCRATE"));
+		crateLG.setSound("boodaboo");
+        indoor.setImage(Asset.assetImage("INDOOR"));
+        backwall.setImage(Asset.assetImage("BACKWALL"));
+        leftwall.setImage(Asset.assetImage("LEFTWALL"));
+        rightwall.setImage(Asset.assetImage("RIGHTWALL"));
+        player.setFrames(Asset.returnUp());
+		player.setImage(Asset.findIdle("UP"));
         nudeman.setObjecttext("My milkshake brings all the boys to th- whaa agh!");
         crateSM.setObjecttext("This crate is full of empty peanut butter jars...");
         crateLG.setObjecttext("It looks like a small animal was kept in here...");
@@ -105,8 +92,7 @@ public class HouseSheet extends Sheet {
 				int j = 0;
 				
 				elapsedTime = (currentNanoTime - startNanoTime) / 1000000000.0;
-				
-				
+
 				gc.clearRect(0, 0, 768, 512);
 				gc.drawImage(sceneImage, 0, 0);
 				
@@ -114,28 +100,28 @@ public class HouseSheet extends Sheet {
 				player.setNextX(player.getX());
 				player.setNextY(player.getY());
 				if (player.downkey) {
-					player.setFrames(AssetManager.returnDown());
+					player.setFrames(Asset.returnDown());
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() + 5);
 					nudeman.animate(elapsedTime, .5);
 
 				}
 				if (player.upkey) {
-					player.setFrames(AssetManager.returnUp());
+					player.setFrames(Asset.returnUp());
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() - 5);
 					nudeman.animate(elapsedTime, .5);
 
 				}
 				if (player.leftkey) {
-					player.setFrames(AssetManager.returnLeft());
+					player.setFrames(Asset.returnLeft());
 					player.animate(elapsedTime, 0.100);
 					player.setNextX(player.getNextX() - 5);
 					nudeman.animate(elapsedTime, .5);
 
 				}
 				if (player.rightkey) {
-					player.setFrames(AssetManager.returnRight());
+					player.setFrames(Asset.returnRight());
 					player.animate(elapsedTime, 0.100);
 					player.setNextX(player.getNextX() + 5);
 					nudeman.animate(elapsedTime, .5);
@@ -143,8 +129,11 @@ public class HouseSheet extends Sheet {
 				}
 				if (player.intersects(indoor) && player.downkey) {
 					try {
+						if (!indoor.getSound().isBlank()) {
+							SoundManager.playClip(indoor.getSound());
+						}
 						StartController controller = new StartController(607, 445);
-						Base.changeScene(controller);
+						Handler.changeScene(controller);
 						nudeman.animate(elapsedTime, .5);
 						this.stop();
 						gc.clearRect(0, 0, 768, 512);
@@ -237,6 +226,13 @@ public class HouseSheet extends Sheet {
 	 */
 	public void setObjectlist(ObservableList<GameObject> objectlist) {
 		this.objectlist = objectlist;
+	}
+
+
+	@Override
+	public void awake() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

@@ -3,19 +3,26 @@ package application.front.controllers;
 import java.io.FileNotFoundException;
 
 import application.back.managers.InputManager;
+
 import application.front.sheets.HouseSheet;
 import javafx.scene.Scene;
 
 public class HouseController extends Controller {
 	public HouseSheet sheet;
 	public Scene scene;
-	
+	public final String music = "nftsb";
+	public final double volume = .02;
 	
 	public HouseController(int exitX, int exitY) throws FileNotFoundException {
 		super(exitX, exitY);
+		
+//		manager  = SoundManager.nftsb;
+//		SoundManager.windy.stopMusic();
+//		MusicManager.playMusic("nftsb", 0.05);
 		sheet = new HouseSheet(exitX, exitY);
 		scene = new Scene(sheet);
 		sheet.enter();
+		
 		InputManager manager = new InputManager();
 		scene.setOnKeyPressed(e -> {
 			manager.keyPress(e);

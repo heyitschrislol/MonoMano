@@ -3,6 +3,7 @@ package application.back.managers;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import application.back.enums.Asset;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
 import javafx.geometry.Rectangle2D;

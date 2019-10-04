@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import application.back.enums.*;
-import application.back.managers.AssetManager;
 import application.front.Base;
 import application.front.controllers.Controller;
 import application.front.objects.*;
@@ -45,15 +44,12 @@ public class InputManager {
 		String key = e.getCode().toString();
 		if (key.contains("DOWN")) {
 			Handler.findPlayer().downkey = true;
-//			if (!input.contains("DOWN"))input.add("DOWN");
 		}
 		if (key.contains("UP")) {
 			Handler.findPlayer().upkey = true;
-//			if (!input.contains("UP"))input.add("UP");
 		}
 		if (key.contains("LEFT")) {
 			Handler.findPlayer().leftkey = true;
-//			if (!input.contains("LEFT"))input.add("LEFT");
 		}
 		if (key.contains("RIGHT")) {
 			Handler.findPlayer().rightkey = true;
@@ -62,29 +58,31 @@ public class InputManager {
 			if (intersecting) {
 				if (!popup) {
 					if (!actionobject.getObjecttext().isBlank()) {
-						Base.showPopup(actionobject);
+						Handler.showPopup(actionobject);
 						popup = true;
 					}
 					if (!actionobject.getSound().isBlank()) {
-						AudioManager.playSound(actionobject.getSound());
+						if (actionobject.getSound().equals("boodaboo")) {
+							double volume = .3;
+							SoundManager.playClip(actionobject.getSound());
+						} else {
+							SoundManager.playClip(actionobject.getSound());
+
+						}
 					}
 					
 				} else {
-					Base.clearPopup();
+					Handler.clearPopup();
 					popup = false;
 				}
 
 			} else {
-				Base.clearPopup();
+				Handler.clearPopup();
 				intersecting = false;
 				popup = false;
 			}
 		}
 		
-//		if (key.contains("SPACE")) {
-//			Rectangle2D bounds = temp.getBoundary();
-//			System.out.println("Player Min X: " + bounds.getMinX() + " Max X: " + (bounds.getMinX() + bounds.getWidth()) + " Min Y: " + bounds.getMinY() + " Max Y: " + (bounds.getMinY() + bounds.getHeight()));
-//		}
 	}
 
 	public void keyRelease(KeyEvent e) {
@@ -110,10 +108,7 @@ public class InputManager {
 
 		}
 	}
-//	public void actionKey(KeyEvent e) {
-//		String key = e.getCode().toString();
-//		
-//	}
+
 	/**
 	 * @return the Handler
 	 */
@@ -127,18 +122,5 @@ public class InputManager {
 		InputManager.handler = handler;
 	}
 	
-//	public GraphicsContext popup(GraphicsContext ogc, EnvironmentObject eo) {
-//		ogc.setStroke(Color.BROWN);
-//		ogc.setLineWidth(4);
-//		ogc.strokeRoundRect(134, 70, 500, 270, 10, 10);
-//        // Draw a filled rounded Rectangle
-//		ogc.setFill(Color.ANTIQUEWHITE);
-//        ogc.fillRoundRect(138, 74, 494, 264, 10, 10);
-//        ogc.setFill(Color.BLACK);
-//        ogc.fillText(eo.getObjecttext(),170, 110, 482);
-//         return ogc;
-//	}
-//	public void clearPopup(GraphicsContext ogc) {
-//		ogc.clearRect(0, 0, 768, 512);
-//	}
+
 }

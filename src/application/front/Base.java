@@ -2,51 +2,35 @@ package application.front;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.HashMap;
 
-import application.back.enums.ID;
-import application.back.enums.Tag;
-import application.back.managers.AssetManager;
-import application.back.managers.AudioManager;
 import application.back.managers.Handler;
 import application.back.managers.InputManager;
 import application.back.managers.SoundManager;
 import application.front.controllers.Controller;
-import application.front.controllers.HouseController;
 import application.front.controllers.StartController;
-import application.front.objects.Boundary;
-import application.front.objects.EnvironmentObject;
+
 import application.front.objects.GameObject;
 import application.front.objects.PlayerObject;
-import application.front.sheets.HouseSheet;
 import application.front.sheets.Sheet;
 import application.front.sheets.StartSheet;
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
-import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
+import javafx.collections.ObservableMap;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 public class Base extends Application {
 	public static final int WIDTH = 768;
@@ -58,155 +42,108 @@ public class Base extends Application {
 	@SuppressWarnings("exports")
 	public static PlayerObject player;
 	public static ObservableList<GameObject> objectlist = FXCollections.observableArrayList();
-	public Image sceneImage;
-	
+	private MediaPlayer mp;
+	private String id;
+	protected ObservableMap<String, Media> musicmap = FXCollections.observableMap(new HashMap<>());
+	private MediaView mediaview;	
 	public static Stage primaryStage;
 	public static Scene scene;
-	private Scene scene2;
-	private Sheet sheet;
-	private StartSheet start;
-	private Group root;
-	private Group root2;
-	private Canvas canvas;
-	private static Canvas overlay;
-	private static GraphicsContext ogc;
-	private GraphicsContext ngc;
-	private Handler handler;
+	public Handler handler;
 	public static InputManager manager;
-	public static AudioManager audiomanager;
-//	public static SoundManager soundmanager;
-	public static Font regfont;
-	public static Font boldfont;
+	private Thread thread;
+	public SoundManager sm;
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			SoundManager.soundmanager.setId("forest");
+			loadBGM("bgins", "/application/assets/audio/bgins.mp3");
+			loadBGM("windy", "/application/assets/audio/windy.mp3");
+			loadBGM("forest", "/application/assets/audio/forest.mp3");
+			loadBGM("water", "/application/assets/audio/awaterlap.mp3");
+			loadBGM("nftsb", "/application/assets/audio/nftsb.mp3");
+//			
+//			loadSound("grunt", "/application/assets/audio/Male Grunt.wav");
+//			loadSound("pendrop", "/application/assets/audio/pendrop.mp3");
+//			loadSound("milkshake", "/application/assets/audio/milkshake.mp3");
+//			loadSound("blooblee", "/application/assets/audio/blooblee.wav");
+//			loadSound("boodaboo", "/application/assets/audio/boodaboo.wav");
+//			loadSound("doorclick", "/application/assets/audio/doorhclick.mp3");
+//			loadSound("swords12", "/application/assets/audio/swords/swords12.mp3");
+//			loadSound("failnegative", "/application/assets/audio/retrogameincorrect_fail_negative.mp3");
+//			mp = new MediaPlayer(musicmap.get(id));
+			
+			
+			mediaview = new MediaView(mp);
+			
 			
 			Base.primaryStage = primaryStage;
-			
-			overlay = new Canvas(768, 512);
-			ogc = overlay.getGraphicsContext2D();
+
+	        Base.primaryStage.setTitle("Mono Mano");
 	        
-			regfont = Font.loadFont(new FileInputStream(new File("src/application/resources/fonts/AmaticSC-Regular.ttf")), 40);
-	        boldfont = Font.loadFont(new FileInputStream(new File("src/application/resources/fonts/AmaticSC-Bold.ttf")), 44);
+//			sm = new SoundManager();
 			
-	        ogc.setFont(regfont);
-	        primaryStage.setTitle("Mono Mano");
-						
+			
 			StartController starter = new StartController(352, 244);
-			changeScene(starter);
-			
+			Handler.changeScene(starter);
 
-			/*
-			 * instantiate and activate custom classes, methods, and variables.
-			 */
+			Handler.setObjectlist(starter.sheet.getObjectlist());
 
-			handler = new Handler(starter.sheet.getObjectlist());
-
-			audiomanager = new AudioManager(3);
-//			audiomanager.loadBGMusic("Bgins", "Bgins.wav");
-//			audiomanager.loadBGMusic("NFTSB", "Nothing For the Swim Back.wav");
-			audiomanager.loadSoundEffects("grunt", "Male grunt.wav");
-			audiomanager.loadSoundEffects("wah", "wachhg.mp3");
-			audiomanager.loadSoundEffects("pendrop", "pendrop.mp3");
-			audiomanager.loadSoundEffects("mailshake", "shakymail.mp3");
-			audiomanager.loadSoundEffects("milkshake", "milkshake.mp3");
-			audiomanager.loadSoundEffects("heeya", "Hee-ya.mp3");
 			
-//			audiomanager.playMusic("Bgins");
 			
-			SoundManager.bgins.playMusic();
-			SoundManager.bgins.loopMusic();
-			primaryStage.setOnCloseRequest(e -> {
-				
-				AudioManager.soundPool.shutdown();
-			});
-//			AudioManager.changeMusic("/application/assets/Bgins.wav");
-			primaryStage.setResizable(false);
-			primaryStage.show();
+//			Base.primaryStage.sceneProperty().addListener(e -> {
+//				
+//				mediaview.getMediaPlayer().setOnReady(new Runnable() {
+//					@Override
+//					public void run() {
+//						Status status = mediaview.getMediaPlayer().getStatus();
+//						 if (status == Status.PLAYING) {
+//							 MediaPlayer pp = new MediaPlayer(musicmap.get(id));
+//							 mediaview.getMediaPlayer().stop();
+//							 mediaview.setMediaPlayer(pp);
+//							 mediaview.getMediaPlayer().setVolume(0.02);
+//							 mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
+//							 mediaview.getMediaPlayer().play();
+//					         return;
+////							 if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
+//
+//						 } else {
+//							 mediaview.getMediaPlayer().setVolume(0.02);
+//							 mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
+//							 mediaview.getMediaPlayer().play();						 }						
+//					}
+//					
+//				});
+//				thread = new Thread() {
+//					@Override
+//					public void run() {
+//						playMusic();
+//					}
+//				};
+//				thread.start();
+//			});
+			
+			
+			
+			Base.primaryStage.setResizable(false);
+			Base.primaryStage.show();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public static void playMusic(final String id) {
-    	audiomanager.playMusic(id);
-	}
-	public static void showPopup(GameObject eo) {
-		if (!eo.getObjecttext().isBlank()) {
-			ogc.setStroke(Color.BROWN);
-			ogc.setLineWidth(4);
-			ogc.strokeRoundRect(134, 302, 500, 200, 10, 10);
-	        // Draw a filled rounded Rectangle
-			ogc.setFill(Color.ANTIQUEWHITE);
-	        ogc.fillRoundRect(138, 306, 494, 194, 10, 10);
-	        ogc.setFill(Color.BLACK);
-	        int index = 0;
-	        int linect = 0;
-	        int xlet = 150;
-	        int ylet = 356;
-	        
-	        String[] lines = new String[] { "", "", "", "" };
-	        String[]words = eo.getObjecttext().split(" ");
-	        for (String word : words) {
-	        	 linect += word.length();
-	        	 if (linect < 35) {
-		        	 lines[index] = lines[index].concat(" " + word);
-	        	 } else {
-	        		 index++;
-	        		 linect = 0;
-		        	 lines[index] = lines[index].concat(" " + word);
-	        	 }
-	        }
-	        boolean isfirst = true;
-	        for (int i = 0; i < lines.length; i++) {
-	        	if (!lines[i].isBlank()) {
-	        		if (isfirst && !eo.getName().isBlank()) {
-	        			ogc.setFont(boldfont);
-	        			ogc.fillText(eo.getName() + ":", xlet, ylet);
-		        		ylet += 35; 
-		        		ogc.setFont(regfont);
-	        			ogc.fillText(lines[i], xlet, ylet);
-		        		ylet += 35; 
-		        		isfirst = false;
-	        		} else {
-	        			ogc.fillText(lines[i], xlet, ylet);
-		        		ylet += 35;
-	        		}
-	        		
-	        	}
-	        }
-	       
-		}
-	}
-	public static void clearPopup() {
-		ogc.clearRect(0, 0, 768, 512);
-	}
+	
+	public void playMusic() {
+		 
 
-	public static void changeScene(Controller controller) throws FileNotFoundException {
-		Sheet sheet = controller.getSheet();
-		sheet.getChildren().add(overlay);
-		sheet.player.render(sheet.gc);
-		
-		Handler.setObjectlist(sheet.getObjectlist());
-		Handler.render(sheet.gc);
-		Scene scene = controller.getScene();
-		scene.setRoot(sheet);
-		primaryStage.setScene(scene);
 	}
 	
-	public static AudioClip startMusic() {
-		AudioClip music = new AudioClip("src/application/assets/Bgins.wav");
-        music.setVolume(0.5f);
-        music.setCycleCount(1000);
-        music.play();
-        return null;
-	}
-
-
-
 	
-
+	public void loadBGM(String id, String url) {
+		Media track = new Media(getClass().getResource(url).toExternalForm());
+		musicmap.put(id, track);
+	}
+	
 	public static PlayerObject getPlayer() {
 		return player;
 	}
@@ -245,9 +182,108 @@ public class Base extends Application {
 	public void setManager(InputManager manager) {
 		this.manager = manager;
 	}
-	public static void main(String[] args) {
-		launch(args);
+	/**
+	 * @return the thread
+	 */
+	public Thread getThread() {
+		return thread;
 	}
+
+	/**
+	 * @param thread the thread to set
+	 */
+	public void setThread(Thread thread) {
+		this.thread = thread;
+	}
+
+	/**
+	 * @return the sm
+	 */
+	public SoundManager getSm() {
+		return sm;
+	}
+
+	/**
+	 * @param sm the sm to set
+	 */
+	public void setSm(SoundManager sm) {
+		this.sm = sm;
+	}
+
+
+
+	/**
+	 * @return the mp
+	 */
+	public MediaPlayer getMp() {
+		return mp;
+	}
+
+
+
+	/**
+	 * @param mp the mp to set
+	 */
+	public void setMp(MediaPlayer mp) {
+		this.mp = mp;
+	}
+
+
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+
+	/**
+	 * @return the musicmap
+	 */
+	public ObservableMap<String, Media> getMusicmap() {
+		return musicmap;
+	}
+
+
+
+	/**
+	 * @param musicmap the musicmap to set
+	 */
+	public void setMusicmap(ObservableMap<String, Media> musicmap) {
+		this.musicmap = musicmap;
+	}
+
+
+
+	/**
+	 * @return the mediaview
+	 */
+	public MediaView getMediaview() {
+		return mediaview;
+	}
+
+
+
+	/**
+	 * @param mediaview the mediaview to set
+	 */
+	public void setMediaview(MediaView mediaview) {
+		this.mediaview = mediaview;
+	}
+
+
+
 	
 	
 	/*

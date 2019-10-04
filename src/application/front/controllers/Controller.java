@@ -10,7 +10,9 @@ public abstract class Controller {
 	public Scene scene;
 	public int exitX;
 	public int exitY;
-	
+//	public SoundManager manager;
+	public String music;
+	public double volume;
 	
 	public Controller() {
 
@@ -66,6 +68,42 @@ public abstract class Controller {
 	 */
 	public void setExitY(int exitY) {
 		this.exitY = exitY;
+	}
+//	/**
+//	 * @return the manager
+//	 */
+//	public SoundManager getManager() {
+//		return manager;
+//	}
+//	/**
+//	 * @param manager the manager to set
+//	 */
+//	public void setManager(SoundManager manager) {
+//		this.manager = manager;
+//	}
+	/**
+	 * @return the music
+	 */
+	public String getMusic() {
+		return music;
+	}
+	/**
+	 * @param music the music to set
+	 */
+	public void setMusic(String music) {
+		this.music = music;
+	}
+	/**
+	 * @return the volume
+	 */
+	public double getVolume() {
+		return volume;
+	}
+	/**
+	 * @param volume the volume to set
+	 */
+	public void setVolume(double volume) {
+		this.volume = volume;
 	}
 	
 }

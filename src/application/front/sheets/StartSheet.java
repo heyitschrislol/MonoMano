@@ -1,23 +1,18 @@
 package application.front.sheets;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import application.back.*;
+import application.back.enums.Asset;
 import application.back.enums.ID;
+import application.back.enums.Location;
 import application.back.enums.Tag;
-import application.back.managers.Asset;
-import application.back.managers.AssetManager;
-import application.back.managers.AudioManager;
 import application.back.managers.Handler;
 import application.back.managers.InputManager;
+import application.back.managers.SoundManager;
 import application.front.Base;
 import application.front.controllers.HouseController;
-import application.front.controllers.StartController;
 import application.front.objects.Boundary;
 import application.front.objects.EnvironmentObject;
 import application.front.objects.GameObject;
@@ -25,30 +20,25 @@ import application.front.objects.PlayerObject;
 import javafx.animation.AnimationTimer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class StartSheet extends Sheet {
 	public final long startNanoTime = System.nanoTime();
 	public static double elapsedTime = Base.elapsedTime;
 	
-	
 	public StartSheet(int startX, int startY) throws FileNotFoundException {
 		super(startX, startY);
+		this.location = Location.START;
 		
 		portallist.addAll(createExitList());
 		
 		player = new PlayerObject(startX, startY, 55, 64, ID.PLAYER);
-
+		PlayerObject.location = Location.START;
 		canvas = new Canvas(768, 512);
 		gc = canvas.getGraphicsContext2D();
-		
-//		AudioManager.changeMusic("/application/assets/Bgins.wav");
-		
+			
         getChildren().add(canvas);
 		/*
 		 * set up world and world objects including the player.
@@ -57,12 +47,6 @@ public class StartSheet extends Sheet {
 		Image[] SMtrees = Asset.spriteFrames("SMTREES");
 		Image[] LGtrees = Asset.spriteFrames("LGTREES");
 		Image[] trunks = Asset.spriteFrames("TREETRUNKS");
-//		Image[] bushFrames = new Image[4];
-//		bushFrames[0] = new Image(AssetManager.LGBUSH1);
-//		bushFrames[1] = new Image(AssetManager.LGBUSH2);
-//		bushFrames[2] = new Image(AssetManager.LGBUSH3);
-//		bushFrames[3] = new Image(AssetManager.LGBUSH4);
-		
 		
 		EnvironmentObject smbot = new EnvironmentObject(325, 178, 21, 17, ID.COLLIDABLE, Tag.TREE);
 		EnvironmentObject smtop = new EnvironmentObject(306, 101, 64, 112, ID.ENVIRONMENT);
@@ -72,27 +56,36 @@ public class StartSheet extends Sheet {
 		EnvironmentObject bushlg = new EnvironmentObject(36, 436, 50, 43, ID.ENVIRONMENT);
 		EnvironmentObject winopen = new EnvironmentObject(553, 360, 38, 85, ID.COLLIDABLE, Tag.WINDOW);
 		EnvironmentObject winclosed = new EnvironmentObject(684, 360, 32, 85, ID.COLLIDABLE, Tag.WINDOW);
-		EnvironmentObject sign = new EnvironmentObject(200, 50, 50, 50, ID.COLLIDABLE,Tag.SIGN);
+		EnvironmentObject sign = new EnvironmentObject(200, 40, 40, 50, ID.COLLIDABLE,Tag.SIGN);
 		EnvironmentObject house = new EnvironmentObject(512, -60, 248, 498, ID.COLLIDABLE, Tag.HOUSE);
 		EnvironmentObject door = new EnvironmentObject(607, 382, 58, 58, ID.COLLIDABLE, Tag.DOOR);
 
-		bushlg.setFrames(bushFrames);
 		sign.setObjecttext("Sign: 'U suck haha'");
 		winopen.setObjecttext("There's a naked man inside... it looks like he's practicing thrusting his pelvis...");
 		winclosed.setObjecttext("The window is closed. You can only see window.");
-		bushsm.setImage(sbush);
-		bushlg.setImage(lbush);
+		bushsm.setImage(Asset.assetImage("SMBUSH"));
+		bushlg.setImage(Asset.assetImage("LGBUSH"));
 		winopen.setImage(Asset.assetImage("WINOPEN"));
+		winopen.setSound("boodaboo");
 		winclosed.setImage(Asset.assetImage("WINCLOSED"));
+		winclosed.setSound("boodaboo");
 		smtop.setImage(SMtrees[1]);
 		smbot.setImage(trunks[0]);
 		lgtop.setImage(LGtrees[1]);
 		lgbot.setImage(trunks[1]);
-		sign.setImage(Asset.assetImage("SIGN"));
+		sign.setImage(Asset.assetImage("SIGN", 50, 50, true, true));
+		sign.setSound("boodaboo");
 		house.setImage(Asset.assetImage("BLANKHOUSE"));
 		door.setImage(Asset.assetImage("DOOR"));
-		player.setFrames(AssetManager.returnRight());
-		player.setImage(AssetManager.findIdle("RIGHT"));
+		ArrayList<String> footsteps = new ArrayList<>();
+		footsteps.add("grasstep1");
+		footsteps.add("grasstep2");
+		footsteps.add("grasstep3");
+		footsteps.add("grasstep6");
+		door.setSound("doorclick");
+		player.setFrames(Asset.returnDown());
+		player.setImage(Asset.findIdle("DOWN"));
+		player.footsteps = footsteps;
 		objectlist.add(player);
 		objectlist.add(smtop);
 		objectlist.add(smbot);
@@ -127,38 +120,42 @@ public class StartSheet extends Sheet {
 				player.setNextX(player.getX());
 				player.setNextY(player.getY());
 				if (player.downkey) {
-					player.setFrames(AssetManager.returnDown());
+					player.setFrames(Asset.returnDown());
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() + 5);
 				}
 				if (player.upkey) {
-					player.setFrames(AssetManager.returnUp());
+					player.setFrames(Asset.returnUp());
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() - 5);
 				}
 				if (player.leftkey) {
-					player.setFrames(AssetManager.returnLeft());
+					player.setFrames(Asset.returnLeft());
 					player.animate(elapsedTime, 0.100);
 					player.setNextX(player.getNextX() - 5);
 				}
 				if (player.rightkey) {
-					player.setFrames(AssetManager.returnRight());
+					player.setFrames(Asset.returnRight());
 					player.animate(elapsedTime, 0.100);
 					player.setNextX(player.getNextX() + 5);
 				}
 				if (player.intersects(door) && player.upkey) {
 					try {
+						if (!door.getSound().isBlank()) {
+							SoundManager.playClip(door.getSound());
+						}
+						
 						HouseController controller = new HouseController(352, 440);
-						Base.changeScene(controller);
+						Handler.changeScene(controller);
 						this.stop();
 						gc.clearRect(0, 0, 768, 512);
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					}
 				}
-				if (player.intersects(bushlg)) {
-					bushlg.animate(elapsedTime, 0.1, player.getX(), player.getY());
-				}
+//				if (player.intersects(bushlg)) {
+//					bushlg.animate(elapsedTime, 0.1, player.getX(), player.getY());
+//				}
 				for (Boundary bound : objectBoundaries()) {
 					if (bound.intersects(player.getNextX(), player.getNextY() + 15, 64, 34)) {
 						if (bound.getTag() != Tag.BORDER) {
@@ -230,6 +227,12 @@ public class StartSheet extends Sheet {
 		for (GameObject temp : objectlist) {
 			temp.render(gc);
 		}	
+	}
+
+	@Override
+	public void awake() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

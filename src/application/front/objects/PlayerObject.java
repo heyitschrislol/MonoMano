@@ -1,8 +1,10 @@
 package application.front.objects;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import application.back.enums.ID;
+import application.back.enums.Location;
 import application.back.managers.Handler;
 import application.back.managers.InputManager;
 import application.front.Base;
@@ -10,15 +12,20 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 
 public class PlayerObject extends GameObject {
+	public static Location location;
+	public static PlayerObject instance;
 	private Image[] idles;
+	public ArrayList<String> footsteps;
 	private double nextX;
 	private double nextY;
 	public boolean upkey = false;
 	public boolean downkey = false;
 	public boolean leftkey = false;
 	public boolean rightkey = false;
+	public static ItemObject[] items;
 	
 	
 	
@@ -29,7 +36,7 @@ public class PlayerObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
-
+		footsteps = new ArrayList<>();
 	}
 
 	public PlayerObject(double x, double y, double width, double height) {
@@ -39,6 +46,7 @@ public class PlayerObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
+		footsteps = new ArrayList<>();
 
 	}
 
@@ -49,7 +57,10 @@ public class PlayerObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
+		footsteps = new ArrayList<>();
+		
 	}
+	
 
 	
 	//#########---	G E T / S E T	---#############################################
@@ -100,6 +111,20 @@ public class PlayerObject extends GameObject {
 	}
 
 	/**
+	 * @return the footsteps
+	 */
+	public ArrayList<String> getFootsteps() {
+		return footsteps;
+	}
+
+	/**
+	 * @param footsteps the footsteps to set
+	 */
+	public void setFootsteps(ArrayList<String> footsteps) {
+		this.footsteps = footsteps;
+	}
+
+	/**
 	 * @return the inputsnag
 	 */
 	
@@ -122,13 +147,14 @@ public class PlayerObject extends GameObject {
 	@Override
 	public void animate(double time, double duration) {
 		int index = (int) ((time % (frames.length * duration)) / duration);
-		this.image = frames[index];	
+		this.image = frames[index];
 	}
 	@Override
 	public void animate(double time, double duration, double playerX, double playerY) {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 	@Override
 	public void render(GraphicsContext gc) {
