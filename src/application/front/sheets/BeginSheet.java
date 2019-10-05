@@ -45,7 +45,10 @@ public class BeginSheet extends Sheet {
 		if (SoundManager.nftsb.isPlaying()) {
 			SoundManager.nftsb.stopSong();
 			SoundManager.bgins.playSong();
-
+		}
+		if (SoundManager.water.isPlaying()) {
+			SoundManager.water.stopSong();
+			SoundManager.bgins.playSong();
 		}
 		
 		
@@ -240,7 +243,6 @@ public class BeginSheet extends Sheet {
 	@Override
 	public ArrayList<Boundary> createExitList() {
 		ArrayList<Boundary> list = new ArrayList<>();
-		Boundary door = new Boundary(620, 390, 30, 50, "door");
 		Boundary minx = new Boundary(Base.LOCX, Base.LOCY, 768, 0, "north");
 		minx.setTag(Tag.BORDER);
 		Boundary miny = new Boundary(Base.LOCX, Base.LOCY, 0, 512, "west");

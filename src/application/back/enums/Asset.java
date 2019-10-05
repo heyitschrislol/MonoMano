@@ -13,9 +13,10 @@ public enum Asset {
 /*
 ** 		********	S I N G L E		S P R I T E S	*****
 */
-	LAKE1("LAKE1", "application/assets/sprites/LAKEscene1.png", 768, 512, 768, 512, 1, 1, 0, 0),
-	LAKE2("LAKE2", "application/assets/sprites/LAKEscene2.png", 768, 512, 768, 512, 1, 1, 0, 0),
-	LAKE3("LAKE3", "application/assets/sprites/LAKEscene3.png", 768, 512, 768, 512, 1, 1, 0, 0),
+	LAKE("LAKE", "application/assets/sprites/lakescene.png", 768, 512, 768, 512, 1, 1, 0, 0),
+	WATER1("WATER1", "application/assets/sprites/water2.png", 768, 297, 768, 297, 1, 1, 0, 0),
+	WATER2("WATER2", "application/assets/sprites/water3.png", 768, 297, 768, 297, 1, 1, 0, 0),
+	WATER3("WATER3", "application/assets/sprites/water3.png", 768, 297, 768, 297, 1, 1, 0, 0),
 	GRASS("GRASS", "/application/assets/sprites/grass768x512.png", 768, 512, 768, 512, 1, 1, 0, 0),
 	LGBUSH("LGBUSH", "application/assets/sprites/bushLG-50x43.png", 50, 43, 50, 43, 1, 1, 0, 0),
 	SMBUSH("SMBUSH", "application/assets/sprites/bushSM-27x21.png", 27, 21, 27, 21, 1, 1, 0, 0),

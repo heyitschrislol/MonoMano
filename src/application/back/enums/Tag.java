@@ -9,6 +9,7 @@ public enum Tag {
 	WINDOW,
 	DOOR,
 	HOUSE,
+	WATER,
 	BORDER;
 	
 }
