@@ -33,7 +33,7 @@ public class Handler {
 	public static Font regfont;
 	public static Font boldfont;
 	public static Handler handler = new Handler();
-	public static Thread thread;
+	public static Thread thread = new Thread();
 	
 	public Handler()  {
 		try {
@@ -71,6 +71,8 @@ public class Handler {
 		
 		
 //		SoundManager.soundmanager.setId(controller.getMusic());
+//		SoundManager sm = new SoundManager("nftsb");
+//		thread.
 //		thread.start();
 		
 		Handler.setObjectlist(sheet.getObjectlist());

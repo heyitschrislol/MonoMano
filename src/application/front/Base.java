@@ -2,6 +2,7 @@ package application.front;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import application.back.managers.Handler;
@@ -14,6 +15,7 @@ import application.front.objects.GameObject;
 import application.front.objects.PlayerObject;
 import application.front.sheets.Sheet;
 import application.front.sheets.StartSheet;
+import application.front.sheets.BeginSheet;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +26,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -56,12 +60,12 @@ public class Base extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			SoundManager.soundmanager.setId("forest");
-			loadBGM("bgins", "/application/assets/audio/bgins.mp3");
-			loadBGM("windy", "/application/assets/audio/windy.mp3");
-			loadBGM("forest", "/application/assets/audio/forest.mp3");
-			loadBGM("water", "/application/assets/audio/awaterlap.mp3");
-			loadBGM("nftsb", "/application/assets/audio/nftsb.mp3");
+//			SoundManager.soundmanager.setId("forest");
+//			loadBGM("bgins", "/application/assets/audio/bgins.mp3");
+//			loadBGM("windy", "/application/assets/audio/windy.mp3");
+//			loadBGM("forest", "/application/assets/audio/forest.mp3");
+//			loadBGM("water", "/application/assets/audio/awaterlap.mp3");
+//			loadBGM("nftsb", "/application/assets/audio/nftsb.mp3");
 //			
 //			loadSound("grunt", "/application/assets/audio/Male Grunt.wav");
 //			loadSound("pendrop", "/application/assets/audio/pendrop.mp3");
@@ -72,22 +76,30 @@ public class Base extends Application {
 //			loadSound("swords12", "/application/assets/audio/swords/swords12.mp3");
 //			loadSound("failnegative", "/application/assets/audio/retrogameincorrect_fail_negative.mp3");
 //			mp = new MediaPlayer(musicmap.get(id));
-			
+			StartSheet start = new StartSheet();
 			
 			mediaview = new MediaView(mp);
-			
+			Scene startscene = new Scene(start);
 			
 			Base.primaryStage = primaryStage;
-
+			Base.primaryStage.setScene(startscene);
 	        Base.primaryStage.setTitle("Mono Mano");
 	        
-//			sm = new SoundManager();
+			sm = new SoundManager("nftsb");
 			
-			
-			StartController starter = new StartController(352, 244);
-			Handler.changeScene(starter);
+			startscene.setOnKeyPressed(e -> {
+				try {
+//					SoundManager.bgins.playClip("start");
 
-			Handler.setObjectlist(starter.sheet.getObjectlist());
+					startMenu(e);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			});
+			
+
 
 			
 			
@@ -136,6 +148,17 @@ public class Base extends Application {
 	public void playMusic() {
 		 
 
+	}
+	public void startMenu(KeyEvent k) throws FileNotFoundException {
+		String key = k.getCode().toString();
+		if (key.contains("ENTER")) {
+			StartController starter = new StartController(352, 244);
+			Handler.changeScene(starter);
+			
+			Handler.setObjectlist(starter.sheet.getObjectlist());
+		}
+		
+		
 	}
 	
 	

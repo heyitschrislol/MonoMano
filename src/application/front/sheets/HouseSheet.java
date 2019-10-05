@@ -26,7 +26,8 @@ public class HouseSheet extends Sheet {
 	public HouseSheet(int startX, int startY){
 		super(startX, startY);
 		this.location = Location.HOUSE;
-		
+		SoundManager.bgins.stopSong();
+		SoundManager.weird.playSong();
 		
 		portallist.addAll(createExitList());
 		

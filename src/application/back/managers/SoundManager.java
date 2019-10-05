@@ -5,6 +5,10 @@ import java.util.HashMap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -12,38 +16,45 @@ import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
 
 public class SoundManager implements Runnable {
+	
+	private boolean playing = false;
 	private MediaPlayer player;
 	private String id;
 	protected ObservableMap<String, Media> musicmap = FXCollections.observableMap(new HashMap<>());
 	protected static ObservableMap<String, AudioClip> soundmap = FXCollections.observableMap(new HashMap<>());
 	private MediaView mediaview;
-	public static SoundManager soundmanager = new SoundManager("bgins");
-	
-	
-	public SoundManager() {
-//		this.id = id;
-		loadBGM("bgins", "/application/assets/audio/bgins.mp3");
-		loadBGM("windy", "/application/assets/audio/windy.mp3");
-		loadBGM("forest", "/application/assets/audio/forest.mp3");
-		loadBGM("water", "/application/assets/audio/awaterlap.mp3");
-		loadBGM("nftsb", "/application/assets/audio/nftsb.mp3");
-		
-		loadSound("grunt", "/application/assets/audio/Male Grunt.wav");
-		loadSound("pendrop", "/application/assets/audio/pendrop.mp3");
-		loadSound("milkshake", "/application/assets/audio/milkshake.mp3");
-		loadSound("blooblee", "/application/assets/audio/blooblee.wav");
-		loadSound("boodaboo", "/application/assets/audio/boodaboo.wav");
-		loadSound("doorclick", "/application/assets/audio/doorhclick.mp3");
-		loadSound("swords12", "/application/assets/audio/swords/swords12.mp3");
-		loadSound("failnegative", "/application/assets/audio/retrogameincorrect_fail_negative.mp3");
-		player = new MediaPlayer(musicmap.get(id));
-		mediaview = new MediaView(player);
-		
-		playMusic();
-		
+	public static SoundManager nftsb = new SoundManager("nftsb");
+	public static SoundManager bgins = new SoundManager("bgins");
+	public static SoundManager forest = new SoundManager("forest");
+	public static SoundManager windy = new SoundManager("windy");
+	public static SoundManager water = new SoundManager("awaterlap");
+	public static SoundManager horror = new SoundManager("horror");
+	public static SoundManager weird = new SoundManager("weird");
 
-		
-	}
+//	public SoundManager() {
+////		this.id = id;
+////		loadBGM("bgins", "/application/assets/audio/bgins.mp3");
+////		loadBGM("windy", "/application/assets/audio/windy.mp3");
+////		loadBGM("forest", "/application/assets/audio/forest.mp3");
+////		loadBGM("water", "/application/assets/audio/awaterlap.mp3");
+////		loadBGM("nftsb", "/application/assets/audio/nftsb.mp3");
+////		
+////		loadSound("grunt", "/application/assets/audio/Male Grunt.wav");
+////		loadSound("pendrop", "/application/assets/audio/pendrop.mp3");
+////		loadSound("milkshake", "/application/assets/audio/milkshake.mp3");
+////		loadSound("blooblee", "/application/assets/audio/blooblee.wav");
+////		loadSound("boodaboo", "/application/assets/audio/boodaboo.wav");
+////		loadSound("doorclick", "/application/assets/audio/doorhclick.mp3");
+////		loadSound("swords12", "/application/assets/audio/swords/swords12.mp3");
+////		loadSound("failnegative", "/application/assets/audio/retrogameincorrect_fail_negative.mp3");
+//		player = new MediaPlayer(musicmap.get(id));
+//		mediaview = new MediaView(player);
+//		
+//		playMusic();
+//		
+//
+//		
+//	}
 	public SoundManager(String id) {
 		this.id = id;
 		loadBGM("bgins", "/application/assets/audio/bgins.mp3");
@@ -51,8 +62,12 @@ public class SoundManager implements Runnable {
 		loadBGM("forest", "/application/assets/audio/forest.mp3");
 		loadBGM("water", "/application/assets/audio/awaterlap.mp3");
 		loadBGM("nftsb", "/application/assets/audio/nftsb.mp3");
+		loadBGM("horror", "/application/assets/audio/unseenhorrors.mp3");
+		loadBGM("weird", "/application/assets/audio/weirdman.mp3");
 		
 		loadSound("grunt", "/application/assets/audio/Male Grunt.wav");
+		loadSound("start.mp3", "/application/assets/audio/press start.mp3");
+		loadSound("start2.mp3", "/application/assets/audio/press start2.mp3");
 		loadSound("pendrop", "/application/assets/audio/pendrop.mp3");
 		loadSound("milkshake", "/application/assets/audio/milkshake.mp3");
 		loadSound("blooblee", "/application/assets/audio/blooblee.wav");
@@ -60,53 +75,69 @@ public class SoundManager implements Runnable {
 		loadSound("doorclick", "/application/assets/audio/doorhclick.mp3");
 		loadSound("swords12", "/application/assets/audio/swords/swords12.mp3");
 		loadSound("failnegative", "/application/assets/audio/retrogameincorrect_fail_negative.mp3");
-		player = new MediaPlayer(musicmap.get(id));
-		mediaview = new MediaView(player);
-		
-		playMusic();
-		
 
 		
+
 	}
-	
-	public void playMusic() {
-		
+	public void playSong() {
+		player = new MediaPlayer(musicmap.get(id));
+		mediaview = new MediaView(player);
+		mediaview.getMediaPlayer().setVolume(0.07);
+		mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
+		mediaview.getMediaPlayer().setAutoPlay(true);
+		playing = true;
+	}
+	public void stopSong() {
+//		player= new MediaPlayer(musicmap.get(id));
+//		mediaview = new MediaView(player);
 		Status status = mediaview.getMediaPlayer().getStatus();
-		 
-		if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
-			
-			mediaview.getMediaPlayer().setVolume(0.02);
-			mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
-			mediaview.getMediaPlayer().play();
-	        return;
-	         
+		
+		if (status == Status.PLAYING) {
+			mediaview.getMediaPlayer().stop();
+			playing = false;
 		} else {
-			player = new MediaPlayer(musicmap.get(id));
-			mediaview.setMediaPlayer(player);
-			mediaview.getMediaPlayer().setVolume(0.05);
-			mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
-			mediaview.getMediaPlayer().play();
+			return;
 		}
 	}
-	public void playMusic(String id) {
-		
-		Status status = mediaview.getMediaPlayer().getStatus();
-		 
-		if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
-			
-			mediaview.getMediaPlayer().setVolume(0.02);
-			mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
-			mediaview.getMediaPlayer().play();
-	        return;
-	         
-		} else {
-			player = new MediaPlayer(musicmap.get(id));
-			mediaview.setMediaPlayer(player);
-			mediaview.getMediaPlayer().setVolume(0.02);
-			mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
-			mediaview.getMediaPlayer().play();
-		}
-	}
+//	public void playMusic() {
+//		Status status = mediaview.getMediaPlayer().getStatus();
+//		 
+//		if (status == Status.PLAYING) {
+//			mediaview.getMediaPlayer().stop();
+//			MediaPlayer pp = new MediaPlayer(musicmap.get(id));
+//			mediaview.setMediaPlayer(pp);
+//			mediaview.getMediaPlayer().setVolume(0.02);
+//			mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
+//			mediaview.getMediaPlayer().play();
+//	        return;
+//	         
+//		} else {
+//			player = new MediaPlayer(musicmap.get(id));
+//			mediaview.setMediaPlayer(player);
+//			mediaview.getMediaPlayer().setVolume(0.05);
+//			mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
+//			mediaview.getMediaPlayer().play();
+//		}
+//	}
+//	public void playMusic(String id) {
+//		
+//		Status status = mediaview.getMediaPlayer().getStatus();
+//		 
+//		if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
+//			
+//			mediaview.getMediaPlayer().setVolume(0.02);
+//			mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
+//			mediaview.getMediaPlayer().play();
+//	        return;
+//	         
+//		} else {
+//			player = new MediaPlayer(musicmap.get(id));
+//			mediaview.setMediaPlayer(player);
+//			mediaview.getMediaPlayer().setVolume(0.02);
+//			mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
+//			mediaview.getMediaPlayer().play();
+//		}
+//	}
 	public static void playClip(String id) {
 		soundmap.get(id).play();
 	}
@@ -123,7 +154,44 @@ public class SoundManager implements Runnable {
 
 	@Override
 	public void run() {
-		// DOESNT NEED ANYTHING
+		loadBGM("bgins", "/application/assets/audio/bgins.mp3");
+		loadBGM("windy", "/application/assets/audio/windy.mp3");
+		loadBGM("forest", "/application/assets/audio/forest.mp3");
+		loadBGM("water", "/application/assets/audio/awaterlap.mp3");
+		loadBGM("nftsb", "/application/assets/audio/nftsb.mp3");
+		loadBGM("horror", "/application/assets/audio/unseenhorrors.mp3");
+		loadBGM("weird", "/application/assets/audio/weirdman.mp3");
+
+
+		
+		loadSound("grunt", "/application/assets/audio/Male Grunt.wav");
+		loadSound("start", "/application/assets/audio/press start.mp3");
+		loadSound("start2", "/application/assets/audio/press start2.mp3");
+		loadSound("pendrop", "/application/assets/audio/pendrop.mp3");
+		loadSound("milkshake", "/application/assets/audio/milkshake.mp3");
+		loadSound("blooblee", "/application/assets/audio/blooblee.wav");
+		loadSound("boodaboo", "/application/assets/audio/boodaboo.wav");
+		loadSound("doorclick", "/application/assets/audio/doorhclick.mp3");
+		loadSound("swords12", "/application/assets/audio/swords/swords12.mp3");
+		loadSound("failnegative", "/application/assets/audio/retrogameincorrect_fail_negative.mp3");
+//		player = new MediaPlayer(musicmap.get(id));
+//		mediaview.getMediaPlayer().setVolume(0.02);
+//		mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
+//		mediaview = new MediaView(player);
+		playSong();
+		
+//		mediaview.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+//
+//			@Override
+//			public void handle(ActionEvent arg0) {
+//				player = new MediaPlayer(musicmap.get(id));
+//				mediaview = new MediaView(player);
+//				playMusic();
+//			}
+//			
+//		});
+//		playMusic();
+		
 	}
 
 
@@ -157,6 +225,8 @@ public class SoundManager implements Runnable {
 	 */
 	public void setId(String id) {
 		this.id = id;
+		player = new MediaPlayer(musicmap.get(id));
+		
 	}
 	/**
 	 * @return the musicmap
@@ -207,5 +277,17 @@ public class SoundManager implements Runnable {
 	@SuppressWarnings("exports")
 	public void setMediaview(MediaView mediaview) {
 		this.mediaview = mediaview;
+	}
+	/**
+	 * @return the playing
+	 */
+	public boolean isPlaying() {
+		return playing;
+	}
+	/**
+	 * @param playing the playing to set
+	 */
+	public void setPlaying(boolean playing) {
+		this.playing = playing;
 	}
 }

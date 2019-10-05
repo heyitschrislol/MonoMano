@@ -4,11 +4,11 @@ import java.io.FileNotFoundException;
 
 import application.back.managers.InputManager;
 
-import application.front.sheets.StartSheet;
+import application.front.sheets.BeginSheet;
 import javafx.scene.Scene;
 
 public class StartController extends Controller {
-	public StartSheet sheet;
+	public BeginSheet sheet;
 	public Scene scene;
 	public final String music = "bgins";
 	public final double volume = .07;
@@ -20,7 +20,7 @@ public class StartController extends Controller {
 //		SoundManager.windy.playMusic(volume);
 //		MusicManager.playMusic("windy", 0.05);
 
-		sheet = new StartSheet(exitX, exitY);
+		sheet = new BeginSheet(exitX, exitY);
 
 		scene = new Scene(sheet);
 		sheet.enter();
@@ -36,13 +36,13 @@ public class StartController extends Controller {
 	/**
 	 * @return the sheet
 	 */
-	public StartSheet getSheet() {
+	public BeginSheet getSheet() {
 		return sheet;
 	}
 	/**
 	 * @param sheet the sheet to set
 	 */
-	public void setSheet(StartSheet sheet) {
+	public void setSheet(BeginSheet sheet) {
 		this.sheet = sheet;
 	}
 	/**
