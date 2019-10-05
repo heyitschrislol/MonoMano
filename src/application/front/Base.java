@@ -14,8 +14,8 @@ import application.front.controllers.StartController;
 import application.front.objects.GameObject;
 import application.front.objects.PlayerObject;
 import application.front.sheets.Sheet;
+import application.front.sheets.IntroSheet;
 import application.front.sheets.StartSheet;
-import application.front.sheets.BeginSheet;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,82 +60,25 @@ public class Base extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-//			SoundManager.soundmanager.setId("forest");
-//			loadBGM("bgins", "/application/assets/audio/bgins.mp3");
-//			loadBGM("windy", "/application/assets/audio/windy.mp3");
-//			loadBGM("forest", "/application/assets/audio/forest.mp3");
-//			loadBGM("water", "/application/assets/audio/awaterlap.mp3");
-//			loadBGM("nftsb", "/application/assets/audio/nftsb.mp3");
-//			
-//			loadSound("grunt", "/application/assets/audio/Male Grunt.wav");
-//			loadSound("pendrop", "/application/assets/audio/pendrop.mp3");
-//			loadSound("milkshake", "/application/assets/audio/milkshake.mp3");
-//			loadSound("blooblee", "/application/assets/audio/blooblee.wav");
-//			loadSound("boodaboo", "/application/assets/audio/boodaboo.wav");
-//			loadSound("doorclick", "/application/assets/audio/doorhclick.mp3");
-//			loadSound("swords12", "/application/assets/audio/swords/swords12.mp3");
-//			loadSound("failnegative", "/application/assets/audio/retrogameincorrect_fail_negative.mp3");
-//			mp = new MediaPlayer(musicmap.get(id));
-			StartSheet start = new StartSheet();
+
+			IntroSheet start = new IntroSheet();
 			
 			mediaview = new MediaView(mp);
 			Scene startscene = new Scene(start);
 			
-			Base.primaryStage = primaryStage;
-			Base.primaryStage.setScene(startscene);
-	        Base.primaryStage.setTitle("Mono Mano");
-	        
-			sm = new SoundManager("nftsb");
-			
 			startscene.setOnKeyPressed(e -> {
 				try {
-//					SoundManager.bgins.playClip("start");
-
 					startMenu(e);
 				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
 			});
-			
-
-
-			
-			
-//			Base.primaryStage.sceneProperty().addListener(e -> {
-//				
-//				mediaview.getMediaPlayer().setOnReady(new Runnable() {
-//					@Override
-//					public void run() {
-//						Status status = mediaview.getMediaPlayer().getStatus();
-//						 if (status == Status.PLAYING) {
-//							 MediaPlayer pp = new MediaPlayer(musicmap.get(id));
-//							 mediaview.getMediaPlayer().stop();
-//							 mediaview.setMediaPlayer(pp);
-//							 mediaview.getMediaPlayer().setVolume(0.02);
-//							 mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
-//							 mediaview.getMediaPlayer().play();
-//					         return;
-////							 if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
-//
-//						 } else {
-//							 mediaview.getMediaPlayer().setVolume(0.02);
-//							 mediaview.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
-//							 mediaview.getMediaPlayer().play();						 }						
-//					}
-//					
-//				});
-//				thread = new Thread() {
-//					@Override
-//					public void run() {
-//						playMusic();
-//					}
-//				};
-//				thread.start();
-//			});
-			
-			
+			Base.primaryStage = primaryStage;
+			Base.primaryStage.setScene(startscene);
+	        Base.primaryStage.setTitle("Mono Mano");
+	        
+			sm = new SoundManager("nftsb");		
 			
 			Base.primaryStage.setResizable(false);
 			Base.primaryStage.show();
@@ -143,11 +86,6 @@ public class Base extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public void playMusic() {
-		 
-
 	}
 	public void startMenu(KeyEvent k) throws FileNotFoundException {
 		String key = k.getCode().toString();
@@ -157,14 +95,6 @@ public class Base extends Application {
 			
 			Handler.setObjectlist(starter.sheet.getObjectlist());
 		}
-		
-		
-	}
-	
-	
-	public void loadBGM(String id, String url) {
-		Media track = new Media(getClass().getResource(url).toExternalForm());
-		musicmap.put(id, track);
 	}
 	
 	public static PlayerObject getPlayer() {
