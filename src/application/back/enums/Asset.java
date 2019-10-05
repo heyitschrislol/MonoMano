@@ -42,7 +42,8 @@ public enum Asset {
 	SMTREES("SMTREES", "/application/assets/sprites/treeSMsheet.png", 173, 88, 51, 78, 3, 1, 5, 5),
 	TREETRUNKS("TREETRUNKS", "/application/assets/sprites/treeTrunks.png", 53, 22, 19, 22, 2, 1, 5, 0),
 	PLAYER("PLAYER", "/application/assets/sprites/playersheet.png", 1109, 64, 64, 64, 16, 1, 5, 0),
-	NUDEMAN("NUDEMAN", "/application/assets/sprites/nudemansheet.png", 630, 64, 57, 64, 9, 1, 13, 0);
+	NUDEMAN("NUDEMAN", "/application/assets/sprites/nudemansheet.png", 630, 64, 57, 64, 9, 1, 13, 0),
+	HURTMAN("HURTMAN", "/application/assets/sprites/hurtmansheet.png", 630, 140, 70, 70, 9, 2, 0, 0);
 //	NPCS("NPCS", "/application/assets/sprites/walkcyclevarious.png", 768, 474, 12, 1, 0, 0),
 //	PLAYER_0("PLAYER_0", "/application/assets/sprites/player_0.png", 64, 64, 64, 64, 1, 1, 0, 0),
 //	PLAYER_1("PLAYER_1", "/application/assets/sprites/player_1.png", 64, 64, 64, 64, 1, 1, 0, 0), 

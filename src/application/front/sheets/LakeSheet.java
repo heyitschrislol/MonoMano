@@ -24,6 +24,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class LakeSheet extends Sheet {
 	public final long startNanoTime = System.nanoTime();
@@ -57,40 +58,22 @@ public class LakeSheet extends Sheet {
         
 //        NPCObject nudeman = new NPCObject(369, 169, 55, 64, ID.NPC, Tag.CHARACTER);
         EnvironmentObject lake = new EnvironmentObject(0, 215, 768, 297, ID.COLLIDABLE, Tag.WATER);
-//        EnvironmentObject crateLG = new EnvironmentObject(200, 175, 42, 47, ID.COLLIDABLE, Tag.CRATE);
-//        EnvironmentObject indoor = new EnvironmentObject(335, 500, 98, 16, ID.COLLIDABLE, Tag.DOOR);
-//        EnvironmentObject backwall = new EnvironmentObject(0, 0, 768, 64, ID.COLLIDABLE, Tag.BORDER);
-//        EnvironmentObject leftwall = new EnvironmentObject(0, 64, 16, 448, ID.COLLIDABLE, Tag.BORDER);
-//        EnvironmentObject rightwall = new EnvironmentObject(752, 64, 16, 448, ID.COLLIDABLE, Tag.DOOR);
+        NPCObject hurtman = new NPCObject(230, 160, 70, 70, ID.NPC, Tag.CHARACTER);
+//        m.setImage(Asset.spriteFrames("HURTMAN")[8]);
+//        m.setRotate(-90);
+        
+        hurtman.setImage(Asset.spriteFrames("HURTMAN")[8]);
         lake.setFrames(sceneFrames);
-//        nudeman.setName("Fully-Erect Nude Man");
-//        nudeman.setImage(nudemanframes[3]);
-//        nudeman.setSound("grunt");
-//        nudeman.setVolume(0.07);
-//        nudeman.setFrames(nudeframes);
-//        indoor.setSound("doorclick");
-//        crateSM.setImage(Asset.assetImage("SMCRATE"));
-//		crateSM.setSound("boodaboo");
-//        crateLG.setImage(Asset.assetImage("LGCRATE"));
-//		crateLG.setSound("boodaboo");
-//        indoor.setImage(Asset.assetImage("INDOOR"));
-//        backwall.setImage(Asset.assetImage("BACKWALL"));
-//        leftwall.setImage(Asset.assetImage("LEFTWALL"));
-//        rightwall.setImage(Asset.assetImage("RIGHTWALL"));
+
         player.setFrames(Asset.returnDown());
 		player.setImage(Asset.findIdle("DOWN"));
-//        nudeman.setObjecttext("My milkshake brings all the boys to th- whaa agh!");
+        hurtman.setName("Injured Man");
+        hurtman.setObjecttext("......");
 //        crateSM.setObjecttext("This crate is full of empty peanut butter jars...");
 //        crateLG.setObjecttext("It looks like a small animal was kept in here...");
 		objectlist.add(lake);
+		objectlist.add(hurtman);
         objectlist.add(player);
-//        objectlist.add(nudeman);
-//        objectlist.add(crateSM);
-//        objectlist.add(crateLG);
-//        objectlist.add(indoor);
-//        objectlist.add(backwall);
-//        objectlist.add(leftwall);
-//        objectlist.add(rightwall);
         
         Handler.setObjectlist(objectlist);
         
@@ -139,20 +122,6 @@ public class LakeSheet extends Sheet {
 					lake.animate(elapsedTime, .9);
 
 				}
-//				if (player.intersects(indoor) && player.downkey) {
-//					try {
-//						if (!indoor.getSound().isBlank()) {
-//							SoundManager.playClip(indoor.getSound());
-//						}
-//						StartController controller = new StartController(607, 445);
-//						Handler.changeScene(controller);
-//						lake.animate(elapsedTime, .9);
-//						this.stop();
-//						gc.clearRect(0, 0, 768, 512);
-//					} catch (FileNotFoundException e) {
-//						e.printStackTrace();
-//					}
-//				}
 				for (Boundary b : createExitList()) {
 					if (player.intersects(b) && b.getLabel().equals("north") && player.upkey) {
 						try {
@@ -171,18 +140,6 @@ public class LakeSheet extends Sheet {
 							InputManager.intersecting = true;
 							InputManager.actionobject = bound.getObj();
 						} 
-//							else if (bound.getTag() == Tag.BORDER) {
-//							if (player.upkey) {
-//								StartController controller;
-//								try {
-//									controller = new StartController((int) player.getX(), 460);
-//									Handler.changeScene(controller);
-//
-//								} catch (FileNotFoundException e) {
-//									e.printStackTrace();
-//								}
-//							}
-//						}
 						lake.animate(elapsedTime, .9);
 						Handler.tick();
 						render(gc);
