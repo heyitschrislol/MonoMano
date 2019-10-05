@@ -24,7 +24,7 @@ public class EnvironmentObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
-
+		this.volume = .3;
 	}
 
 	public EnvironmentObject(double x, double y, double width, double height) {
@@ -34,6 +34,7 @@ public class EnvironmentObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
+		this.volume = .3;
 
 	}
 	public EnvironmentObject(double x, double y, double width, double height, ID id) {
@@ -43,6 +44,7 @@ public class EnvironmentObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
+		this.volume = .3;
 
 	}
 	public EnvironmentObject(double x, double y, double width, double height, ID id, Tag tag) {
@@ -52,6 +54,7 @@ public class EnvironmentObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
+		this.volume = .3;
 
 	}
 	public EnvironmentObject(double x, double y, double width, double height, Image image, ID id, Tag tag) {
@@ -61,6 +64,7 @@ public class EnvironmentObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
+		this.volume = .3;
 
 	}
 

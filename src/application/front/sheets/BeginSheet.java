@@ -12,7 +12,10 @@ import application.back.managers.Handler;
 import application.back.managers.InputManager;
 import application.back.managers.SoundManager;
 import application.front.Base;
+import application.front.controllers.Controller;
 import application.front.controllers.HouseController;
+import application.front.controllers.LakeController;
+import application.front.controllers.StartController;
 import application.front.objects.Boundary;
 import application.front.objects.EnvironmentObject;
 import application.front.objects.GameObject;
@@ -116,7 +119,8 @@ public class BeginSheet extends Sheet {
 				go.setObjecttext("It's a tree, idiot");
 			}
 		}
-	
+		
+		
 		Handler.setObjectlist(objectlist);
 		
 		new AnimationTimer() {
@@ -165,9 +169,19 @@ public class BeginSheet extends Sheet {
 						e.printStackTrace();
 					}
 				}
-//				if (player.intersects(bushlg)) {
-//					bushlg.animate(elapsedTime, 0.1, player.getX(), player.getY());
-//				}
+				for (Boundary b : createExitList()) {
+					if (player.intersects(b) && b.getLabel().equals("south") && player.downkey) {
+						try {
+							LakeController controller = new LakeController((int) player.getX(), 60);
+							Handler.changeScene(controller);
+							this.stop();
+							gc.clearRect(0, 0, 768, 512);
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				
 				for (Boundary bound : objectBoundaries()) {
 					if (bound.intersects(player.getNextX(), player.getNextY() + 15, 64, 34)) {
 						if (bound.getTag() != Tag.BORDER) {
@@ -178,7 +192,7 @@ public class BeginSheet extends Sheet {
 						Handler.tick();
 						render(gc);
 						return;
-					}
+					} 
 					InputManager.intersecting = false;
 				}
 				player.setX(player.getNextX());
@@ -227,11 +241,19 @@ public class BeginSheet extends Sheet {
 	public ArrayList<Boundary> createExitList() {
 		ArrayList<Boundary> list = new ArrayList<>();
 		Boundary door = new Boundary(620, 390, 30, 50, "door");
-		Boundary northexit = new Boundary(0, 0, 768, 3, "north");
-		Boundary southexit = new Boundary(0, 509, 768, 512, "south");
-		Boundary eastexit = new Boundary(765, 0, 3, 512, "east");
-		Boundary westexit = new Boundary(0, 0, 3, 512, "west");
-		list.add(door);
+		Boundary minx = new Boundary(Base.LOCX, Base.LOCY, 768, 0, "north");
+		minx.setTag(Tag.BORDER);
+		Boundary miny = new Boundary(Base.LOCX, Base.LOCY, 0, 512, "west");
+		miny.setTag(Tag.BORDER);
+		Boundary maxx = new Boundary(Base.LOCX, Base.LOCY + 512, 768, 0, "south");
+		maxx.setTag(Tag.BORDER);
+		Boundary maxy = new Boundary(Base.LOCX + 768, Base.LOCY, 0, 512, "east");
+		maxy.setTag(Tag.BORDER);
+//		list.add(door);
+		list.add(minx);
+		list.add(miny);
+		list.add(maxx);
+		list.add(maxy);
 		return list;
 	}
 	@Override

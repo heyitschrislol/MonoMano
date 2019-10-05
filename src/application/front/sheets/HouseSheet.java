@@ -58,6 +58,7 @@ public class HouseSheet extends Sheet {
         nudeman.setName("Fully-Erect Nude Man");
         nudeman.setImage(nudemanframes[3]);
         nudeman.setSound("grunt");
+        nudeman.setVolume(0.07);
         nudeman.setFrames(nudeframes);
         indoor.setSound("doorclick");
         crateSM.setImage(Asset.assetImage("SMCRATE"));

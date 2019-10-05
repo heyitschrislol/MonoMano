@@ -17,6 +17,7 @@ public abstract class GameObject {
 	protected Animator animator;
 	protected String name;
 	protected String sound;
+	protected double volume;
 	protected ID id;
 	public Location location;
 	protected Tag tag;
@@ -40,7 +41,7 @@ public abstract class GameObject {
 		this.y = y;
 		this.objecttext = "";
 		this.sound = "";
-
+		
 	}
 	public GameObject(double x, double y, ID id) {
 		this.x = x;
@@ -165,6 +166,18 @@ public abstract class GameObject {
 	 */
 	public void setSound(String sound) {
 		this.sound = sound;
+	}
+	/**
+	 * @return the volume
+	 */
+	public double getVolume() {
+		return volume;
+	}
+	/**
+	 * @param volume the volume to set
+	 */
+	public void setVolume(double volume) {
+		this.volume = volume;
 	}
 	/**
 	 * @return the x

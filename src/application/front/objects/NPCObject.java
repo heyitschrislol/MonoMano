@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 
 public class NPCObject extends GameObject {
 	private String name;
+//	private double volume = .07;
 	
 	public NPCObject(double x, double y) {
 		super(x, y);
@@ -16,6 +17,7 @@ public class NPCObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
+		this.volume = .07;
 
 	}
 
@@ -26,6 +28,7 @@ public class NPCObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
+		this.volume = .07;
 
 	}
 
@@ -36,6 +39,7 @@ public class NPCObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
+		this.volume = .07;
 
 	}
 
@@ -46,6 +50,7 @@ public class NPCObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
+		this.volume = .07;
 
 	}
 
@@ -56,6 +61,7 @@ public class NPCObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
+		this.volume = .07;
 
 	}
 
@@ -66,6 +72,7 @@ public class NPCObject extends GameObject {
 		this.objecttext = "";
 		this.name = "";
 		this.sound = "";
+		this.volume = .07;
 
 	}
 

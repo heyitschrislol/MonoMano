@@ -27,7 +27,7 @@ public class SoundManager implements Runnable {
 	public static SoundManager bgins = new SoundManager("bgins");
 	public static SoundManager forest = new SoundManager("forest");
 	public static SoundManager windy = new SoundManager("windy");
-	public static SoundManager water = new SoundManager("awaterlap");
+	public static SoundManager water = new SoundManager("water");
 	public static SoundManager horror = new SoundManager("horror");
 	public static SoundManager weird = new SoundManager("weird");
 
@@ -139,6 +139,10 @@ public class SoundManager implements Runnable {
 //		}
 //	}
 	public static void playClip(String id) {
+		soundmap.get(id).play();
+	}
+	public static void playClip(String id, double volume) {
+		soundmap.get(id).setVolume(volume);
 		soundmap.get(id).play();
 	}
 	

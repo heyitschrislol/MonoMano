@@ -63,10 +63,9 @@ public class InputManager {
 					}
 					if (!actionobject.getSound().isBlank()) {
 						if (actionobject.getSound().equals("boodaboo")) {
-							double volume = .3;
-							SoundManager.playClip(actionobject.getSound());
+							SoundManager.playClip(actionobject.getSound(), actionobject.getVolume());
 						} else {
-							SoundManager.playClip(actionobject.getSound());
+							SoundManager.playClip(actionobject.getSound(), actionobject.getVolume());
 
 						}
 					}
