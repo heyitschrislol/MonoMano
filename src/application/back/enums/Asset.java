@@ -42,6 +42,8 @@ public enum Asset {
 	SMTREES("SMTREES", "/application/assets/sprites/treeSMsheet.png", 173, 88, 51, 78, 3, 1, 5, 5),
 	TREETRUNKS("TREETRUNKS", "/application/assets/sprites/treeTrunks.png", 53, 22, 19, 22, 2, 1, 5, 0),
 	PLAYER("PLAYER", "/application/assets/sprites/playersheet.png", 1109, 64, 64, 64, 16, 1, 5, 0),
+	CHRIS("CHRIS", "/application/assets/sprites/chrissheet.png", 512, 182, 64, 55, 8, 3, 4, 10),
+	RYAN("RYAN", "/application/assets/sprites/ryansheet.png", 512, 180, 64, 55, 8, 3, 4, 10),
 	NUDEMAN("NUDEMAN", "/application/assets/sprites/nudemansheet.png", 630, 64, 57, 64, 9, 1, 13, 0),
 	HURTMAN("HURTMAN", "/application/assets/sprites/hurtmansheet.png", 630, 140, 70, 70, 9, 2, 0, 0);
 //	NPCS("NPCS", "/application/assets/sprites/walkcyclevarious.png", 768, 474, 12, 1, 0, 0),
@@ -63,6 +65,9 @@ public enum Asset {
 //	PLAYER_15("PLAYER_15", "/application/assets/sprites/player_15.png", 64, 64, 64, 64, 1, 1, 0, 0);
 
 	public static final Image[] playersprites = spriteFrames("PLAYER");
+	public static final Image[] chrissprites1 = characterFrames("CHRIS", 0);
+	public static final Image[] chrissprites2 = characterFrames("CHRIS", 1);
+	public static final Image[] chrissprites3 = characterFrames("CHRIS", 2);
 	private String name;
 	private String url;
 	private int sheetWidth;
@@ -168,89 +173,63 @@ public enum Asset {
 		return null;
 		
 	}
-//	public static Image[] spriteFrames(String name, int height, int row) {
-//		Asset asset = Asset.findAsset(name);
-//		int count = asset.getCount();
-//		Image[] sprites = new Image[count];
-//		Image wholeimage = new Image(asset.url);
-//		
-//		int sheetwidth = asset.sheetWidth;
-//		int offsetx = asset.offsetX;
-//		int offsety = asset.offsetY;
-//		
-//		int slicewidth = (sheetwidth - (offsetx * count)) / count;
-//		int sliceheight = height;
-//		int x = 0 + offsetx;
-//		int y = offsety + (offsety * row) + (height * row);
-//		
-//		PixelReader reader = wholeimage.getPixelReader();
-//		WritableImage wimage;
-//		for (int i = 0; i < count; i++) {
-//			wimage = new WritableImage(reader, x, y, slicewidth, sliceheight);
-//			sprites[i] = wimage;
-//			x += (slicewidth + offsetx);
-//		}
-//		
-//		return sprites;
-//	}
-//	public static Image[] spriteFrames(String name, int rowstart, int count, int slicewidth, int sliceheight) {
-//		Asset asset = Asset.findAsset(name);
-//		Image[] sprites = new Image[count];
-//		String url = asset.getUrl();
-//		Image wholeimage = new Image(url);
-//		
-//		int offsetx = asset.offsetX;
-//		int offsety = asset.offsetY;		
-//		
-//		int x = 0 + offsetx;
-//		int y = offsety + rowstart;
-//		
-//		PixelReader reader = wholeimage.getPixelReader();
-//		WritableImage wimage;
-//		for (int i = 0; i < count; i++) {
-//			wimage = new WritableImage(reader, x, y, slicewidth, sliceheight);
-//			sprites[i] = wimage;
-//			x += (slicewidth + offsetx);
-//		}
-//		
-//		return sprites;
-//	}
+	public static Image[] characterFrames(String name, int rowindex) {
+		Asset asset = Asset.findAsset(name);
+		if (asset != null) {
+			int count = Asset.findAsset(name).count;
+			Image[] sprites = new Image[count];
+			Image wholeimage = new Image(asset.url);
+			
+			int offsetx = asset.offsetX;
+			int offsety = asset.offsetY;
+			
+			int slicewidth = asset.sliceX;
+			int sliceheight = asset.sliceY;
+			int x = 0 + offsetx;
+			int y = offsety + 0 + ((sliceheight + offsety) * rowindex) ;
+//			if (rowindex == 0) {
+//				y = 0 + offsety;
+//			} else {
+//				y = 0 + (rowindex * (sliceheight + offsety));
+//			}
+			
+			PixelReader reader = wholeimage.getPixelReader();
+			WritableImage wimage;
+			for (int i = 0; i < count; i++) {
+				wimage = new WritableImage(reader, x, y, slicewidth, sliceheight);
+				sprites[i] = wimage;
+				x += slicewidth;
+			}
+			
+			return sprites;
+		}
+		return null;
+		
+	}
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	/*
 	 * OLD METHODS THAT NEED TO BE REPLACED
 	 */
 	public static Image[] returnDown() {
 //		playersprites = spriteFrames("PLAYER");
-		Image[] movedown = new Image[3];
-		movedown[0] = playersprites[1];
-		movedown[1] = playersprites[0];
-		movedown[2] = playersprites[2];
+		Image[] movedown = new Image[4];
+		movedown[0] = chrissprites3[4];
+		movedown[1] = chrissprites3[5];
+		movedown[2] = chrissprites3[6];
+		movedown[3] = chrissprites3[7];
 //
 		return movedown;
 	}
-
 	public static Image[] returnUp() {
 //		Image[] playersprites = spriteFrames("PLAYER");
-		Image[] moveup = new Image[3];
-		moveup[0] = playersprites[4];
-		moveup[1] = playersprites[3];
-		moveup[2] = playersprites[5];
+		Image[] moveup = new Image[4];
+		moveup[0] = chrissprites1[0];
+		moveup[1] = chrissprites1[1];
+		moveup[2] = chrissprites1[2];
+		moveup[3] = chrissprites1[3];
 
 		return moveup;
 	}
@@ -258,10 +237,10 @@ public enum Asset {
 	public static Image[] returnLeft() {
 //		Image[] playersprites = spriteFrames("PLAYER");
 		Image[] moveleft = new Image[4];
-		moveleft[0] = playersprites[7];
-		moveleft[1] = playersprites[8];
-		moveleft[2] = playersprites[9];
-		moveleft[3] = playersprites[10];
+		moveleft[0] = chrissprites2[0];
+		moveleft[1] = chrissprites2[1];
+		moveleft[2] = chrissprites2[2];
+		moveleft[3] = chrissprites2[3];
 
 		return moveleft;
 	}
@@ -269,20 +248,71 @@ public enum Asset {
 	public static Image[] returnRight() {
 //		Image[] playersprites = spriteFrames("PLAYER");
 		Image[] moveright = new Image[4];
-		moveright[0] = playersprites[12];
-		moveright[1] = playersprites[13];
-		moveright[2] = playersprites[14];
-		moveright[3] = playersprites[15];
+		moveright[0] = chrissprites2[4];
+		moveright[1] = chrissprites2[5];
+		moveright[2] = chrissprites2[6];
+		moveright[3] = chrissprites2[7];
 
 		return moveright;
 	}
+//	public static Image[] returnDown() {
+////		playersprites = spriteFrames("PLAYER");
+//		Image[] movedown = new Image[4];
+//		movedown[0] = playersprites[1];
+//		movedown[1] = playersprites[0];
+//		movedown[2] = playersprites[2];
+////
+//		return movedown;
+//	}
 
+//	public static Image[] returnUp() {
+////		Image[] playersprites = spriteFrames("PLAYER");
+//		Image[] moveup = new Image[3];
+//		moveup[0] = playersprites[4];
+//		moveup[1] = playersprites[3];
+//		moveup[2] = playersprites[5];
+//
+//		return moveup;
+//	}
+//
+//	public static Image[] returnLeft() {
+////		Image[] playersprites = spriteFrames("PLAYER");
+//		Image[] moveleft = new Image[4];
+//		moveleft[0] = playersprites[7];
+//		moveleft[1] = playersprites[8];
+//		moveleft[2] = playersprites[9];
+//		moveleft[3] = playersprites[10];
+//
+//		return moveleft;
+//	}
+//
+//	public static Image[] returnRight() {
+////		Image[] playersprites = spriteFrames("PLAYER");
+//		Image[] moveright = new Image[4];
+//		moveright[0] = playersprites[12];
+//		moveright[1] = playersprites[13];
+//		moveright[2] = playersprites[14];
+//		moveright[3] = playersprites[15];
+//
+//		return moveright;
+//	}
+	
+//
+//	public static Image[] returnIdles() {
+//		Image[] idles = new Image[4];
+//		idles[0] = playersprites[0];
+//		idles[1] = playersprites[3];
+//		idles[2] = playersprites[6];
+//		idles[3] = playersprites[11];
+//
+//		return idles;
+//	}
 	public static Image[] returnIdles() {
 		Image[] idles = new Image[4];
-		idles[0] = playersprites[0];
-		idles[1] = playersprites[3];
-		idles[2] = playersprites[6];
-		idles[3] = playersprites[11];
+		idles[0] = chrissprites3[3];
+		idles[1] = chrissprites1[6];
+		idles[2] = chrissprites1[7];
+		idles[3] = chrissprites1[4];
 
 		return idles;
 	}
