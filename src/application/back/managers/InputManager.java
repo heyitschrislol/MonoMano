@@ -93,21 +93,25 @@ public class InputManager {
 		if (key.contains("DOWN")) {
 			Handler.findPlayer().downkey = false;
 			Handler.findPlayer().setVelY(0);
+			Handler.findPlayer().setImage(Asset.returnIdles()[0]);
 
 		}
 		if (key.contains("UP")) {
 			Handler.findPlayer().upkey = false;
 			Handler.findPlayer().setVelY(0);
+			Handler.findPlayer().setImage(Asset.returnIdles()[1]);
 
 		}
 		if (key.contains("LEFT")) {
 			Handler.findPlayer().leftkey = false;
 			Handler.findPlayer().setVelX(0);
+			Handler.findPlayer().setImage(Asset.returnIdles()[2]);
 
 		}
 		if (key.contains("RIGHT")) {
 			Handler.findPlayer().rightkey = false;
 			Handler.findPlayer().setVelX(0);
+			Handler.findPlayer().setImage(Asset.returnIdles()[3]);
 
 		}
 	}

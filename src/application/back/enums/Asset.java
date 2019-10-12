@@ -43,7 +43,8 @@ public enum Asset {
 	TREETRUNKS("TREETRUNKS", "/application/assets/sprites/treeTrunks.png", 53, 22, 19, 22, 2, 1, 5, 0),
 	PLAYER("PLAYER", "/application/assets/sprites/playersheet.png", 1109, 64, 64, 64, 16, 1, 5, 0),
 //	CHRIS("CHRIS", "/application/assets/sprites/chrissheet.png", 1643, 70, 74, 70, 22, 1, 0, 0),
-	CHRIS("CHRIS", "/application/assets/sprites/chrissheet.png", 720, 100, 60, 100, 12, 1, 0, 0),
+//	CHRIS("CHRIS", "/application/assets/sprites/chrissheet.png", 720, 100, 60, 100, 12, 1, 0, 0),
+	CHRIS("CHRIS", "/application/assets/sprites/adultchrissheet.png", 660, 95, 55, 95, 12, 1, 0, 0),
 	JORDAN("JORDAN", "/application/assets/sprites/jordansheet.png", 720, 100, 60, 100, 12, 1, 0, 0),
 	RYAN("RYAN", "/application/assets/sprites/ryansheet.png", 512, 180, 64, 55, 8, 3, 4, 10),
 	NUDEMAN("NUDEMAN", "/application/assets/sprites/nudemansheet.png", 630, 64, 57, 64, 9, 1, 13, 0),
@@ -353,10 +354,10 @@ public enum Asset {
 //	}
 	public static Image[] returnIdles() {
 		Image[] idles = new Image[4];
-		idles[0] = playersprites[0];
-		idles[1] = playersprites[3];
-		idles[2] = playersprites[6];
-		idles[3] = playersprites[9];
+		idles[0] = chrissprites[0];
+		idles[1] = chrissprites[4];
+		idles[2] = chrissprites[6];
+		idles[3] = chrissprites[9];
 
 		return idles;
 	}

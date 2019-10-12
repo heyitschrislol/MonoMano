@@ -140,22 +140,22 @@ public class StartSheet extends Sheet {
 				player.setNextY(player.getY());
 				if (player.downkey) {
 					player.setFrames(Asset.returnDown());
-					player.animate(elapsedTime, 0.100);
+					player.animate(elapsedTime, 0.250);
 					player.setNextY(player.getNextY() + 5);
 				}
 				if (player.upkey) {
 					player.setFrames(Asset.returnUp());
-					player.animate(elapsedTime, 0.100);
+					player.animate(elapsedTime, 0.250);
 					player.setNextY(player.getNextY() - 5);
 				}
 				if (player.leftkey) {
 					player.setFrames(Asset.returnLeft());
-					player.animate(elapsedTime, 0.100);
+					player.animate(elapsedTime, 0.250);
 					player.setNextX(player.getNextX() - 5);
 				}
 				if (player.rightkey) {
 					player.setFrames(Asset.returnRight());
-					player.animate(elapsedTime, 0.100);
+					player.animate(elapsedTime, 0.250);
 					player.setNextX(player.getNextX() + 5);
 				}
 				if (player.intersects(door) && player.upkey) {
