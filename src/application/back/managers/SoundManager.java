@@ -1,6 +1,7 @@
 package application.back.managers;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
@@ -66,6 +67,13 @@ public class SoundManager implements Runnable {
 		loadBGM("weird", "/application/assets/audio/weirdman.mp3");
 		
 		loadSound("grunt", "/application/assets/audio/Male Grunt.wav");
+		loadSound("doodoodoo", "/application/assets/audio/doodoodoo.mp3");
+		loadSound("bizwhacker", "/application/assets/audio/suchabizwhacker.mp3");
+		loadSound("brother1", "/application/assets/audio/hellobrother.mp3");
+		loadSound("brother2", "/application/assets/audio/hellobrother2.mp3");
+		loadSound("hmm1", "/application/assets/audio/jordan-hmm.mp3");
+		loadSound("hmm2", "/application/assets/audio/jordan-hmmm2.mp3");
+		loadSound("idk", "/application/assets/audio/jordan-idk.mp3");
 		loadSound("start.mp3", "/application/assets/audio/press start.mp3");
 		loadSound("start2.mp3", "/application/assets/audio/press start2.mp3");
 		loadSound("pendrop", "/application/assets/audio/pendrop.mp3");
@@ -138,12 +146,21 @@ public class SoundManager implements Runnable {
 //			mediaview.getMediaPlayer().play();
 //		}
 //	}
+//	public ObservableMap<String, AudioClip> voiceMap(String[] names) {
+//		ObservableMap<String, AudioClip> voices = 
+//	}
 	public static void playClip(String id) {
 		soundmap.get(id).play();
 	}
 	public static void playClip(String id, double volume) {
 		soundmap.get(id).setVolume(volume);
 		soundmap.get(id).play();
+	}
+	public static void playRandomClip(String[] ids) {
+		int x;
+		Random rando = new Random();
+		x = rando.nextInt(ids.length);
+		soundmap.get(ids[x]).play();
 	}
 	
 	public void loadBGM(String id, String url) {
@@ -167,7 +184,14 @@ public class SoundManager implements Runnable {
 		loadBGM("weird", "/application/assets/audio/weirdman.mp3");
 
 
-		
+		loadSound("wellhello", "/application/assets/audio/wellhello.mp3");
+		loadSound("doodoodoo", "/application/assets/audio/doodoodoo.mp3");
+		loadSound("bizwhacker", "/application/assets/audio/suchabizwhacker.mp3");
+		loadSound("brother1", "/application/assets/audio/hellobrother.mp3");
+		loadSound("brother2", "/application/assets/audio/hellobrother2.mp3");
+		loadSound("hmm1", "/application/assets/audio/jordan-hmm.mp3");
+		loadSound("hmm2", "/application/assets/audio/jordan-hmmm2.mp3");
+		loadSound("idk", "/application/assets/audio/jordan-idk.mp3");
 		loadSound("grunt", "/application/assets/audio/Male Grunt.wav");
 		loadSound("start", "/application/assets/audio/press start.mp3");
 		loadSound("start2", "/application/assets/audio/press start2.mp3");

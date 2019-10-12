@@ -42,6 +42,10 @@ public class HouseSheet extends Sheet {
 
         sceneImage = Asset.assetImage("STONEFLOOR");
         
+        NPCObject jordan = new NPCObject(100, 269, 60, 100, ID.NPC, Tag.CHARACTER);
+        Image[] jordanframes = Asset.returnDown("JORDAN");
+        
+        
         Image[] nudemanframes = Asset.spriteFrames("NUDEMAN");
         Image[] nudeframes = new Image[2];
         nudeframes[0] = nudemanframes[1];
@@ -55,9 +59,17 @@ public class HouseSheet extends Sheet {
         EnvironmentObject leftwall = new EnvironmentObject(0, 64, 16, 448, ID.COLLIDABLE, Tag.BORDER);
         EnvironmentObject rightwall = new EnvironmentObject(752, 64, 16, 448, ID.COLLIDABLE, Tag.DOOR);
         
+        jordan.setName("Jordan");
+        jordan.setFrames(jordanframes);
+        jordan.setImage(jordanframes[0]);
+//        jordan.setSound("wellhello");
+        jordan.setVoicemap("idk", "brother2", "bizwhacker");
+        jordan.setVolume(0.7);
+        jordan.setObjecttext("This guy is the only lead we have at the moment... ");
         nudeman.setName("Fully-Erect Nude Man");
         nudeman.setImage(nudemanframes[3]);
-        nudeman.setSound("grunt");
+        nudeman.setVoicemap(new String[] {"grunt", "doodoodoo", "wellhello"});
+//        nudeman.setSound("grunt");
         nudeman.setVolume(0.07);
         nudeman.setFrames(nudeframes);
         indoor.setSound("doorclick");
@@ -75,6 +87,7 @@ public class HouseSheet extends Sheet {
         crateSM.setObjecttext("This crate is full of empty peanut butter jars...");
         crateLG.setObjecttext("It looks like a small animal was kept in here...");
         objectlist.add(player);
+        objectlist.add(jordan);
         objectlist.add(nudeman);
         objectlist.add(crateSM);
         objectlist.add(crateLG);
@@ -106,6 +119,7 @@ public class HouseSheet extends Sheet {
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() + 5);
 					nudeman.animate(elapsedTime, .5);
+					jordan.animate(elapsedTime, .7);
 
 				}
 				if (player.upkey) {
@@ -113,6 +127,7 @@ public class HouseSheet extends Sheet {
 					player.animate(elapsedTime, 0.100);
 					player.setNextY(player.getNextY() - 5);
 					nudeman.animate(elapsedTime, .5);
+					jordan.animate(elapsedTime, .7);
 
 				}
 				if (player.leftkey) {
@@ -120,6 +135,7 @@ public class HouseSheet extends Sheet {
 					player.animate(elapsedTime, 0.100);
 					player.setNextX(player.getNextX() - 5);
 					nudeman.animate(elapsedTime, .5);
+					jordan.animate(elapsedTime, .7);
 
 				}
 				if (player.rightkey) {
@@ -127,6 +143,7 @@ public class HouseSheet extends Sheet {
 					player.animate(elapsedTime, 0.100);
 					player.setNextX(player.getNextX() + 5);
 					nudeman.animate(elapsedTime, .5);
+					jordan.animate(elapsedTime, .7);
 
 				}
 				if (player.intersects(indoor) && player.downkey) {
@@ -137,6 +154,7 @@ public class HouseSheet extends Sheet {
 						StartController controller = new StartController(607, 445);
 						Handler.changeScene(controller);
 						nudeman.animate(elapsedTime, .5);
+						jordan.animate(elapsedTime, .7);
 						this.stop();
 						gc.clearRect(0, 0, 768, 512);
 					} catch (FileNotFoundException e) {
@@ -150,6 +168,7 @@ public class HouseSheet extends Sheet {
 							InputManager.actionobject = bound.getObj();
 						}
 						nudeman.animate(elapsedTime, .5);
+						jordan.animate(elapsedTime, .7);
 						Handler.tick();
 						render(gc);
 						return;
@@ -161,6 +180,7 @@ public class HouseSheet extends Sheet {
 				player.setY(player.getNextY());
 
 				nudeman.animate(elapsedTime, .5);
+				jordan.animate(elapsedTime, .7);
 				Handler.tick();
 				render(gc);
 			}

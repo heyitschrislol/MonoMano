@@ -42,7 +42,9 @@ public enum Asset {
 	SMTREES("SMTREES", "/application/assets/sprites/treeSMsheet.png", 173, 88, 51, 78, 3, 1, 5, 5),
 	TREETRUNKS("TREETRUNKS", "/application/assets/sprites/treeTrunks.png", 53, 22, 19, 22, 2, 1, 5, 0),
 	PLAYER("PLAYER", "/application/assets/sprites/playersheet.png", 1109, 64, 64, 64, 16, 1, 5, 0),
-	CHRIS("CHRIS", "/application/assets/sprites/chrissheet.png", 512, 182, 64, 55, 8, 3, 4, 10),
+//	CHRIS("CHRIS", "/application/assets/sprites/chrissheet.png", 1643, 70, 74, 70, 22, 1, 0, 0),
+	CHRIS("CHRIS", "/application/assets/sprites/chrissheet.png", 720, 100, 60, 100, 12, 1, 0, 0),
+	JORDAN("JORDAN", "/application/assets/sprites/jordansheet.png", 720, 100, 60, 100, 12, 1, 0, 0),
 	RYAN("RYAN", "/application/assets/sprites/ryansheet.png", 512, 180, 64, 55, 8, 3, 4, 10),
 	NUDEMAN("NUDEMAN", "/application/assets/sprites/nudemansheet.png", 630, 64, 57, 64, 9, 1, 13, 0),
 	HURTMAN("HURTMAN", "/application/assets/sprites/hurtmansheet.png", 630, 140, 70, 70, 9, 2, 0, 0);
@@ -65,9 +67,10 @@ public enum Asset {
 //	PLAYER_15("PLAYER_15", "/application/assets/sprites/player_15.png", 64, 64, 64, 64, 1, 1, 0, 0);
 
 	public static final Image[] playersprites = spriteFrames("PLAYER");
-	public static final Image[] chrissprites1 = characterFrames("CHRIS", 0);
-	public static final Image[] chrissprites2 = characterFrames("CHRIS", 1);
-	public static final Image[] chrissprites3 = characterFrames("CHRIS", 2);
+	public static final Image[] chrissprites = spriteFrames("CHRIS");
+//	public static final Image[] chrissprites = characterFrames("CHRIS", 0);
+//	public static final Image[] chrissprites2 = characterFrames("CHRIS", 1);
+//	public static final Image[] chrissprites = characterFrames("CHRIS", 2);
 	private String name;
 	private String url;
 	private int sheetWidth;
@@ -215,46 +218,78 @@ public enum Asset {
 	 */
 	public static Image[] returnDown() {
 //		playersprites = spriteFrames("PLAYER");
-		Image[] movedown = new Image[4];
-		movedown[0] = chrissprites3[4];
-		movedown[1] = chrissprites3[5];
-		movedown[2] = chrissprites3[6];
-		movedown[3] = chrissprites3[7];
+		Image[] movedown = new Image[2];
+		movedown[0] = chrissprites[1];
+		movedown[1] = chrissprites[2];
+//
+		return movedown;
+	}
+	public static Image[] returnDown(String name) {
+		Image[] sprites = spriteFrames(name);
+		Image[] movedown = new Image[2];
+		movedown[0] = sprites[1];
+		movedown[1] = sprites[2];
 //
 		return movedown;
 	}
 	public static Image[] returnUp() {
 //		Image[] playersprites = spriteFrames("PLAYER");
-		Image[] moveup = new Image[4];
-		moveup[0] = chrissprites1[0];
-		moveup[1] = chrissprites1[1];
-		moveup[2] = chrissprites1[2];
-		moveup[3] = chrissprites1[3];
+		Image[] moveup = new Image[2];
+		moveup[0] = chrissprites[4];
+		moveup[1] = chrissprites[5];
 
+		return moveup;
+	}
+	public static Image[] returnUp(String name) {
+		Image[] sprites = spriteFrames(name);
+		Image[] moveup = new Image[2];
+		moveup[0] = sprites[1];
+		moveup[1] = sprites[2];
+//
 		return moveup;
 	}
 
 	public static Image[] returnLeft() {
 //		Image[] playersprites = spriteFrames("PLAYER");
-		Image[] moveleft = new Image[4];
-		moveleft[0] = chrissprites2[0];
-		moveleft[1] = chrissprites2[1];
-		moveleft[2] = chrissprites2[2];
-		moveleft[3] = chrissprites2[3];
+		Image[] moveleft = new Image[2];
+		moveleft[0] = chrissprites[7];
+		moveleft[1] = chrissprites[8];
 
+		return moveleft;
+	}
+	public static Image[] returnLeft(String name) {
+		Image[] sprites = spriteFrames(name);
+		Image[] moveleft = new Image[2];
+		moveleft[0] = sprites[1];
+		moveleft[1] = sprites[2];
+//
 		return moveleft;
 	}
 
 	public static Image[] returnRight() {
 //		Image[] playersprites = spriteFrames("PLAYER");
-		Image[] moveright = new Image[4];
-		moveright[0] = chrissprites2[4];
-		moveright[1] = chrissprites2[5];
-		moveright[2] = chrissprites2[6];
-		moveright[3] = chrissprites2[7];
+		Image[] moveright = new Image[2];
+		moveright[0] = chrissprites[10];
+		moveright[1] = chrissprites[11];
 
 		return moveright;
 	}
+	public static Image[] returnRight(String name) {
+		Image[] sprites = spriteFrames(name);
+		Image[] moveright = new Image[2];
+		moveright[0] = sprites[1];
+		moveright[1] = sprites[2];
+//
+		return moveright;
+	}
+//	public static Image[] returnAttack() {
+//		Image[] attack = new Image[3];
+//		attack[0] = chrissprites[16];
+//		attack[1] = chrissprites[17];
+//		attack[2] = chrissprites[18];
+//
+//		return attack;
+//	}
 //	public static Image[] returnDown() {
 ////		playersprites = spriteFrames("PLAYER");
 //		Image[] movedown = new Image[4];
@@ -307,12 +342,21 @@ public enum Asset {
 //
 //		return idles;
 //	}
+//	public static Image[] returnIdles() {
+//		Image[] idles = new Image[4];
+//		idles[0] = chrissprites[21];
+//		idles[1] = chrissprites[4];
+//		idles[2] = chrissprites[9];
+//		idles[3] = chrissprites[13];
+//
+//		return idles;
+//	}
 	public static Image[] returnIdles() {
 		Image[] idles = new Image[4];
-		idles[0] = chrissprites3[3];
-		idles[1] = chrissprites1[6];
-		idles[2] = chrissprites1[7];
-		idles[3] = chrissprites1[4];
+		idles[0] = playersprites[0];
+		idles[1] = playersprites[3];
+		idles[2] = playersprites[6];
+		idles[3] = playersprites[9];
 
 		return idles;
 	}
@@ -320,18 +364,33 @@ public enum Asset {
 	public static Image findIdle(String direction) {
 		Image idle;
 		if (direction.equals("DOWN")) {
-			return idle = playersprites[0];
+			return idle = chrissprites[1];
 		} else if (direction.equals("UP")) {
-			return idle = playersprites[3];
+			return idle = chrissprites[3];
 		} else if (direction.equals("LEFT")) {
-			return idle = playersprites[6];
+			return idle = chrissprites[6];
 		} else if (direction.equals("RIGHT")) {
-			return idle = playersprites[11];
+			return idle = chrissprites[9];
 		} else {
 			return null;
 		}
 
 	}
+//	public static Image findIdle(String direction) {
+//		Image idle;
+//		if (direction.equals("DOWN")) {
+//			return idle = chrissprites[21];
+//		} else if (direction.equals("UP")) {
+//			return idle = chrissprites[4];
+//		} else if (direction.equals("LEFT")) {
+//			return idle = chrissprites[9];
+//		} else if (direction.equals("RIGHT")) {
+//			return idle = chrissprites[13];
+//		} else {
+//			return null;
+//		}
+//
+//	}
 	
 
 

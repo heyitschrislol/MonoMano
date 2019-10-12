@@ -16,6 +16,7 @@ public abstract class GameObject {
 	protected static GameObject instance;
 	protected Animator animator;
 	protected String name;
+	protected String[] voicemap;
 	protected String sound;
 	protected double volume;
 	protected ID id;
@@ -154,6 +155,18 @@ public abstract class GameObject {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	/**
+	 * @return the voicemap
+	 */
+	public String[] getVoicemap() {
+		return voicemap;
+	}
+	/**
+	 * @param voicemap the voicemap to set
+	 */
+	public void setVoicemap(String[] voicemap) {
+		this.voicemap = voicemap;
 	}
 	/**
 	 * @return the sound

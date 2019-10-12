@@ -61,14 +61,18 @@ public class InputManager {
 						Handler.showPopup(actionobject);
 						popup = true;
 					}
-					if (!actionobject.getSound().isBlank()) {
-						if (actionobject.getSound().equals("boodaboo")) {
-							SoundManager.playClip(actionobject.getSound(), actionobject.getVolume());
-						} else {
-							SoundManager.playClip(actionobject.getSound(), actionobject.getVolume());
-
-						}
+					if (actionobject.getId() == ID.NPC) {
+						SoundManager.playRandomClip(actionobject.getVoicemap());
+					} else if (!actionobject.getSound().isBlank()) {
+						SoundManager.playClip(actionobject.getSound(), actionobject.getVolume());
 					}
+//					if (!actionobject.getSound().isBlank()) {
+//						if (actionobject.getSound().equals("boodaboo")) {
+//							SoundManager.playClip(actionobject.getSound(), actionobject.getVolume());
+//						} else {
+//							SoundManager.playClip(actionobject.getSound(), actionobject.getVolume());
+//						}
+//					}
 					
 				} else {
 					Handler.clearPopup();

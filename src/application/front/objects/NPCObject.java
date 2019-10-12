@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 
 public class NPCObject extends GameObject {
 	private String name;
+	private String[] voicemap;
 //	private double volume = .07;
 	
 	public NPCObject(double x, double y) {
@@ -88,6 +89,23 @@ public class NPCObject extends GameObject {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the voicemap
+	 */
+	public String[] getVoicemap() {
+		return voicemap;
+	}
+
+	/**
+	 * @param voicemap the voicemap to set
+	 */
+	public void setVoicemap(String[] voicemap) {
+		this.voicemap = voicemap;
+	}
+	public void setVoicemap(String voiceA, String voiceB, String voiceC) {
+		this.voicemap = new String[]{voiceA, voiceB, voiceC};
 	}
 
 	@Override
