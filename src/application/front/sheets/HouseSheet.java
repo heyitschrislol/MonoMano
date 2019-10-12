@@ -116,7 +116,7 @@ public class HouseSheet extends Sheet {
 				player.setNextY(player.getY());
 				if (player.downkey) {
 					player.setFrames(Asset.returnDown());
-					player.animate(elapsedTime, 0.100);
+					player.animate(elapsedTime, 0.250);
 					player.setNextY(player.getNextY() + 5);
 					nudeman.animate(elapsedTime, .5);
 					jordan.animate(elapsedTime, .7);
@@ -124,7 +124,7 @@ public class HouseSheet extends Sheet {
 				}
 				if (player.upkey) {
 					player.setFrames(Asset.returnUp());
-					player.animate(elapsedTime, 0.100);
+					player.animate(elapsedTime, 0.250);
 					player.setNextY(player.getNextY() - 5);
 					nudeman.animate(elapsedTime, .5);
 					jordan.animate(elapsedTime, .7);

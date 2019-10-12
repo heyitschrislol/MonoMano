@@ -44,7 +44,7 @@ public enum Asset {
 	PLAYER("PLAYER", "/application/assets/sprites/playersheet.png", 1109, 64, 64, 64, 16, 1, 5, 0),
 //	CHRIS("CHRIS", "/application/assets/sprites/chrissheet.png", 1643, 70, 74, 70, 22, 1, 0, 0),
 //	CHRIS("CHRIS", "/application/assets/sprites/chrissheet.png", 720, 100, 60, 100, 12, 1, 0, 0),
-	CHRIS("CHRIS", "/application/assets/sprites/adultchrissheet.png", 660, 95, 55, 95, 12, 1, 0, 0),
+	CHRIS("CHRIS", "/application/assets/sprites/adultchrissheet.png", 660, 95, 65, 96, 16, 1, 0, 0),
 	JORDAN("JORDAN", "/application/assets/sprites/jordansheet.png", 720, 100, 60, 100, 12, 1, 0, 0),
 	RYAN("RYAN", "/application/assets/sprites/ryansheet.png", 512, 180, 64, 55, 8, 3, 4, 10),
 	NUDEMAN("NUDEMAN", "/application/assets/sprites/nudemansheet.png", 630, 64, 57, 64, 9, 1, 13, 0),
@@ -252,34 +252,42 @@ public enum Asset {
 
 	public static Image[] returnLeft() {
 //		Image[] playersprites = spriteFrames("PLAYER");
-		Image[] moveleft = new Image[2];
+		Image[] moveleft = new Image[4];
 		moveleft[0] = chrissprites[7];
 		moveleft[1] = chrissprites[8];
+		moveleft[2] = chrissprites[9];
+		moveleft[3] = chrissprites[10];
 
 		return moveleft;
 	}
 	public static Image[] returnLeft(String name) {
 		Image[] sprites = spriteFrames(name);
-		Image[] moveleft = new Image[2];
+		Image[] moveleft = new Image[4];
 		moveleft[0] = sprites[1];
 		moveleft[1] = sprites[2];
+		moveleft[2] = sprites[9];
+		moveleft[3] = sprites[10];
 //
 		return moveleft;
 	}
 
 	public static Image[] returnRight() {
 //		Image[] playersprites = spriteFrames("PLAYER");
-		Image[] moveright = new Image[2];
-		moveright[0] = chrissprites[10];
-		moveright[1] = chrissprites[11];
+		Image[] moveright = new Image[4];
+		moveright[0] = chrissprites[12];
+		moveright[1] = chrissprites[13];
+		moveright[2] = chrissprites[14];
+		moveright[3] = chrissprites[15];
 
 		return moveright;
 	}
 	public static Image[] returnRight(String name) {
 		Image[] sprites = spriteFrames(name);
-		Image[] moveright = new Image[2];
+		Image[] moveright = new Image[4];
 		moveright[0] = sprites[1];
 		moveright[1] = sprites[2];
+		moveright[2] = sprites[14];
+		moveright[3] = sprites[15];
 //
 		return moveright;
 	}
@@ -355,9 +363,9 @@ public enum Asset {
 	public static Image[] returnIdles() {
 		Image[] idles = new Image[4];
 		idles[0] = chrissprites[0];
-		idles[1] = chrissprites[4];
+		idles[1] = chrissprites[3];
 		idles[2] = chrissprites[6];
-		idles[3] = chrissprites[9];
+		idles[3] = chrissprites[11];
 
 		return idles;
 	}
@@ -371,7 +379,7 @@ public enum Asset {
 		} else if (direction.equals("LEFT")) {
 			return idle = chrissprites[6];
 		} else if (direction.equals("RIGHT")) {
-			return idle = chrissprites[9];
+			return idle = chrissprites[11];
 		} else {
 			return null;
 		}

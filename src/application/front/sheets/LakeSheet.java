@@ -96,14 +96,14 @@ public class LakeSheet extends Sheet {
 				player.setNextY(player.getY());
 				if (player.downkey) {
 					player.setFrames(Asset.returnDown());
-					player.animate(elapsedTime, 0.100);
+					player.animate(elapsedTime, 0.250);
 					player.setNextY(player.getNextY() + 5);
 					lake.animate(elapsedTime, .9);
 
 				}
 				if (player.upkey) {
 					player.setFrames(Asset.returnUp());
-					player.animate(elapsedTime, 0.100);
+					player.animate(elapsedTime, 0.250);
 					player.setNextY(player.getNextY() - 5);
 					lake.animate(elapsedTime, .9);
 
