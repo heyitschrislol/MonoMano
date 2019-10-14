@@ -42,8 +42,7 @@ public enum Asset {
 	SMTREES("SMTREES", "/application/assets/sprites/treeSMsheet.png", 173, 88, 51, 78, 3, 1, 5, 5),
 	TREETRUNKS("TREETRUNKS", "/application/assets/sprites/treeTrunks.png", 53, 22, 19, 22, 2, 1, 5, 0),
 	PLAYER("PLAYER", "/application/assets/sprites/playersheet.png", 1109, 64, 64, 64, 16, 1, 5, 0),
-//	CHRIS("CHRIS", "/application/assets/sprites/chrissheet.png", 1643, 70, 74, 70, 22, 1, 0, 0),
-//	CHRIS("CHRIS", "/application/assets/sprites/chrissheet.png", 720, 100, 60, 100, 12, 1, 0, 0),
+
 	CHRIS("CHRIS", "/application/assets/sprites/adultchrissheet.png", 660, 95, 65, 96, 16, 1, 0, 0),
 	JORDAN("JORDAN", "/application/assets/sprites/jordansheet.png", 720, 100, 60, 100, 12, 1, 0, 0),
 	RYAN("RYAN", "/application/assets/sprites/ryansheet.png", 512, 180, 64, 55, 8, 3, 4, 10),
@@ -291,75 +290,7 @@ public enum Asset {
 //
 		return moveright;
 	}
-//	public static Image[] returnAttack() {
-//		Image[] attack = new Image[3];
-//		attack[0] = chrissprites[16];
-//		attack[1] = chrissprites[17];
-//		attack[2] = chrissprites[18];
-//
-//		return attack;
-//	}
-//	public static Image[] returnDown() {
-////		playersprites = spriteFrames("PLAYER");
-//		Image[] movedown = new Image[4];
-//		movedown[0] = playersprites[1];
-//		movedown[1] = playersprites[0];
-//		movedown[2] = playersprites[2];
-////
-//		return movedown;
-//	}
 
-//	public static Image[] returnUp() {
-////		Image[] playersprites = spriteFrames("PLAYER");
-//		Image[] moveup = new Image[3];
-//		moveup[0] = playersprites[4];
-//		moveup[1] = playersprites[3];
-//		moveup[2] = playersprites[5];
-//
-//		return moveup;
-//	}
-//
-//	public static Image[] returnLeft() {
-////		Image[] playersprites = spriteFrames("PLAYER");
-//		Image[] moveleft = new Image[4];
-//		moveleft[0] = playersprites[7];
-//		moveleft[1] = playersprites[8];
-//		moveleft[2] = playersprites[9];
-//		moveleft[3] = playersprites[10];
-//
-//		return moveleft;
-//	}
-//
-//	public static Image[] returnRight() {
-////		Image[] playersprites = spriteFrames("PLAYER");
-//		Image[] moveright = new Image[4];
-//		moveright[0] = playersprites[12];
-//		moveright[1] = playersprites[13];
-//		moveright[2] = playersprites[14];
-//		moveright[3] = playersprites[15];
-//
-//		return moveright;
-//	}
-	
-//
-//	public static Image[] returnIdles() {
-//		Image[] idles = new Image[4];
-//		idles[0] = playersprites[0];
-//		idles[1] = playersprites[3];
-//		idles[2] = playersprites[6];
-//		idles[3] = playersprites[11];
-//
-//		return idles;
-//	}
-//	public static Image[] returnIdles() {
-//		Image[] idles = new Image[4];
-//		idles[0] = chrissprites[21];
-//		idles[1] = chrissprites[4];
-//		idles[2] = chrissprites[9];
-//		idles[3] = chrissprites[13];
-//
-//		return idles;
-//	}
 	public static Image[] returnIdles() {
 		Image[] idles = new Image[4];
 		idles[0] = chrissprites[0];
@@ -385,21 +316,6 @@ public enum Asset {
 		}
 
 	}
-//	public static Image findIdle(String direction) {
-//		Image idle;
-//		if (direction.equals("DOWN")) {
-//			return idle = chrissprites[21];
-//		} else if (direction.equals("UP")) {
-//			return idle = chrissprites[4];
-//		} else if (direction.equals("LEFT")) {
-//			return idle = chrissprites[9];
-//		} else if (direction.equals("RIGHT")) {
-//			return idle = chrissprites[13];
-//		} else {
-//			return null;
-//		}
-//
-//	}
 	
 
 
