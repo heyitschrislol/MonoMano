@@ -52,7 +52,7 @@ public class StartSheet extends Sheet {
 		}
 		
 		
-		player = new PlayerObject(startX, startY, 55, 64, ID.PLAYER);
+		player = new PlayerObject(startX, startY, 55, 94, ID.PLAYER);
 		PlayerObject.location = Location.START;
 		canvas = new Canvas(768, 512);
 		gc = canvas.getGraphicsContext2D();
@@ -62,66 +62,60 @@ public class StartSheet extends Sheet {
 		 * set up world and world objects including the player.
 		 */
 		sceneImage = Asset.assetImage("GRASS");
-		Image[] SMtrees = Asset.spriteFrames("SMTREES");
-		Image[] LGtrees = Asset.spriteFrames("LGTREES");
-		Image[] trunks = Asset.spriteFrames("TREETRUNKS");
-		
-		EnvironmentObject smbot = new EnvironmentObject(325, 178, 21, 17, ID.COLLIDABLE, Tag.TREE);
-		EnvironmentObject smtop = new EnvironmentObject(306, 101, 64, 112, ID.ENVIRONMENT);
-		EnvironmentObject lgbot = new EnvironmentObject(103, 300, 21, 17, ID.COLLIDABLE, Tag.TREE);	
-		EnvironmentObject lgtop = new EnvironmentObject(80, 200, 64, 112, ID.ENVIRONMENT);
-		EnvironmentObject bushsm = new EnvironmentObject(517, 12, 27, 21, ID.ENVIRONMENT);
-		EnvironmentObject bushlg = new EnvironmentObject(36, 436, 50, 43, ID.ENVIRONMENT);
-		EnvironmentObject winopen = new EnvironmentObject(553, 360, 38, 85, ID.COLLIDABLE, Tag.WINDOW);
-		EnvironmentObject winclosed = new EnvironmentObject(684, 360, 32, 85, ID.COLLIDABLE, Tag.WINDOW);
-		EnvironmentObject sign = new EnvironmentObject(200, 40, 40, 50, ID.COLLIDABLE,Tag.SIGN);
-		EnvironmentObject house = new EnvironmentObject(512, -60, 248, 498, ID.COLLIDABLE, Tag.HOUSE);
-		EnvironmentObject door = new EnvironmentObject(607, 382, 58, 58, ID.COLLIDABLE, Tag.DOOR);
 
-		sign.setObjecttext("Sign: 'U suck haha'");
-		winopen.setObjecttext("There's a naked man inside... it looks like he's practicing thrusting his pelvis...");
-		winclosed.setObjecttext("The window is closed. You can only see window.");
-		bushsm.setImage(Asset.assetImage("SMBUSH"));
-		bushlg.setImage(Asset.assetImage("LGBUSH"));
-		winopen.setImage(Asset.assetImage("WINOPEN"));
-		winopen.setSound("boodaboo");
-		winclosed.setImage(Asset.assetImage("WINCLOSED"));
-		winclosed.setSound("boodaboo");
-		smtop.setImage(SMtrees[1]);
-		smbot.setImage(trunks[0]);
-		lgtop.setImage(LGtrees[1]);
-		lgbot.setImage(trunks[1]);
-		sign.setImage(Asset.assetImage("SIGN", 50, 50, true, true));
-		sign.setSound("boodaboo");
-		house.setImage(Asset.assetImage("BLANKHOUSE"));
+		EnvironmentObject shack = new EnvironmentObject(501, 70, 258, 240, ID.COLLIDABLE, Tag.HOUSE);
+		EnvironmentObject window = new EnvironmentObject(608, 250, 42, 36, ID.COLLIDABLE, Tag.WINDOW);
+		EnvironmentObject door = new EnvironmentObject(546, 237, 54, 69, ID.COLLIDABLE, Tag.DOOR);
+		EnvironmentObject farm = new EnvironmentObject(5, 30, 490, 280, ID.COLLIDABLE, Tag.AREA);
+
+		EnvironmentObject treetrunk = new EnvironmentObject(197, 473, 87, 54, ID.COLLIDABLE, Tag.TREE);
+		EnvironmentObject treetop = new EnvironmentObject(160, 330, 173, 155, ID.ENVIRONMENT, Tag.TREE);
+		EnvironmentObject sign = new EnvironmentObject(472, 305, 68, 50, ID.COLLIDABLE,Tag.SIGN);
+
+//		EnvironmentObject smbot = new EnvironmentObject(325, 178, 21, 17, ID.COLLIDABLE, Tag.TREE);
+//		EnvironmentObject smtop = new EnvironmentObject(306, 101, 64, 112, ID.ENVIRONMENT);
+//		EnvironmentObject lgbot = new EnvironmentObject(103, 300, 21, 17, ID.COLLIDABLE, Tag.TREE);	
+//		EnvironmentObject lgtop = new EnvironmentObject(80, 200, 64, 112, ID.ENVIRONMENT);
+//		EnvironmentObject bushsm = new EnvironmentObject(517, 12, 27, 21, ID.ENVIRONMENT);
+//		EnvironmentObject bushlg = new EnvironmentObject(36, 436, 50, 43, ID.ENVIRONMENT);
+//		EnvironmentObject winopen = new EnvironmentObject(553, 360, 38, 85, ID.COLLIDABLE, Tag.WINDOW);
+//		EnvironmentObject winclosed = new EnvironmentObject(684, 360, 32, 85, ID.COLLIDABLE, Tag.WINDOW);
+//		EnvironmentObject house = new EnvironmentObject(512, -60, 248, 498, ID.COLLIDABLE, Tag.HOUSE);
+//		EnvironmentObject door = new EnvironmentObject(607, 382, 58, 58, ID.COLLIDABLE, Tag.DOOR);
+
+		
+		
+
+		shack.setImage(Asset.assetImage("SHACK"));
+		window.setImage(Asset.assetImage("WINDOW"));
 		door.setImage(Asset.assetImage("DOOR"));
-		ArrayList<String> footsteps = new ArrayList<>();
-		footsteps.add("grasstep1");
-		footsteps.add("grasstep2");
-		footsteps.add("grasstep3");
-		footsteps.add("grasstep6");
+		farm.setImage(Asset.assetImage("FARM"));
+		treetrunk.setImage(Asset.assetImage("TRUNK"));
+		treetop.setImage(Asset.assetImage("TREETOP"));
+		sign.setImage(Asset.assetImage("SIGN"));
+		
+		window.setObjecttext("There's a naked man inside... it looks like he's thrusting his pelvis into the air...");
+		sign.setObjecttext("Sign: 'Moss Farm'");
+		window.setSound("boodaboo");
 		door.setSound("doorclick");
+		sign.setSound("boodaboo");
+
 		player.setFrames(Asset.returnDown());
 		player.setImage(Asset.findIdle("DOWN"));
-		player.footsteps = footsteps;
 		objectlist.add(player);
-		objectlist.add(smtop);
-		objectlist.add(smbot);
-		objectlist.add(lgtop);
-		objectlist.add(lgbot);
-		objectlist.add(sign);
-		objectlist.add(house);
+		objectlist.add(shack);
+		objectlist.add(window);
 		objectlist.add(door);
-		objectlist.add(bushlg);
-		objectlist.add(bushsm);
-		objectlist.add(winopen);
-		objectlist.add(winclosed);
+		objectlist.add(farm);
+		objectlist.add(sign);
+		objectlist.add(treetop);
+		objectlist.add(treetrunk);
 
-		for (GameObject go : objectlist) {
-			if (go.getTag() == Tag.TREE) {
-				go.setObjecttext("It's a tree, idiot");
-			}
-		}
+//		for (GameObject go : objectlist) {
+//			if (go.getTag() == Tag.TREE) {
+//				go.setObjecttext("It's a tree, idiot");
+//			}
+//		}
 		
 		
 		Handler.setObjectlist(objectlist);

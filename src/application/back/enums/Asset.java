@@ -13,18 +13,27 @@ public enum Asset {
 /*
 ** 		********	S I N G L E		S P R I T E S	*****
 */
-	LAKE("LAKE", "application/assets/sprites/lakescene.png", 768, 512, 768, 512, 1, 1, 0, 0),
-	WATER1("WATER1", "application/assets/sprites/water2.png", 768, 297, 768, 297, 1, 1, 0, 0),
-	WATER2("WATER2", "application/assets/sprites/water3.png", 768, 297, 768, 297, 1, 1, 0, 0),
-	WATER3("WATER3", "application/assets/sprites/water3.png", 768, 297, 768, 297, 1, 1, 0, 0),
-	GRASS("GRASS", "/application/assets/sprites/grass768x512.png", 768, 512, 768, 512, 1, 1, 0, 0),
-	LGBUSH("LGBUSH", "application/assets/sprites/bushLG-50x43.png", 50, 43, 50, 43, 1, 1, 0, 0),
-	SMBUSH("SMBUSH", "application/assets/sprites/bushSM-27x21.png", 27, 21, 27, 21, 1, 1, 0, 0),
+	LAKE("LAKE", "/application/assets/sprites/lakescene.png", 768, 512, 768, 512, 1, 1, 0, 0),
+	WATER1("WATER1", "/application/assets/sprites/water2.png", 768, 297, 768, 297, 1, 1, 0, 0),
+	WATER2("WATER2", "/application/assets/sprites/water3.png", 768, 297, 768, 297, 1, 1, 0, 0),
+	WATER3("WATER3", "/application/assets/sprites/water3.png", 768, 297, 768, 297, 1, 1, 0, 0),
+	GRASS("GRASS", "/application/assets/sprites/grassyfield.png", 768, 512, 768, 512, 1, 1, 0, 0),
+//	LGBUSH("LGBUSH", "/application/assets/sprites/bushLG-50x43.png", 50, 43, 50, 43, 1, 1, 0, 0),
+//	SMBUSH("SMBUSH", "/application/assets/sprites/bushSM-27x21.png", 27, 21, 27, 21, 1, 1, 0, 0),
 	
-	BLANKHOUSE("BLANKHOUSE", "/application/assets/sprites/blankhouse-248x498.png", 248, 498, 248, 498, 1, 1, 0, 0),
-	DOOR("DOOR", "/application/assets/sprites/doorOPEN.png", 58, 58, 58, 58, 1, 1, 0, 0), 
-	WINOPEN("WINOPEN", "/application/assets/sprites/winOPEN-38x85.png", 38, 85, 38, 85, 1, 1, 0, 0),
-	WINCLOSED("WINCLOSED", "/application/assets/sprites/winCLOSED-32x85.png", 32, 85, 32, 85, 1, 1, 0, 0), 
+	SHACK("SHACK", "/application/assets/sprites/shack.png", 258, 240, 258, 240, 1, 1, 0, 0),
+	WINDOW("WINDOW", "/application/assets/sprites/window.png", 42, 36, 42, 36, 1, 1, 0, 0),
+	DOOR("DOOR", "/application/assets/sprites/door.png", 54, 69, 54, 69, 1, 1, 0, 0),
+	FARM("FARM", "/application/assets/sprites/pokefarm.png", 490, 280, 490, 280, 1, 1, 0, 0),
+	TRUNK("TRUNK", "/application/assets/sprites/poketreetrunk.png", 87, 54, 87, 54, 1, 1, 0, 0),
+	TREETOP("TREETOP", "/application/assets/sprites/poketreetrunk.png", 173, 155, 173, 155, 1, 1, 0, 0),
+	SIGN("SIGN", "/application/assets/sprites/sign.png", 68, 50, 68, 50, 1, 1, 0, 0), 
+
+	
+	
+//	BLANKHOUSE("BLANKHOUSE", "/application/assets/sprites/blankhouse-248x498.png", 248, 498, 248, 498, 1, 1, 0, 0),
+//	WINOPEN("WINOPEN", "/application/assets/sprites/winOPEN-38x85.png", 38, 85, 38, 85, 1, 1, 0, 0),
+//	WINCLOSED("WINCLOSED", "/application/assets/sprites/winCLOSED-32x85.png", 32, 85, 32, 85, 1, 1, 0, 0), 
 	INDOOR("INDOOR", "/application/assets/sprites/insidedoor.png", 98, 16, 98, 16, 1, 1, 0, 0),
 	STONEFLOOR("STONEFLOOR", "/application/assets/sprites/stonefloor-v2.png", 768, 512, 768, 512, 1, 1, 0, 0), 
 	BACKWALL("BACKWALL", "/application/assets/sprites/backwall.png", 768, 64, 768, 64, 1, 1, 0, 0),
@@ -32,45 +41,26 @@ public enum Asset {
 	RIGHTWALL("RIGHTWALL", "/application/assets/sprites/rightwall.png", 16, 448, 16, 448, 1, 1, 0, 0),
 	SMCRATE("SMCRATE", "/application/assets/sprites/crateSM.png", 32, 37, 37, 37, 1, 1, 0, 0), 
 	LGCRATE("LGCRATE", "/application/assets/sprites/crateLG.png", 42, 47, 42, 47, 1, 1, 0, 0),
-	SIGN("SIGN", "/application/assets/sprites/sign.png", 50, 50, 50, 50, 1, 1, 0, 0), 
 
 	
 /*
  * ********		S P R I T E 	S H E E T S 	*****
  */
-	LGTREES("LGTREES", "/application/assets/sprites/treeLGsheet.png", 212, 111, 64, 101, 3, 1, 5, 5),
-	SMTREES("SMTREES", "/application/assets/sprites/treeSMsheet.png", 173, 88, 51, 78, 3, 1, 5, 5),
-	TREETRUNKS("TREETRUNKS", "/application/assets/sprites/treeTrunks.png", 53, 22, 19, 22, 2, 1, 5, 0),
-	PLAYER("PLAYER", "/application/assets/sprites/playersheet.png", 1109, 64, 64, 64, 16, 1, 5, 0),
+//	LGTREES("LGTREES", "/application/assets/sprites/treeLGsheet.png", 212, 111, 64, 101, 3, 1, 5, 5),
+//	SMTREES("SMTREES", "/application/assets/sprites/treeSMsheet.png", 173, 88, 51, 78, 3, 1, 5, 5),
+//	TREETRUNKS("TREETRUNKS", "/application/assets/sprites/treeTrunks.png", 53, 22, 19, 22, 2, 1, 5, 0),
+//	PLAYER("PLAYER", "/application/assets/sprites/playersheet.png", 1109, 64, 64, 64, 16, 1, 5, 0),
 
-	CHRIS("CHRIS", "/application/assets/sprites/adultchrissheet.png", 660, 95, 65, 96, 16, 1, 0, 0),
+	CHRIS("CHRIS", "application/assets/sprites/adultchrissheet.png", 1045, 95, 65, 93, 19, 1, 0, 3),
 	JORDAN("JORDAN", "/application/assets/sprites/jordansheet.png", 720, 100, 60, 100, 12, 1, 0, 0),
 	RYAN("RYAN", "/application/assets/sprites/ryansheet.png", 512, 180, 64, 55, 8, 3, 4, 10),
 	NUDEMAN("NUDEMAN", "/application/assets/sprites/nudemansheet.png", 630, 64, 57, 64, 9, 1, 13, 0),
 	HURTMAN("HURTMAN", "/application/assets/sprites/hurtmansheet.png", 630, 140, 70, 70, 9, 2, 0, 0);
-//	NPCS("NPCS", "/application/assets/sprites/walkcyclevarious.png", 768, 474, 12, 1, 0, 0),
-//	PLAYER_0("PLAYER_0", "/application/assets/sprites/player_0.png", 64, 64, 64, 64, 1, 1, 0, 0),
-//	PLAYER_1("PLAYER_1", "/application/assets/sprites/player_1.png", 64, 64, 64, 64, 1, 1, 0, 0), 
-//	PLAYER_2("PLAYER_2", "/application/assets/sprites/player_2.png", 64, 64, 64, 64, 1, 1, 0, 0),
-//	PLAYER_3("PLAYER_3", "/application/assets/sprites/player_3.png", 64, 64, 64, 64, 1, 1, 0, 0), 
-//	PLAYER_4("PLAYER_4", "/application/assets/sprites/player_4.png", 64, 64, 64, 64, 1, 1, 0, 0),
-//	PLAYER_5("PLAYER_5", "/application/assets/sprites/player_5.png", 64, 64, 64, 64, 1, 1, 0, 0), 
-//	PLAYER_6("PLAYER_6", "/application/assets/sprites/player_6.png", 64, 64, 64, 64, 1, 1, 0, 0),
-//	PLAYER_7("PLAYER_7", "/application/assets/sprites/player_7.png", 64, 64, 64, 64, 1, 1, 0, 0), 
-//	PLAYER_8("PLAYER_8", "/application/assets/sprites/player_8.png", 64, 64, 64, 64, 1, 1, 0, 0),
-//	PLAYER_9("PLAYER_9", "/application/assets/sprites/player_9.png", 64, 64, 64, 64, 1, 1, 0, 0), 
-//	PLAYER_10("PLAYER_10", "/application/assets/sprites/player_10.png", 64, 64, 64, 64, 1, 1, 0, 0),
-//	PLAYER_11("PLAYER_11", "/application/assets/sprites/player_11.png", 64, 64, 64, 64, 1, 1, 0, 0), 
-//	PLAYER_12("PLAYER_12", "/application/assets/sprites/player_12.png", 64, 64, 64, 64, 1, 1, 0, 0),
-//	PLAYER_13("PLAYER_13", "/application/assets/sprites/player_13.png", 64, 64, 64, 64, 1, 1, 0, 0), 
-//	PLAYER_14("PLAYER_14", "/application/assets/sprites/player_14.png", 64, 64, 64, 64, 1, 1, 0, 0),
-//	PLAYER_15("PLAYER_15", "/application/assets/sprites/player_15.png", 64, 64, 64, 64, 1, 1, 0, 0);
 
-	public static final Image[] playersprites = spriteFrames("PLAYER");
+
+//	public static final Image[] playersprites = spriteFrames("PLAYER");
 	public static final Image[] chrissprites = spriteFrames("CHRIS");
-//	public static final Image[] chrissprites = characterFrames("CHRIS", 0);
-//	public static final Image[] chrissprites2 = characterFrames("CHRIS", 1);
-//	public static final Image[] chrissprites = characterFrames("CHRIS", 2);
+
 	private String name;
 	private String url;
 	private int sheetWidth;
@@ -119,8 +109,8 @@ public enum Asset {
 		return null;
 	}
 	public static Image assetImage(Asset asset) {
-		Image image = new Image(asset.url);
-		return image;
+		
+		return new Image(asset.url);
 	}
 
 	public static Image assetImage(String name) {
@@ -287,7 +277,7 @@ public enum Asset {
 		moveright[1] = sprites[2];
 		moveright[2] = sprites[14];
 		moveright[3] = sprites[15];
-//
+
 		return moveright;
 	}
 
