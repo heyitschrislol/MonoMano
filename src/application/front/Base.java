@@ -90,7 +90,7 @@ public class Base extends Application {
 	public void startMenu(KeyEvent k) throws FileNotFoundException {
 		String key = k.getCode().toString();
 		if (key.contains("ENTER")) {
-			StartController starter = new StartController(355, 284);
+			StartController starter = new StartController(355, 314);
 			Handler.changeScene(starter);
 			
 			Handler.setObjectlist(starter.sheet.getObjectlist());

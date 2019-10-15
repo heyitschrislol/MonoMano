@@ -26,7 +26,7 @@ public enum Asset {
 	DOOR("DOOR", "/application/assets/sprites/door.png", 54, 69, 54, 69, 1, 1, 0, 0),
 	FARM("FARM", "/application/assets/sprites/pokefarm.png", 490, 280, 490, 280, 1, 1, 0, 0),
 	TRUNK("TRUNK", "/application/assets/sprites/poketreetrunk.png", 87, 54, 87, 54, 1, 1, 0, 0),
-	TREETOP("TREETOP", "/application/assets/sprites/poketreetrunk.png", 173, 155, 173, 155, 1, 1, 0, 0),
+	TREETOP("TREETOP", "/application/assets/sprites/poketreetop.png", 173, 155, 173, 155, 1, 1, 0, 0),
 	SIGN("SIGN", "/application/assets/sprites/sign.png", 68, 50, 68, 50, 1, 1, 0, 0), 
 
 	
@@ -51,7 +51,7 @@ public enum Asset {
 //	TREETRUNKS("TREETRUNKS", "/application/assets/sprites/treeTrunks.png", 53, 22, 19, 22, 2, 1, 5, 0),
 //	PLAYER("PLAYER", "/application/assets/sprites/playersheet.png", 1109, 64, 64, 64, 16, 1, 5, 0),
 
-	CHRIS("CHRIS", "application/assets/sprites/adultchrissheet.png", 1045, 95, 65, 93, 19, 1, 0, 3),
+	CHRIS("CHRIS", "/application/assets/sprites/adultchrissheet.png", 1045, 94, 55, 94, 19, 1, 0, 0),
 	JORDAN("JORDAN", "/application/assets/sprites/jordansheet.png", 720, 100, 60, 100, 12, 1, 0, 0),
 	RYAN("RYAN", "/application/assets/sprites/ryansheet.png", 512, 180, 64, 55, 8, 3, 4, 10),
 	NUDEMAN("NUDEMAN", "/application/assets/sprites/nudemansheet.png", 630, 64, 57, 64, 9, 1, 13, 0),
@@ -143,8 +143,8 @@ public enum Asset {
 		if (asset != null) {
 			int count = Asset.findAsset(name).count;
 			Image[] sprites = new Image[count];
-			Image wholeimage = new Image(asset.url);
-			
+			Image wholeimage = new Image(asset.getUrl());
+
 			int offsetx = asset.offsetX;
 			int offsety = asset.offsetY;
 			
@@ -178,8 +178,8 @@ public enum Asset {
 			
 			int slicewidth = asset.sliceX;
 			int sliceheight = asset.sliceY;
-			int x = 0 + offsetx;
-			int y = offsety + 0 + ((sliceheight + offsety) * rowindex) ;
+			int x = offsetx;
+			int y = offsety + ((sliceheight + offsety) * rowindex);
 //			if (rowindex == 0) {
 //				y = 0 + offsety;
 //			} else {

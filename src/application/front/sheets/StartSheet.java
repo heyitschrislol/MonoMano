@@ -180,7 +180,7 @@ public class StartSheet extends Sheet {
 				}
 				
 				for (Boundary bound : objectBoundaries()) {
-					if (bound.intersects(player.getNextX(), player.getNextY() + 15, 64, 34)) {
+					if (bound.intersects(player.getNextX() + 5, player.getNextY() + 5, 64, 34)) {
 						if (bound.getTag() != Tag.BORDER) {
 							InputManager.intersecting = true;
 							InputManager.actionobject = bound.getObj();

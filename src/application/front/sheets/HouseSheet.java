@@ -151,7 +151,7 @@ public class HouseSheet extends Sheet {
 						if (!indoor.getSound().isBlank()) {
 							SoundManager.playClip(indoor.getSound());
 						}
-						StartController controller = new StartController(607, 445);
+						StartController controller = new StartController(548, 307);
 						Handler.changeScene(controller);
 						nudeman.animate(elapsedTime, .5);
 						jordan.animate(elapsedTime, .7);
