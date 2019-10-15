@@ -66,7 +66,7 @@ public class SoundManager implements Runnable {
 		loadBGM("horror", "/application/assets/audio/unseenhorrors.mp3");
 		loadBGM("weird", "/application/assets/audio/weirdman.mp3");
 		
-		loadSound("grunt", "/application/assets/audio/Male Grunt.wav");
+		loadSound("wellhello", "/application/assets/audio/wellhello.mp3");
 		loadSound("doodoodoo", "/application/assets/audio/doodoodoo.mp3");
 		loadSound("bizwhacker", "/application/assets/audio/suchabizwhacker.mp3");
 		loadSound("brother1", "/application/assets/audio/hellobrother.mp3");
@@ -74,8 +74,9 @@ public class SoundManager implements Runnable {
 		loadSound("hmm1", "/application/assets/audio/jordan-hmm.mp3");
 		loadSound("hmm2", "/application/assets/audio/jordan-hmmm2.mp3");
 		loadSound("idk", "/application/assets/audio/jordan-idk.mp3");
-		loadSound("start.mp3", "/application/assets/audio/press start.mp3");
-		loadSound("start2.mp3", "/application/assets/audio/press start2.mp3");
+		loadSound("grunt", "/application/assets/audio/Male Grunt.wav");
+		loadSound("start", "/application/assets/audio/press start.mp3");
+		loadSound("start2", "/application/assets/audio/press start2.mp3");
 		loadSound("pendrop", "/application/assets/audio/pendrop.mp3");
 		loadSound("milkshake", "/application/assets/audio/milkshake.mp3");
 		loadSound("blooblee", "/application/assets/audio/blooblee.wav");

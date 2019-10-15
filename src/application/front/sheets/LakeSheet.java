@@ -40,7 +40,7 @@ public class LakeSheet extends Sheet {
 		
 		sceneImage = Asset.assetImage("LAKE");
 		PlayerObject.location = Location.LAKE;
-		player = new PlayerObject(startX, startY, 64, 64, ID.PLAYER);
+		player = new PlayerObject(startX, startY, 55, 94, ID.PLAYER);
 		
 		canvas = new Canvas(768, 512);
 		gc = canvas.getGraphicsContext2D();
@@ -88,7 +88,6 @@ public class LakeSheet extends Sheet {
 				elapsedTime = (currentNanoTime - startNanoTime) / 1000000000.0;
 
 				gc.clearRect(0, 0, 768, 512);
-//				animate(elapsedTime, .9);
 				gc.drawImage(sceneImage, 0, 0);
 				
 				

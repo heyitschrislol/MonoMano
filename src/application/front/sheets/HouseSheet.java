@@ -32,7 +32,7 @@ public class HouseSheet extends Sheet {
 		portallist.addAll(createExitList());
 		
 		PlayerObject.location = Location.HOUSE;
-		player = new PlayerObject(startX, startY, 64, 64, ID.PLAYER);
+		player = new PlayerObject(startX, startY, 55, 94, ID.PLAYER);
 
 		canvas = new Canvas(768, 512);
 		gc = canvas.getGraphicsContext2D();
@@ -57,7 +57,7 @@ public class HouseSheet extends Sheet {
         EnvironmentObject indoor = new EnvironmentObject(335, 500, 98, 16, ID.COLLIDABLE, Tag.DOOR);
         EnvironmentObject backwall = new EnvironmentObject(0, 0, 768, 64, ID.COLLIDABLE, Tag.BORDER);
         EnvironmentObject leftwall = new EnvironmentObject(0, 64, 16, 448, ID.COLLIDABLE, Tag.BORDER);
-        EnvironmentObject rightwall = new EnvironmentObject(752, 64, 16, 448, ID.COLLIDABLE, Tag.DOOR);
+        EnvironmentObject rightwall = new EnvironmentObject(752, 64, 16, 448, ID.COLLIDABLE, Tag.BORDER);
         
         jordan.setName("Jordan");
         jordan.setFrames(jordanframes);

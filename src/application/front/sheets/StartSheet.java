@@ -68,30 +68,17 @@ public class StartSheet extends Sheet {
 		EnvironmentObject door = new EnvironmentObject(546, 237, 54, 69, ID.COLLIDABLE, Tag.DOOR);
 		EnvironmentObject farm = new EnvironmentObject(5, 30, 490, 280, ID.COLLIDABLE, Tag.AREA);
 
-		EnvironmentObject treetrunk = new EnvironmentObject(197, 473, 87, 54, ID.COLLIDABLE, Tag.TREE);
-		EnvironmentObject treetop = new EnvironmentObject(160, 330, 173, 155, ID.ENVIRONMENT, Tag.TREE);
+//		EnvironmentObject treetrunk = new EnvironmentObject(197, 473, 87, 54, ID.COLLIDABLE, Tag.TREE);
+//		EnvironmentObject treetop = new EnvironmentObject(160, 330, 173, 155, ID.ENVIRONMENT, Tag.TREE);
 		EnvironmentObject sign = new EnvironmentObject(472, 305, 68, 50, ID.COLLIDABLE,Tag.SIGN);
-
-//		EnvironmentObject smbot = new EnvironmentObject(325, 178, 21, 17, ID.COLLIDABLE, Tag.TREE);
-//		EnvironmentObject smtop = new EnvironmentObject(306, 101, 64, 112, ID.ENVIRONMENT);
-//		EnvironmentObject lgbot = new EnvironmentObject(103, 300, 21, 17, ID.COLLIDABLE, Tag.TREE);	
-//		EnvironmentObject lgtop = new EnvironmentObject(80, 200, 64, 112, ID.ENVIRONMENT);
-//		EnvironmentObject bushsm = new EnvironmentObject(517, 12, 27, 21, ID.ENVIRONMENT);
-//		EnvironmentObject bushlg = new EnvironmentObject(36, 436, 50, 43, ID.ENVIRONMENT);
-//		EnvironmentObject winopen = new EnvironmentObject(553, 360, 38, 85, ID.COLLIDABLE, Tag.WINDOW);
-//		EnvironmentObject winclosed = new EnvironmentObject(684, 360, 32, 85, ID.COLLIDABLE, Tag.WINDOW);
-//		EnvironmentObject house = new EnvironmentObject(512, -60, 248, 498, ID.COLLIDABLE, Tag.HOUSE);
-//		EnvironmentObject door = new EnvironmentObject(607, 382, 58, 58, ID.COLLIDABLE, Tag.DOOR);
-
 		
 		
-
 		shack.setImage(Asset.assetImage("SHACK"));
 		window.setImage(Asset.assetImage("WINDOW"));
 		door.setImage(Asset.assetImage("DOOR"));
 		farm.setImage(Asset.assetImage("FARM"));
-		treetrunk.setImage(Asset.assetImage("TRUNK"));
-		treetop.setImage(Asset.assetImage("TREETOP"));
+//		treetrunk.setImage(Asset.assetImage("TRUNK"));
+//		treetop.setImage(Asset.assetImage("TREETOP"));
 		sign.setImage(Asset.assetImage("SIGN"));
 		
 		window.setObjecttext("There's a naked man inside... it looks like he's thrusting his pelvis into the air...");
@@ -108,8 +95,8 @@ public class StartSheet extends Sheet {
 		objectlist.add(door);
 		objectlist.add(farm);
 		objectlist.add(sign);
-		objectlist.add(treetop);
-		objectlist.add(treetrunk);
+//		objectlist.add(treetop);
+//		objectlist.add(treetrunk);
 
 //		for (GameObject go : objectlist) {
 //			if (go.getTag() == Tag.TREE) {
@@ -158,7 +145,7 @@ public class StartSheet extends Sheet {
 							SoundManager.playClip(door.getSound());
 						}
 						
-						HouseController controller = new HouseController(352, 440);
+						HouseController controller = new HouseController(352, 430);
 						Handler.changeScene(controller);
 						this.stop();
 						gc.clearRect(0, 0, 768, 512);
@@ -180,7 +167,7 @@ public class StartSheet extends Sheet {
 				}
 				
 				for (Boundary bound : objectBoundaries()) {
-					if (bound.intersects(player.getNextX() + 5, player.getNextY() + 5, 64, 34)) {
+					if (bound.intersects(player.getNextX(), player.getNextY() + 10, 64, 34)) {
 						if (bound.getTag() != Tag.BORDER) {
 							InputManager.intersecting = true;
 							InputManager.actionobject = bound.getObj();
