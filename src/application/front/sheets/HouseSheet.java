@@ -1,6 +1,11 @@
 package application.front.sheets;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -22,6 +27,7 @@ import javafx.scene.image.Image;
 public class HouseSheet extends Sheet {
 	public final long startNanoTime = System.nanoTime();
 	public static double elapsedTime = Base.elapsedTime;
+	private int sceneswitch = 0;
 
 	public HouseSheet(int startX, int startY){
 		super(startX, startY);
@@ -191,8 +197,52 @@ public class HouseSheet extends Sheet {
 	@Override
 	public void enter() {
 		gc.drawImage(sceneImage, startX, startY);
-		Handler.tick();
-		render(gc);
+		if (videoCheck().equals("true")) {
+			Handler.tick();
+			render(gc);
+		} else {
+			// code here to display scene video
+			
+			try {
+				saveSceneState("true");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+//	public void sceneCheck() throws IOException {
+//		if (videoCheck().equals("true")) {
+//			sceneswitch = 1;
+//			
+//		} else if (videoCheck().equals("false")) {
+//			sceneswitch = 0;
+//		} else {
+//			saveSceneState("false");
+//		}
+//	}
+	public static String videoCheck() {
+		BufferedReader reader;
+		String line = "";
+		try {
+			reader = new BufferedReader(new FileReader("housevideo.txt"));
+			line = reader.readLine();
+			
+			reader.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return line;
+	}
+	
+	public static void saveSceneState(String x) throws IOException {
+		File creds = new File("housevideo.txt");
+		FileWriter writer = new FileWriter(creds, false);
+		
+		writer.write(x);
+		writer.close();
 	}
 	@Override
 	public ObservableList<Boundary> objectBoundaries() {

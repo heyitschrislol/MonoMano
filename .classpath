@@ -11,12 +11,17 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX 12 (local win)">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX12(localmac)">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX 12 (local win)">
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX13(localmac)">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
