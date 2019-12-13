@@ -134,7 +134,7 @@ public class LakeSheet extends Sheet {
 					}
 				}
 				for (Boundary bound : objectBoundaries()) {
-					if (bound.intersects(player.getNextX(), player.getNextY() + 15, 64, 34)) {
+					if (bound.intersects(player.getNextX(), player.getNextY() + 9, 64, 34)) {
 						if (bound.getTag() != Tag.BORDER) {
 							InputManager.intersecting = true;
 							InputManager.actionobject = bound.getObj();

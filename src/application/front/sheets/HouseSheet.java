@@ -72,7 +72,7 @@ public class HouseSheet extends Sheet {
         jordan.setVoicemap("idk", "brother2", "bizwhacker");
         jordan.setVolume(0.7);
         jordan.setObjecttext("This guy is the only lead we have at the moment... ");
-        nudeman.setName("Fully-Erect Nude Man");
+        nudeman.setName("Bobby Moss");
         nudeman.setImage(nudemanframes[3]);
         nudeman.setVoicemap(new String[] {"grunt", "doodoodoo", "wellhello"});
 //        nudeman.setSound("grunt");
@@ -89,7 +89,7 @@ public class HouseSheet extends Sheet {
         rightwall.setImage(Asset.assetImage("RIGHTWALL"));
         player.setFrames(Asset.returnUp());
 		player.setImage(Asset.findIdle("UP"));
-        nudeman.setObjecttext("My milkshake brings all the boys to th- whaa agh!");
+        nudeman.setObjecttext("My daughters run this farm now");
         crateSM.setObjecttext("This crate is full of empty peanut butter jars...");
         crateLG.setObjecttext("It looks like a small animal was kept in here...");
         objectlist.add(player);
@@ -168,7 +168,7 @@ public class HouseSheet extends Sheet {
 					}
 				}
 				for (Boundary bound : objectBoundaries()) {
-					if (bound.intersects(player.getNextX(), player.getNextY() + 15, 64, 34)) {
+					if (bound.intersects(player.getNextX(), player.getNextY() + 9, 64, 34)) {
 						if (bound.getTag() != Tag.BORDER) {
 							InputManager.intersecting = true;
 							InputManager.actionobject = bound.getObj();
