@@ -71,7 +71,7 @@ public class HouseSheet extends Sheet {
 //        jordan.setSound("wellhello");
         jordan.setVoicemap("idk", "brother2", "bizwhacker");
         jordan.setVolume(0.7);
-        jordan.setObjecttext("This guy is the only lead we have at the moment... ");
+        jordan.setObjecttext("Unfortunately... this guy is the only lead we have at the moment.");
         nudeman.setName("Bobby Moss");
         nudeman.setImage(nudemanframes[3]);
         nudeman.setVoicemap(new String[] {"grunt", "doodoodoo", "wellhello"});
@@ -89,7 +89,7 @@ public class HouseSheet extends Sheet {
         rightwall.setImage(Asset.assetImage("RIGHTWALL"));
         player.setFrames(Asset.returnUp());
 		player.setImage(Asset.findIdle("UP"));
-        nudeman.setObjecttext("My daughters run this farm now");
+        nudeman.setObjecttext("My daughters run this farm now. I just live here. Check the crates.");
         crateSM.setObjecttext("This crate is full of empty peanut butter jars...");
         crateLG.setObjecttext("It looks like a small animal was kept in here...");
         objectlist.add(player);
