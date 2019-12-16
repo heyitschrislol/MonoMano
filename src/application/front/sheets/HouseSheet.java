@@ -68,11 +68,10 @@ public class HouseSheet extends Sheet {
         jordan.setName("Jordan");
         jordan.setFrames(jordanframes);
         jordan.setImage(jordanframes[0]);
-//        jordan.setSound("wellhello");
         jordan.setVoicemap("idk", "brother2", "bizwhacker");
         jordan.setVolume(0.7);
         jordan.setObjecttext("Unfortunately... this guy is the only lead we have at the moment.");
-        nudeman.setName("Bobby Moss");
+        nudeman.setName("Paw Moss");
         nudeman.setImage(nudemanframes[3]);
         nudeman.setVoicemap(new String[] {"grunt", "doodoodoo", "wellhello"});
 //        nudeman.setSound("grunt");
