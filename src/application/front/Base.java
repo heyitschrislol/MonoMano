@@ -234,7 +234,9 @@ public class Base extends Application {
 	public void setMediaview(MediaView mediaview) {
 		this.mediaview = mediaview;
 	}
-
+	public static void main(String[] args) {
+		launch(args);
+	}
 
 
 	
